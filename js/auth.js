@@ -25,12 +25,12 @@
 
 
   // expose both under auth.* and globally
-  window.auth = { getToken, saveToken, parseRole, logout, protectPage };
+  window.auth = { getToken, saveToken, parseRole, logout };
   window.getToken     = getToken;
   window.saveToken    = saveToken;
   window.parseRole    = parseRole;
   window.logout       = logout;
-  window.protectPage  = protectPage;
+
 })(window);
 function parseRole(token) {
   if (!token) return null;

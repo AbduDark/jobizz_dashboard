@@ -1,4 +1,4 @@
-// js/js/auth.js
+// /js/auth.js
 (function(window) {
   function getToken() {
     return sessionStorage.getItem("token");

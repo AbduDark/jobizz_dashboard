@@ -57,7 +57,7 @@ function restrictAdminPages(role) {
           padding: 15px;
           text-align: center;
           font-weight: bold;
-        ">🚫 Access Denied Only for super admin</div>`
+        "> Access Denied Only for super admin🚫</div>`
       );
     }
   }

@@ -1,23 +1,39 @@
-// login.js
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("loginForm");
   const emailInput = document.getElementById("userEmail");
-  const passInput = document.getElementById("userPassword");
+  const passwordInput = document.getElementById("userPassword");
   const errorBox = document.getElementById("error-message-box");
+  const loginButton = document.getElementById("loginButton");
+  const togglePassword = document.getElementById("togglePassword");
 
   if (!form) return;
+
+  // عرض/إخفاء كلمة المرور
+  if (togglePassword) {
+    togglePassword.addEventListener("click", function () {
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+      this.querySelector("i").classList.toggle("fa-eye");
+      this.querySelector("i").classList.toggle("fa-eye-slash");
+    });
+  }
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const email = emailInput.value.trim();
-    const password = passInput.value;
+    const password = passwordInput.value;
 
     if (!email || !password) {
-      errorBox.textContent = "Please fill all fields";
-      errorBox.classList.add("show"); 
+      showError("يرجى إدخال البريد الإلكتروني وكلمة المرور.");
       return;
     }
+
+    // زر التحميل
+    loginButton.disabled = true;
+    loginButton.innerHTML = '<span class="spinner"></span> جاري تسجيل الدخول...';
+    loginButton.classList.add("btn-loading");
+    hideError();
 
     try {
       const res = await fetch("https://jobizaa.com/api/admin/login", {
@@ -28,29 +44,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const payload = await res.json();
 
-      if (!res.ok) throw new Error(payload.message || "Login failed");
+      if (!res.ok) throw new Error(payload.message || "فشل تسجيل الدخول");
 
-      const token = payload.data.token;
-      if (!token) throw new Error("Token not found in response");
+      const token = payload.data?.token;
+      if (!token) throw new Error("لم يتم استلام التوكن من الخادم");
 
-      // Store token in sessionStorage
+      // حفظ التوكن
       sessionStorage.setItem("token", token);
 
-      // Parse token manually to extract role
+      // استخراج الدور من التوكن
       const role = parseRole(token);
-      if (role === "super-admin") {
-        window.location.href = "index.html";
-      } else {
-        window.location.href = "profile.html";
-      }
+
+      showSuccess("تم تسجيل الدخول بنجاح! سيتم التحويل...");
+
+      setTimeout(() => {
+        if (role === "super-admin") {
+          window.location.href = "index.html";
+        } else {
+          window.location.href = "profile.html";
+        }
+      }, 1500);
+
     } catch (err) {
       console.error("Login error:", err);
-      errorBox.textContent = err.message;
-      errorBox.classList.add("show");
+      showError(err.message || "حدث خطأ غير متوقع أثناء تسجيل الدخول.");
+    } finally {
+      resetButton();
     }
   });
 
-  // Helper to decode JWT and extract role
+  function showError(message) {
+    errorBox.textContent = message;
+    errorBox.classList.add("show");
+    errorBox.classList.remove("success-box");
+  }
+
+  function showSuccess(message) {
+    errorBox.textContent = message;
+    errorBox.classList.add("show", "success-box");
+  }
+
+  function hideError() {
+    errorBox.classList.remove("show", "success-box");
+  }
+
+  function resetButton() {
+    loginButton.disabled = false;
+    loginButton.innerHTML = "Login";
+    loginButton.classList.remove("btn-loading");
+  }
+
+  // دالة استخراج الدور من التوكن (JWT)
   function parseRole(token) {
     try {
       const base64Payload = token.split(".")[1];

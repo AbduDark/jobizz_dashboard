@@ -1,57 +1,64 @@
-// js/js/login.js
-document.addEventListener("DOMContentLoaded", function() {
-  const form       = document.getElementById("loginForm");
+// login.js
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("loginForm");
   const emailInput = document.getElementById("userEmail");
-  const passInput  = document.getElementById("userPassword");
-  const errorBox   = document.getElementById("error-message-box");
+  const passInput = document.getElementById("userPassword");
+  const errorBox = document.getElementById("error-message-box");
 
-  form.addEventListener("submit", async function(e) {
+  if (!form) return;
+
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const email    = emailInput.value.trim();
+    const email = emailInput.value.trim();
     const password = passInput.value;
 
     if (!email || !password) {
       errorBox.textContent = "Please fill all fields";
-      errorBox.classList.add("show");
+      errorBox.classList.add("show"); 
       return;
     }
 
     try {
-      const res  = await fetch("https://jobizaa.com/api/admin/login", {
+      const res = await fetch("https://jobizaa.com/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
+
       const payload = await res.json();
 
-      if (!res.ok) {
-        throw new Error(payload.message || "Login failed");
-      }
+      if (!res.ok) throw new Error(payload.message || "Login failed");
 
-      // 1) استخرج التوكن من payload.data.token
       const token = payload.data.token;
-      if (!token) {
-        throw new Error("Token not found in response");
-      }
+      if (!token) throw new Error("Token not found in response");
 
-      console.log("Extracted token:", token);
-
-      // 2) خزّنه في sessionStorage
+      // Store token in sessionStorage
       sessionStorage.setItem("token", token);
 
-      console.log("Stored token:", sessionStorage.getItem("token"));
-
-      // 3) وجّه المستخدم حسب دوره
-      const role = auth.parseRole(token);
-      window.location.href = (role === "super-admin")
-        ? "index.html"
-        : "profile.html";
-
+      // Parse token manually to extract role
+      const role = parseRole(token);
+      if (role === "super-admin") {
+        window.location.href = "index.html";
+      } else {
+        window.location.href = "profile.html";
+      }
     } catch (err) {
       console.error("Login error:", err);
       errorBox.textContent = err.message;
       errorBox.classList.add("show");
     }
   });
+
+  // Helper to decode JWT and extract role
+  function parseRole(token) {
+    try {
+      const base64Payload = token.split(".")[1];
+      const jsonPayload = atob(base64Payload);
+      const { roles } = JSON.parse(jsonPayload);
+      return roles && roles.length ? roles[0] : null;
+    } catch (e) {
+      return null;
+    }
+  }
 });

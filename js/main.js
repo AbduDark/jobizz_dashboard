@@ -237,45 +237,30 @@ document.addEventListener("DOMContentLoaded", function () {
 const super_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2pvYml6YWEuY29tL2FwaS9hZG1pbi9sb2dpbiIsImlhdCI6MTc0ODQwMDcwMSwibmJmIjoxNzQ4NDAwNzAxLCJqdGkiOiJxN0VhVk5JZkt0eVZma0YwIiwic3ViIjoiMSIsInBydiI6ImRmODgzZGI5N2JkMDVlZjhmZjg1MDgyZDY4NmM0NWU4MzJlNTkzYTkiLCJyb2xlcyI6WyJzdXBlci1hZG1pbiJdLCJwZXJtaXNzaW9ucyI6WyJtYW5hZ2UtYWxsLWNvbXBhbmllcyIsIm1hbmFnZS1hbGwtam9icyIsIm1hbmFnZS1yb2xlcyIsIm1hbmFnZS1jb21wYW55LWFkbWlucyIsIm1hbmFnZS1hcHBsaWNhdGlvbnMiLCJ2aWV3LWFwcGxpY2FudC1wcm9maWxlcyIsInNlbmQtbWVzc2FnZXMiXSwiY29tcGFueV9pZCI6bnVsbH0.19hp0h9-pLLwiqQKycD2KFcR3C3g9v0z8F6xDzT93iw"
 document.addEventListener("DOMContentLoaded", async () => {
   const token = sessionStorage.getItem("token");
-  if (!token) {
-    console.warn("No token found in sessionStorage");
-    return;
-  }
+  const Id = sessionStorage.getItem("id");
+
+  if (!token || !Id) return;
 
   try {
-    const response = await fetch("https://jobizaa.com/api/admin/companies", {
+    const response = await fetch(`https://jobizaa.com/api/admin/companies/${companyId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-        "Content-Type": "application/json"
+        Accept: "application/json"
       }
     });
 
-    const result = await response.json();
+    const data = await response.json();
+    const company = data.data;
 
-    if (!response.ok || !result.data || result.data.length === 0) {
-      console.error("Company fetch failed:", result.message || "Unknown error");
-      return;
-    }
+    // ضيف البيانات في العناصر
+    document.querySelectorAll('[name="name"]').forEach(el => el.textContent = company.name);
+    document.querySelectorAll('[name="websitee"]').forEach(el => el.textContent = company.website);
+    const profileImage = document.querySelector(".user-profile img");
+    if (profileImage) profileImage.src = company.logo;
 
-    const company = result.data[0]; // استخدم أول شركة في القائمة
-
-    // تحديث النصوص
-    document.querySelectorAll("[name='name']").forEach(el => {
-      el.textContent = company.name;
-    });
-
-    document.querySelector("[name='websitee']").textContent = company.website;
-
-    // تحديث صورة اللوجو (لو موجود)
-    const img = document.querySelector(".user-profile img");
-    if (img && company.logo) {
-      img.src = company.logo;
-    }
-
-  } catch (err) {
-    console.error("Error while fetching company:", err);
+  } catch (error) {
+    console.error("Failed to fetch company info:", error);
   }
 });
   

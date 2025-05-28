@@ -1,0 +1,603 @@
+/* ✅  start top-bar */
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 60px;
+
+  width: calc(100% - 60px);
+  background: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding: 10px 20px;
+  justify-content: space-between;
+  z-index: 1000;
+  transition: all 0.5s;
+}
+
+.top-bar.open {
+  left: 250px;
+  width: calc(100% - 250px);
+  transition: 0.5s;
+}
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+
+.search-input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+
+.search-button {
+  background-color: var(--primary-color);
+  border: 1px solid #ddd;
+  border-left: none;
+  padding: 10px 15px;
+  color: var(--white);
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #418cd3;
+}
+
+.search-button i {
+  font-size: 18px;
+}
+
+
+.icon-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+}
+
+.icon-section i {
+  display: none;
+}
+
+
+.notification-badge {
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: relative;
+  top: -8px;
+  right: 5px;
+
+}
+
+
+
+/* ✅ تنسيق القائمة المنسدلة */
+.user-profile {
+  position: relative;
+  cursor: pointer;
+
+  transition: all 0.5s ease;
+
+
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+
+
+.user-profile .dropdown-box {
+  position: absolute;
+  top: 58px;
+  right: -220px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  transition: all 1s ease;
+
+}
+
+.user-info {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #356899;
+  color: white;
+}
+
+.user-info h3 {
+  color: white;
+}
+
+.dropdown-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dropdown-box ul li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.dropdown-box ul li:hover {
+  background: #f0f0f0;
+}
+
+
+/* ✅ عند ظهور القائمة */
+.user-profile.active .dropdown-box {
+
+  right: -15px;
+}
+
+
+/* end top-bar */
+
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 60px;
+  width: calc(100% - 60px);
+  background: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding: 10px 20px;
+  justify-content: space-between;
+  z-index: 1000;
+  transition: all 0.5s;
+}
+
+.top-bar.open {
+  left: 250px;
+  width: calc(100% - 250px);
+  transition: 0.5s;
+}
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+
+.search-input {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+
+.search-button {
+  background-color: var(--primary-color);
+  border: 1px solid #ddd;
+  border-left: none;
+  padding: 10px 15px;
+  color: var(--white);
+  border-radius: 0 5px 5px 0;
+  background-color:  #175792;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #418cd3;
+}
+
+.search-button i {
+  font-size: 18px;
+  
+}
+
+
+.icon-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+ 
+
+}
+
+.icon-section i {
+  display: none;
+  
+}
+
+
+.notification-badge {
+  background: rgb(243, 240, 240);
+  color: rgb(29, 28, 28);
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: relative;
+  top: -8px;
+  right: 5px;
+
+}
+
+
+
+/* ✅ تنسيق القائمة المنسدلة */
+.user-profile {
+  position: relative;
+  cursor: pointer;
+
+  transition: all 0.5s ease;
+
+
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+
+
+.user-profile .dropdown-box {
+  position: absolute;
+  top: 58px;
+  right: -220px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  transition: all 1s ease;
+
+}
+
+.user-info {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #356899;
+  color: white;
+}
+
+.user-info h3 {
+  color: white;
+}
+
+.dropdown-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.dropdown-box ul li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.dropdown-box ul li:hover {
+  background: #f0f0f0;
+}
+
+
+/* ✅ عند ظهور القائمة */
+.user-profile.active .dropdown-box {
+
+  right: -15px;
+}
+
+
+/* end top-bar */
+   /* ✅ start Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100vh;
+  background-color: #356899; /* الأزرق الغامق */
+  color: white;
+  transition: all 0.5s;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+.sidebar .sidebar-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background: var(--dark-primary);
+  margin-bottom: 20px;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+.sidebar .sidebar-header img {
+  width: 50%;
+  height: 80px;
+  display: none;
+}
+
+.sidebar.open .sidebar-header img {
+  display: block;
+}
+
+.sidebar .toggle-btn {
+  color: white;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 60%;
+  font-size: 24px;
+}
+
+.sidebar ul {
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 15px;
+  cursor: pointer;
+  color: #ffffff; /* النص أبيض */
+  display: flex;
+  align-items: center;
+  transition: background 0.3s, color 0.3s;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  margin-bottom: 10px;
+}
+
+.sidebar ul li i {
+  font-size: 20px;
+  width: 40px;
+  text-align: center;
+  color: #ffffff; /* الأيقونات أبيض */
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar .text {
+  display: none;
+}
+
+.sidebar.open .text {
+  display: inline;
+}
+
+/* لما أضغط أو أوقف على العنصر */
+.sidebar ul li:hover,
+.sidebar ul li.active-link {
+  background-color: #fcfeff; /* أزرق فاتح زي الصورة */
+  color:#356899; /* النص يظل أبيض */
+}
+
+.sidebar ul li:hover i,
+.sidebar ul li.active-link i {
+  color: #356899; /* الأيقونة برضه تظل أبيض */
+
+  }
+.notification-container {
+  position: relative;
+  display: inline-block;
+}
+
+.fa-bell {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 0.7rem;
+}
+
+.notification-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  width: 250px; /* تصغير عرض البوكس */
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 0.5rem; /* تصغير الحشوة الداخلية */
+  font-size: 0.7rem; /* تصغير حجم الخط */
+}
+
+.notification-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+.unread {
+  background: #f7f9fa;
+  position: relative;
+}
+
+.unread::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #2d98da;
+  border-radius: 50%;
+  position: absolute;
+  left: -10px;
+}
+
+.view-all {
+  display: block;
+  text-align: center;
+  padding: 0.5rem;
+  color: #2d98da;
+  text-decoration: none;
+  font-size: 0.7rem; /* تصغير الخط */
+}
+/* تعديل في قسم الـ CSS */
+.icon-section i {
+  display: inline-block; /* بدلًا من none */
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+
+/* الشاشات الصغيرة والمتوسطة */
+@media (max-width: 992px) {
+  /* نعدل التوب بار */
+  .top-bar {
+    left: 60px; /* السايد بار يظل عرضه 60 */
+    width: calc(100% - 60px);
+    padding: 8px 10px;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .top-bar.open {
+    left: 250px;
+    width: calc(100% - 250px);
+  }
+
+  .search-container {
+    padding-right: 10px;
+  }
+
+  .search-input {
+    width: 150px;
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .search-button {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .icon-section {
+    gap: 10px;
+  }
+
+  .icon-section i {
+    font-size: 16px;
+  }
+
+  .user-profile img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .user-profile .dropdown-box {
+    right: -200px;
+    width: 180px;
+  }
+
+  .notification-dropdown {
+    width: 200px;
+    font-size: 0.65rem;
+  }
+}
+
+/* الشاشات الأصغر من 576px */
+@media (max-width: 576px) {
+  /* نضيق كل شيء أكثر */
+  .top-bar {
+    padding: 5px 8px;
+  }
+
+  .search-container {
+    padding-right: 5px;
+  }
+
+  .search-input {
+    width: 100px;
+    font-size: 13px;
+  }
+
+  .search-button {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+
+  .icon-section {
+    gap: 8px;
+  }
+
+  .icon-section i {
+    font-size: 14px;
+  }
+
+  .user-profile img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .user-profile .dropdown-box {
+    right: -170px;
+    width: 160px;
+  }
+
+  .notification-badge {
+    padding: 2px 4px;
+    font-size: 0.6rem;
+  }
+
+  .notification-dropdown {
+    width: 180px;
+  }
+  .content{
+      margin-left: 50px;
+  }
+}
+
+/* ❗ ملاحظة: السايدبار يظل ظاهر دائماً في كل الحالات وما يحتاج نغيره */
+
+
+
+  
+
+
+/* ✅ end Sidebar */

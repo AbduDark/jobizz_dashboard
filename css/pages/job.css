@@ -1,0 +1,512 @@
+/* 🌟 إعدادات أساسية */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    overflow-x: hidden;
+    /* تجنب التمرير الأفقي */
+}
+
+:root {
+    --primary-color: #356899;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
+
+
+/* ✅ تنسيق العنوان فوق الجدول */
+h2 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* ✅ تحسين تصميم الأزرار */
+.add-btn,
+.filter-btn,
+button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #356899;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+    text-align: center;
+    font-weight: bold;
+}
+
+.edit-btn {
+    background-color: #0e723e;
+    margin-right: 10px;
+}
+
+.delete-btn {
+    /* background-color: rgb(226, 14, 14); */
+    background-color: red;
+
+}
+
+
+.add-btn {
+    background-color: #EDF3FC;
+    color: #5386E4;
+}
+
+/* .add-btn:hover {
+    background-color: #218838;
+} */
+
+.filter-btn:hover,
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+button i {
+    margin-right: 5px;
+}
+
+/* ✅ تحسين تصميم الفلاتر والأزرار */
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+input,
+select {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.inp {
+    margin-top: 10px;
+}
+
+.btn {
+    margin-top: 30px;
+}
+
+/* ✅ تصميم الجدول */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #356899;
+    color: white;
+}
+
+/* ✅ تحسين الـ Pagination */
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination button {
+    margin: 5px;
+    background-color: #356899;
+    color: white;
+}
+
+/* ✅ تصميم المودال */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    margin-top: 90px;
+    width: 42%;
+    display: grid;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close-btn {
+    display: flex;
+    justify-content: end;
+
+}
+
+.close {
+    cursor: pointer;
+    display: flex;
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 8px;
+
+
+
+}
+
+/* ✅ تحسين التنسيق على جميع الأجهزة */
+@media (max-width: 1024px) {
+
+    /* تابلت */
+    /* .sidebar.open {
+        width: 150px;
+    } */
+
+    .container {
+        margin-left: 60px;
+        width: calc(100% - 60px);
+        padding: 15px;
+    }
+
+    .sidebar.open~.container {
+        margin-left: 150px;
+        width: calc(100% - 150px);
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+
+/* ✅ تحسين التنسيق على الموبايل (عرض أقل من 768px) */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 60px;
+    }
+
+    .sidebar.open {
+        width: 120px;
+        /* تقليل عرض السايد بار في الموبايل */
+    }
+
+    .container {
+        margin-left: 10px;
+        /* ✅ إضافة مسافة بين السايد بار والمحتوى */
+        width: calc(100% - 20px);
+        /* ✅ تقليل العرض ليبقى الجدول واضح */
+        padding: 10px;
+    }
+
+    .sidebar.open~.container {
+        margin-left: 130px;
+        /* ✅ زيادة المساحة عندما يكون السايد بار مفتوح */
+        width: calc(100% - 140px);
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .filter-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-btn,
+    .filter-btn,
+    input,
+    select {
+        width: 100%;
+    }
+
+    /* ✅ تحسين عرض الجدول ليكون متناسقًا */
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: 12px;
+        min-width: 600px;
+        /* ✅ التأكد من أن الجدول لا يصبح ضيقًا جدًا */
+    }
+
+    th,
+    td {
+        padding: 8px;
+        white-space: nowrap;
+        /* ✅ منع النصوص من التكدس */
+    }
+
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+}
+
+/* ✅ تحسين التنسيق على الشاشات الصغيرة جدًا (أقل من 480px) */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 50px;
+    }
+
+    .sidebar.open {
+        width: 100px;
+        /* ✅ تقليل عرض السايد بار أكثر */
+    }
+
+    .container {
+        margin-left: 10px;
+        /* ✅ إضافة مسافة بين السايد بار والمحتوى */
+        width: calc(100% - 20px);
+        /* ✅ تقليل العرض ليبقى الجدول واضح */
+        padding: 8px;
+    }
+
+    .sidebar.open~.container {
+        margin-left: 110px;
+        /* ✅ زيادة المساحة عندما يكون السايد بار مفتوح */
+        width: calc(100% - 120px);
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .filter-container {
+        gap: 5px;
+    }
+
+    .add-btn,
+    .filter-btn,
+    input,
+    select {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    table {
+        font-size: 11px;
+        min-width: 500px;
+        /* ✅ منع الجدول من الانكماش أكثر من اللازم */
+    }
+
+    th,
+    td {
+        padding: 6px;
+    }
+
+    td {
+        padding: 0px 60px;
+    }
+
+    .pagination button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+
+
+/* ✅ تحسين توافق Navbar مع الأجهزة الصغيرة */
+@media (max-width: 768px) {
+    .navbar {
+        /* flex-direction: column; */
+        align-items: flex-start;
+    }
+
+    .name {
+        display: none;
+    }
+
+    .profile-img {
+        margin-right: 50px;
+    }
+/* 
+    .search-box {
+        width: 100%;
+        margin-bottom: 10px;
+    } */
+
+    .nav-icons {
+        width: 80%;
+        justify-content: space-between;
+    }
+
+    .sidebar {
+        width: 60px;
+    }
+
+    .sidebar.open {
+        width: 140px;
+    }
+
+    .container {
+        margin-left: 70px;
+        width: calc(100% - 80px);
+        padding: 15px;
+    }
+
+    .sidebar.open~.container {
+        margin-left: 150px;
+        width: calc(100% - 160px);
+    }
+}
+.notification-container {
+    position: relative;
+    display: inline-block;
+}
+
+.fa-bell {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.7rem;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 250px; /* تصغير عرض البوكس */
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 0.5rem; /* تصغير الحشوة الداخلية */
+    font-size: 0.7rem; /* تصغير حجم الخط */
+}
+
+.notification-item {
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.unread {
+    background: #f8f9fa;
+    position: relative;
+}
+
+.unread::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #2d98da;
+    border-radius: 50%;
+    position: absolute;
+    left: -10px;
+}
+
+.view-all {
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+    color: #2d98da;
+    text-decoration: none;
+    font-size: 0.7rem; /* تصغير الخط */
+}
+.cards-container {
+    display: none;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+}
+
+.card p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-buttons .edit,
+.card-buttons .delete {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.card-buttons .edit {
+    background-color: #0e723e;
+    color: white;
+}
+
+.card-buttons .delete {
+    background-color: red;
+    color:white;
+}

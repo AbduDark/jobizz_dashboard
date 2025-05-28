@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Management</title>
+    <!-- fontAwesome -->
+    <link rel="stylesheet" href="css/vendor/all.min.css" />
+    <script src="js/auth.js"></script>
+    <link rel="stylesheet" href="./css/pages/company.css" />
+
+    <link rel="stylesheet" href="css/style.css" />
+   
+  </head>
+
+  <body>
+    <div class="header">
+      <!-- ✅ Navbar -->
+      <nav class="top-bar">
+        <div class="search-container">
+          <input type="text" placeholder="Search..." class="search-input" />
+          <button class="search-button">
+            <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <div class="icon-section">
+          <i class="fas fa-envelope"></i>
+            <!-- أيقونة الإشعارات مع البادج -->
+<div class="notification-container">
+    <i class="fas fa-bell" id="notificationBell"><span class="notification-badge">4</span></i>
+    
+    <!-- Dropdown الإشعارات -->
+    <div class="notification-dropdown" id="notificationDropdown">
+        <div class="dropdown-header">
+            <h3>Notifications</h3>
+            <a href="#" class="mark-read">Mark all as read</a>
+        </div>
+        
+        <div class="notification-list">
+            <!-- الإشعارات الجديدة -->
+            <div class="notification-section">
+                <h4>NEW</h4>
+                <div class="notification-item unread">
+                    <img src="./images/menna.jpeg" alt="Notification Icon" class="notification-icon">
+                    <div class="notification-content">
+                        Emma Watson replied to your comment: "Hello world 😊"
+                        <span class="notification-time">Just now</span>
+                    </div>
+                </div>
+                <div class="notification-item unread">
+                    <img src="./images/menna.jpeg" alt="Notification Icon" class="notification-icon">
+                    <div class="notification-content">
+                        Emma Watson replied to your comment: "Hello world 😊"
+                        <span class="notification-time">Just now</span>
+                    </div>
+                </div>
+              
+                <!-- باقي الإشعارات هنا -->
+            </div>
+            
+            <!-- الإشعارات القديمة -->
+            <div class="notification-section">
+                <h4>EARLIER</h4>
+                <div class="notification-item">
+                    <img src="./images/istockphoto-1185418020-170667a.jpg" alt="Notification Icon" class="notification-icon">
+                    <div class="notification-content">
+                        The forecast today shows a low of 20°C in California.
+                        <span class="notification-time">8h ago</span>
+                    </div>
+                </div>
+                <!-- باقي الإشعارات هنا -->
+            </div>
+        </div>
+        
+        <a href="./nofigation.html" class="view-all">View all</a>
+    </div>
+</div>
+
+          <i class="fas fa-layer-group"></i>
+          <div class="user-profile" onclick="toggleDropdown()">
+            <img src="assets/images/avata.jpeg" alt="image profile" />
+            <span>Hi, Hizrian</span>
+
+            <div class="dropdown-box">
+              <div class="user-info">
+                <h3>Kevin Anderson</h3>
+                <p>مصمم مواقع</p>
+              </div>
+              <ul>
+                <li><a href="profile.html" class="fas fa-user"> Profile</a></li>
+                <li><a href="setting.html" class="fas fa-cog"> Setting</a></li>
+                <li><a href="app/chat.html" class="fas fa-question-circle"> Support</a></li>
+                <li><a href="#" class="fas fa-sign-out-alt" onclick="logout()">LogOut</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- =============== sidebar ================ -->
+
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/images/logo.png" alt="logo" />
+        <div class="toggle-btn">☰</div>
+      </div>
+
+      <ul>
+  <!-- يظهر للجميع -->
+  <li data-id="dashboard" class="admin-only">
+    <a href="index.html">
+      <span class="icon"><i class="fa-sharp fa-solid fa-house"></i></span>
+      <span class="text">Dashboard</span>
+    </a>
+  </li>
+
+  <li data-id="users" class="admin-only">
+    <a href="user.html">
+      <span class="icon"><i class="fa-solid fa-users"></i></span>
+      <span class="text">Users</span>
+    </a>
+  </li>
+
+  <li data-id="jobs" class="user-only">
+    <a href="job.html">
+      <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
+      <span class="text">Jobs</span>
+    </a>
+  </li>
+
+  <li data-id="view" class="user-only">
+    <a href="view.html">
+      <span class="icon"><i class="fa-sharp fa-solid fa-eye"></i></span>
+      <span class="text">View jobs</span>
+    </a>
+  </li>
+
+  <li data-id="companies" class="admin-only">
+    <a href="company.html">
+      <span class="icon"><i class="fa-solid fa-buildings"></i></span>
+      <span class="text">Companies</span>
+    </a>
+  </li>
+
+  <li class="user-only">
+    <a href="./app/chat.html">
+      <span class="icon"><i class="fas fa-comments"></i></span>
+      <span class="text">Chat</span>
+    </a>
+  </li>
+
+  <li data-id="profile" class="user-only">
+    <a href="profile.html">
+      <span class="icon"><i class="fa-solid fa-user"></i></span>
+      <span class="text">Profile</span>
+    </a>
+  </li>
+
+  <li data-id="register" class="admin-only">
+    <a href="./signup.html">
+      <span class="icon"><i class="fa-solid fa-user-plus"></i></span>
+      <span class="text">Register</span>
+    </a>
+  </li>
+
+  <li data-id="setting" class="admin-only">
+    <a href="setting.html">
+      <span class="icon"><i class="fa-solid fa-gear"></i></span>
+      <span class="text">Settings</span>
+    </a>
+  </li>
+
+  <li data-id="logout">
+    <a href="#" onclick="logout()">
+      <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+      <span class="text">Logout</span>
+    </a>
+  </li>
+</ul>
+    </div>
+
+    <!-- ✅ Main Container -->
+    <section class="main-panel">
+      <div class="container-fluid">
+        <h2 class="my-5">Company List</h2>
+      
+        <!-- ✅ إضافة جدول الشركات -->
+        <div class="table-container my-5">
+          <table>
+           <thead>
+  <tr>
+    <th>Logo</th>
+    <th>Company Name</th>
+    <th>Description</th>
+    <th>Website</th>   
+    <th>Status</th>
+    <th>Delete</th>
+  </tr>
+</thead>
+            <tbody id="companyTableBody">
+              <!-- سيتم ملء البيانات ديناميكيًا -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ✅ قائمة الشركات في الموبايل -->
+        <div id="companyList" class="company-list"></div>
+      </div>
+   </section>
+    <!-- js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/company.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+         protectPage(['super-admin','admin']);
+    </script>
+    <script src="js/login.js"></script>
+</body>
+</html>

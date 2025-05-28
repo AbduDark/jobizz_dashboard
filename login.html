@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <!-- Title Of The Page -->
+   <title>Login || Metrix</title>
+    <!-- Meta Information -->
+    <meta charset="UTF-8" />
+    <meta
+    name="viewport"
+    content="width=device-width, height=device-height, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+    name="description"
+    content="Metrix is a sleek and modern app landing page template built with HTML, CSS, and JavaScript. It's designed to showcase your app's features and attract potential users." />
+    <meta name="keywords" content="Metrix - App Landing Page Template" />
+    <meta name="author" content="white orange software" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="noindex" />
+
+    <!-- Favicons -->
+    <link
+    rel="apple-touch-icon"
+    sizes="72x72"
+    href="/assets/images/favicons/apple-touch-icon.png" />
+    <link
+    rel="icon"
+     type="images/png"
+     sizes="32x32"
+    href="assets/images/favicons/favicon-32x32.png" />
+    <link
+    rel="icon"
+    type="images/png"
+    sizes="16x16"
+    href="assets/images/favicons/favicon-16x16.png" />
+    <link
+  rel="mask-icon"
+  href="/assets/images/favicons/safari-pinned-tab.svg"
+    color="#ffffff" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- All Css -->
+
+    <link type="text/css" rel="stylesheet" href="assets/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+      .error-box {
+        margin-top: 15px;
+        padding: 12px;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        border-radius: 5px;
+        display: none;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .error-box.show {
+        display: block;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .success-box {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .btn-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .form-group {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #999;
+      }
+
+      .password-toggle:hover {
+        color: #555;
+      }
+    </style>
+  
+
+    <link type="text/css" rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+   </head>
+
+
+
+  <body>
+    <!-- Spinner Loader Start -->
+    <div class="loader">
+      <div id="loading-bar-spinner" class="spinner">
+        <div class="spinner-icon"></div>
+      </div>
+    </div>
+
+    <!-- Activity Page Section Starts Here-->
+    <section class="activity-bg bg-norepeat-cover">
+
+      <div class="container d-flex">
+        <div class="activity-card">
+          <div class="activity-logo-wrap">
+            <a href="home.html" class="logo-img pb-0">
+              <img src="assets/images/logo/logo.svg" alt="logo-images" />
+            </a>
+          </div>
+          <div class="activity-card-heading">
+            <h1 class="activity-card-header">Welcome Back</h1>
+            <label class="activity-card-subtitle"
+              >Lorem Ipsum is simply dummy text of the printing and type setting
+              industry.</label
+            >
+          </div>
+          <div class="activity-actions">
+            <form id="loginForm" class="d-flex flex-column gap-4">
+              <div class="form-group">
+                <label for="userEmail"><i class="fas fa-envelope"></i></label>
+                <input
+                  type="email"
+                  id="userEmail"
+                  class="input-one"
+                  placeholder="Email"
+                  required />
+              </div>
+              <div class="form-group">
+                <label for="userPassword"><i class="fas fa-lock"></i></label>
+                <input
+                  type="password"
+                  id="userPassword"
+                  class="input-one"
+                  placeholder="Password"
+                  required />
+                <span class="password-toggle" id="togglePassword">
+                <i class="fas fa-eye"></i>
+                </span>
+              </div>
+              <div class="text-end">
+                <a href="forget-password.html" class="activity-forget mb-0"
+                  >Forget Password?</a
+                >
+              </div>
+              <button
+                type="submit"
+                id="loginButton"
+                class="btn-common btn-activity-confirm">
+                Login
+              </button>
+              <div id="error-message-box" class="error-box"></div>
+            </form>
+          </div>
+          <div class="activity-switch">
+            <label class="activity-switch-title">Don't have an account?</label>
+            <a href="signup.html" class="activity-go-link">Signup</a>
+          </div>
+
+      </div>
+   
+    <!-- Activity Page Section Ends Here-->
+
+    <!-- Jquery Javascript File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <!-- Bootstrap Bundle Javascript File -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Owl Carousel Javascript File -->
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <!-- Smooth Scroll Javascript File -->
+    <script src="assets/js/smoothscroll.min.js"></script>
+    <!-- Default Javascript File -->
+    <script src="assets/js/svg.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+    
+ 
+
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("loginForm");
+        const emailInput = document.getElementById("userEmail");
+        const passwordInput = document.getElementById("userPassword");
+        const errorBox = document.getElementById("error-message-box");
+        const loginButton = document.getElementById("loginButton");
+        const togglePassword = document.getElementById("togglePassword");
+
+        // تعبئة البريد المسجل سابقاً إن وجد
+        const savedEmail = localStorage.getItem("emailToVerify");
+        if (savedEmail) emailInput.value = savedEmail;
+
+        // إظهار/إخفاء كلمة المرور
+        if (togglePassword) {
+          togglePassword.addEventListener("click", function () {
+            const type =
+              passwordInput.getAttribute("type") === "password"
+                ? "text"
+                : "password";
+            passwordInput.setAttribute("type", type);
+            this.querySelector("i").classList.toggle("fa-eye");
+            this.querySelector("i").classList.toggle("fa-eye-slash");
+          });
+        }
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const enteredEmail = emailInput.value.trim();
+          const enteredPassword = passwordInput.value;
+
+          if (!enteredEmail || !enteredPassword) {
+            showError("Please fill in all required fields");
+            return;
+          }
+
+          loginButton.disabled = true;
+          loginButton.innerHTML = '<span class="spinner"></span> Logging in...';
+          loginButton.classList.add("btn-loading");
+          hideError();
+
+          try {
+            const registeredEmail = localStorage.getItem("emailToVerify");
+            const registeredPassword =
+              localStorage.getItem("registeredPassword");
+
+            const isAdmin = checkIfAdmin(enteredEmail);
+
+            if (
+              !isAdmin &&
+              (enteredEmail !== registeredEmail ||
+                enteredPassword !== registeredPassword)
+            ) {
+              showError("Invalid email or password. Please try again.");
+              resetButton();
+              return;
+            }
+
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            localStorage.setItem("authToken", "user-authenticated-token");
+            localStorage.setItem("userRole", isAdmin ? "admin" : "user");
+            localStorage.setItem("userEmail", enteredEmail);
+
+            showSuccess(
+              isAdmin
+                ? "Admin login successful! Redirecting..."
+                : "Login successful! Redirecting..."
+            );
+
+            setTimeout(() => {
+              window.location.href = isAdmin ? "index.html" : "job.html";
+            }, 1500);
+          } catch (error) {
+            console.error("Login error:", error);
+            showError(
+              "Unable to process your request. Please try again later."
+            );
+            resetButton();
+          }
+        });
+
+        function checkIfAdmin(email) {
+          const adminEmails = [
+            "ahmed.khaled@gmail.com",
+            "sara.ibrahim@outlook.com",
+            "omar.hassan@gmail.com",
+            "fatima.ahmed@outlook.com",
+            "khaled.salem@gmail.com",
+            "nourhan.mostafa@outlook.com",
+            "youssef.hassan@gmail.com",
+            "mona.abdelrahman@outlook.com",
+            "hassan.zaki@gmail.com",
+            "amira.fathy@outlook.com",
+            "ahmed.mohamed@gmail.com",
+            "ahmdalshayb77@gmail.com",
+          ];
+          return email && adminEmails.includes(email.toLowerCase());
+        }
+
+        function showError(message) {
+          errorBox.textContent = message;
+          errorBox.classList.add("show");
+          errorBox.classList.remove("success-box");
+        }
+
+        function showSuccess(message) {
+          errorBox.textContent = message;
+          errorBox.classList.add("show", "success-box");
+        }
+
+        function hideError() {
+          errorBox.classList.remove("show");
+        }
+
+        function resetButton() {
+          loginButton.disabled = false;
+          loginButton.innerHTML = "Login";
+          loginButton.classList.remove("btn-loading");
+        }
+      });
+    </script>
+
+  
+</body>
+</html>
+
+    
+   
+  
+
+
+
+

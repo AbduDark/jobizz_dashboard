@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title Of The Page -->
+    <title>Verify Email || Metrix</title>
+
+    <!-- Meta Information -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="description" content="Metrix is a sleek and modern app landing page template built with HTML, CSS, and JavaScript. It's designed to showcase your app's features and attract potential users.">
+    <meta name="keywords" content="Metrix - App Landing Page Template, application landing page, application website landing page, responsive website, application responsive website, mobile app landing website, latest bootstrap mobile application website design, product lounch website, app product lounch website, bootstrap template, creative mobile website, multi pages template, landing page website, minimal portfolio, mobile app intro website">
+    <meta name="author" content="white orange software">
+    <meta property="og:title" content="Verify Email || Metrix" />
+    <meta property="og:description" content="Metrix is a sleek and modern app landing page template built with HTML, CSS, and JavaScript. It's designed to showcase your app's features and attract potential users." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/images/banner/etfit-index-one-hero-04.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="assets/images/favicons/safari-pinned-tab.svg" color="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- All Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/styles.css">
+    
+    <style>
+        .digit-cell {
+            width: 40px;
+            height: 60px;
+            text-align: center;
+            font-size: 28px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .digit-input-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .btn-verify {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .message-box {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Loader Start -->
+    <div class="loader">
+        <div id="loading-bar-spinner" class="spinner">
+            <div class="spinner-icon"></div>
+        </div>
+    </div>
+
+    <!-- Verify Email Section -->
+    <section class="activity-bg bg-norepeat-cover">
+        <div class="container d-flex">
+            <div class="activity-card">
+                <div class="activity-logo-wrap">
+                    <a href="home.html" class="logo-img pb-0">
+                        <img src="assets/images/logo/logo.svg" alt="logo-images" />
+                    </a>
+                </div>
+                <div class="activity-card-heading">
+                    <h1 class="activity-card-header">Verify Your Email</h1>
+                    <label class="activity-card-subtitle">Enter the 6-digit code sent to your email.</label>
+                </div>
+                <div class="activity-actions">
+                    <form id="verifyForm">
+                        <div class="digit-input-group">
+                            <input type="text" class="digit-cell" maxlength="1" inputmode="numeric" />
+                            <input type="text" class="digit-cell" maxlength="1" inputmode="numeric" />
+                            <input type="text" class="digit-cell" maxlength="1" inputmode="numeric" />
+                            <input type="text" class="digit-cell" maxlength="1" inputmode="numeric" />
+                            <input type="text" class="digit-cell" maxlength="1" inputmode="numeric" />
+                            <input type="text" class="digit-cell" maxlength="1" inputmode="numeric" />
+                        </div>
+                        <div id="messageBox" class="message-box"></div>
+                        <button type="submit" class="btn-common btn-verify">Verify</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+        <script src="js/login.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const verifyForm = document.getElementById('verifyForm');
+            const digitInputs = document.querySelectorAll('.digit-cell');
+            const messageBox = document.getElementById('messageBox');
+            const verifyButton = document.querySelector('.btn-verify');
+
+            // Auto-focus first input
+            if (digitInputs.length > 0) digitInputs[0].focus();
+
+            // Handle input navigation
+            digitInputs.forEach((input, index) => {
+                input.addEventListener('input', function () {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                    if (this.value.length === 1 && index < digitInputs.length - 1) {
+                        digitInputs[index + 1].focus();
+                    }
+                });
+
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                        digitInputs[index - 1].focus();
+                    }
+                });
+            });
+
+            // Form submission
+            verifyForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                // Collect the 6-digit code
+                let pinCode = '';
+                digitInputs.forEach(input => pinCode += input.value.trim());
+
+                // Validate code format
+                if (!/^\d{6}$/.test(pinCode)) {
+                    showMessage('Please enter a valid 6-digit code.', false);
+                    return;
+                }
+
+                // Get email from localStorage (should be set during registration)
+                const email = localStorage.getItem('emailToVerify');
+                if (!email) {
+                    showMessage('Session expired. Please register again.', false);
+                    return;
+                }
+
+                // Disable button during request
+                verifyButton.disabled = true;
+                verifyButton.textContent = 'Verifying...';
+
+                try {
+                    // Send verification request to API
+                    const response = await fetch('https://jobizaa.com/api/admin/verify-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            pin_code: pinCode
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.message || 'Verification failed');
+                    }
+
+                    // On success - show message and redirect to login
+                    showMessage('Email verified successfully! Redirecting to login...', true);
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
+
+                } catch (error) {
+                    showMessage(error.message || 'Verification failed. Please try again.', false);
+                    // Clear inputs and refocus first field
+                    digitInputs.forEach(input => input.value = '');
+                    digitInputs[0].focus();
+                } finally {
+                    verifyButton.disabled = false;
+                    verifyButton.textContent = 'Verify';
+                }
+            });
+
+            // Helper function to show messages
+            function showMessage(message, isSuccess) {
+                messageBox.textContent = message;
+                messageBox.className = isSuccess ? 'message-box success-message' : 'message-box error-message';
+                messageBox.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            padding: 2rem;
+        }
+
+        .notifications-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .notifications-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            color: #2d3436;
+        }
+
+        /* Notification Content */
+        .notification-item {
+            display: flex;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            overflow: hidden;
+        }
+
+        .notification-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            color: #2d3436;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .notification-details {
+            color: #636e72;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .notification-time {
+            color: #747d8c;
+            font-size: 0.9rem;
+        }
+
+        /* Unread Badge */
+        .unread-badge {
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: #2d98da;
+            border-radius: 50%;
+        }
+
+        /* Buttons & Actions */
+        .notification-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            background: #2d98da;
+            color: white;
+        }
+
+        .secondary-btn {
+            background: #f8f9fa;
+            color: #2d3436;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .notification-item {
+                flex-direction: column;
+            }
+            
+            .notification-icon {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notifications-container">
+        <div class="notifications-header">
+            <h1 class="header-title">Notifications</h1>
+            <button class="action-button primary-btn">Mark All as Read</button>
+        </div>
+
+        <!-- Notification 1 -->
+        <div class="notification-item">
+            <div class="unread-badge"></div>
+            <div class="notification-icon">
+                <img src="./images/WhatsApp Image 2022-12-14 at 01.58.59.jpg" alt="Award">
+            </div>
+            <div class="notification-content">
+                <h3 class="notification-title">Book Awards Winners Announced</h3>
+                <p class="notification-details">
+                    The winners chosen by readers are now available across all 21 categories
+                </p>
+                <span class="notification-time">Just now</span>
+            </div>
+        </div>
+
+        <!-- Notification 2 -->
+        <div class="notification-item">
+            <div class="notification-icon">
+                <img src="./images/model-being-covered-by-shopping-bags-copy-space_23-2148674119.png" alt="Vote">
+            </div>
+            <div class="notification-content">
+                <h3 class="notification-title">Last Chance to Vote</h3>
+                <p class="notification-details">
+                    2018 Falcon Choice Awards - Voting closes November 26
+                </p>
+                <div class="notification-actions">
+                    <button class="action-button primary-btn">Vote Now</button>
+                    <button class="action-button secondary-btn">View Nominees</button>
+                </div>
+                <span class="notification-time">15m ago</span>
+            </div>
+        </div>
+        <!-- Notification 2 -->
+        <div class="notification-item">
+            <div class="notification-icon">
+                <img src="./images/ava6.jpg" alt="Vote">
+            </div>
+            <div class="notification-content">
+                <h3 class="notification-title">Last Chance to Vote</h3>
+                <p class="notification-details">
+                    2018 Falcon Choice Awards - Voting closes November 26
+                </p>
+                <div class="notification-actions">
+                    <button class="action-button primary-btn">Vote Now</button>
+                    <button class="action-button secondary-btn">View Nominees</button>
+                </div>
+                <span class="notification-time">10m ago</span>
+            </div>
+        </div>
+
+        <!-- Notification 3 -->
+        <div class="notification-item">
+            <div class="unread-badge"></div>
+            <div class="notification-icon">
+                <img src="./images/istockphoto-1185418020-170667a.jpg" alt="User">
+            </div>
+            <div class="notification-content">
+                <h3 class="notification-title">Promotion to Society President</h3>
+                <p class="notification-details">
+                    Jennifer Kent appointed you as President of the Computer Science & Engineering Society
+                </p>
+                <span class="notification-time">1h ago</span>
+            </div>
+        </div>
+
+        <!-- Additional notifications follow same pattern -->
+    </div>
+
+    <script>
+        // Mark all as read functionality
+        document.querySelector('.primary-btn').addEventListener('click', function() {
+            document.querySelectorAll('.unread-badge').forEach(badge => {
+                badge.remove();
+            });
+        });
+
+        // Individual notification click handling
+        document.querySelectorAll('.notification-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const badge = this.querySelector('.unread-badge');
+                if(badge) badge.remove();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: left;
+    direction: ltr;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+:root {
+    --primary-color: #356899;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
+
+
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    color: #070707;
+}
+
+/* Tabs Styling */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    background: #EDF3FC;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    color: #5386E4;
+}
+
+.btn-center {
+
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+.tab.active,
+.tab:hover {
+    background: #356899;
+    color: white;
+}
+
+/* Sections */
+.tab-content {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input,
+select,
+button {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #356899;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 2px;
+    width: 100%;
+}
+
+.custom-file-upload {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+#file-name {
+    font-size: 14px;
+    color: #333;
+}
+
+
+
+
+/* ✅ جعل التصميم متجاوب مع الشاشات الصغيرة */
+@media (max-width: 1200px) {
+    .container {
+        width: 80%;
+        margin-left: 100px;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 100px;
+    }
+
+    /* .sidebar {
+        width: 50px;
+        height: 120vh;
+    } */
+
+    /* .sidebar.open {
+        width: 180px;
+    } */
+
+    .sidebar ul li .text {
+        opacity: 0;
+    }
+
+    .sidebar.open ul li .text {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 15px;
+        margin-top: 80px;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab {
+        width: 100%;
+    }
+
+    .navbar {
+        flex-direction: row;
+        /* إبقاء العناصر في نفس السطر */
+        height: auto;
+        padding: 10px;
+    }
+
+    .search-box {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .nav-icons {
+        margin-top: 10px;
+    }
+
+    .profile {
+        justify-content: center;
+        margin-top: 10px;
+
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+        margin-top: 110px;
+        margin-left: 30px;
+    }
+
+    .sidebar {
+        width: 45px;
+        height: 120vh;
+    }
+
+    .sidebar.open {
+        width: 160px;
+    }
+
+    .sidebar ul li {
+        padding: 10px;
+    }
+
+    .sidebar ul li i {
+        font-size: 18px;
+        width: 30px;
+    }
+
+    .tab {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 8px;
+    }
+
+    .tab {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .profile img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.notification-container {
+    position: relative;
+    display: inline-block;
+}
+
+.fa-bell {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.7rem;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 250px; /* تصغير عرض البوكس */
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 0.5rem; /* تصغير الحشوة الداخلية */
+    font-size: 0.7rem; /* تصغير حجم الخط */
+}
+
+.notification-item {
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.unread {
+    background: #f8f9fa;
+    position: relative;
+}
+
+.unread::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #2d98da;
+    border-radius: 50%;
+    position: absolute;
+    left: -10px;
+}
+
+.view-all {
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+    color: #2d98da;
+    text-decoration: none;
+    font-size: 0.7rem; /* تصغير الخط */
+}

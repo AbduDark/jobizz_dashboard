@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title Of The Page -->
+    <title>Forgot Password || Metrix</title>
+
+    <!-- Meta Information -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Metrix is a sleek and modern app landing page template built with HTML, CSS, and JavaScript. It's designed to showcase your app's features and attract potential users.">
+    <meta name="keywords" content="Metrix - App Landing Page Template, application landing page, application website landing page, responsive website, application responsive website, mobile app landing website, latest bootstrap mobile application website design, product lounch website, app product lounch website, bootstrap template, creative mobile website, multi pages template, landing page website, minimal portfolio, mobile app intro website">
+    <meta name="author" content="white orange software">
+    <!-- meta og property tags start -->
+    <meta property="og:title" content="404 || Metrix" />
+    <meta property="og:description" content="Metrix is a sleek and modern app landing page template built with HTML, CSS, and JavaScript. It's designed to showcase your app's features and attract potential users." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/images/banner/etfit-index-one-hero-04.png" />
+    <meta property="og:URL" content="https://staging.whiteorangesoftware.com/metrix" />
+    <!-- meta og property tags end * -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex">
+
+
+    <!-- Favicons -->
+    
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="images/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="images/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab.svg" color="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- All Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link type="text/css" rel="stylesheet" href="assets/css/styles.css">
+   
+</head>
+<body>
+    <!-- Spinner Loader Start -->
+    <div class="loader">
+        <div id="loading-bar-spinner" class="spinner">
+            <div class="spinner-icon"></div>
+        </div>
+    </div>
+
+    <!-- Activity Page Section Starts Here-->
+    <section class="activity-bg forget bg-norepeat-cover">
+        <div class="container d-flex">
+            <div class="activity-card">
+                <div class="activity-logo-wrap">
+                    <a href="home.html" class="logo-img pb-0">
+                        <img src="assets/images/logo/logo.svg" alt="logo-images" />
+                    </a>
+                </div>
+                <div class="activity-card-heading">
+                    <h1 class="activity-card-header">verify code</h1>
+                    <label class="activity-card-subtitle">Enter the secret code.</p>
+                </div>
+                <div class="activity-actions activity-actions-forget">
+                    <form>
+                        <div class="code-input">
+                            <span class="code-box" contenteditable="true" maxlength="1"></span>
+                            <span class="code-box" contenteditable="true" maxlength="1"></span>
+                            <span class="code-box" contenteditable="true" maxlength="1"></span>
+                            <span class="code-box" contenteditable="true" maxlength="1"></span>
+                            <span class="code-box" contenteditable="true" maxlength="1"></span>
+                            <span class="code-box" contenteditable="true" maxlength="1"></span>
+                        </div>
+                       
+<button type="submit" class="btn-common btn-verify-small">verify</button>
+
+                    </form>
+                </div>
+               
+            </div>
+            <!-- Activity Action Area Ends -->
+        </div>
+    </section>
+    <!-- Activity Page Section Ends Here-->
+    <!-- Jquery Javascript File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <!-- Bootstrap Bundle Javascript File -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Owl Carousel Javascript File -->
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <!-- Smooth Scroll Javascript File -->
+    <script src="assets/js/smoothscroll.min.js"></script>
+    <!-- Default Javascript File -->
+    <!-- Customized Javascript File -->
+    <script src="assets/js/svg.js"></script>
+    <script src="assets/js/custom.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const codeBoxes = document.querySelectorAll(".code-box");
+    const button = document.querySelector(".btn-verify-small");
+
+    // Improve navigation between input fields
+    codeBoxes.forEach((box, index) => {
+        box.addEventListener("input", function () {
+            this.textContent = this.textContent.replace(/[^0-9]/g, '');
+            if (this.textContent.length > 1) {
+                this.textContent = this.textContent.charAt(0);
+            }
+            if (this.textContent && index < codeBoxes.length - 1) {
+                codeBoxes[index + 1].focus();
+            }
+        });
+
+        box.addEventListener("keydown", function (e) {
+            if (e.key === "Backspace" && !this.textContent && index > 0) {
+                codeBoxes[index - 1].focus();
+            }
+        });
+    });
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let pinCode = "";
+        codeBoxes.forEach(box => {
+            pinCode += (box.textContent || "").trim();
+        });
+
+        if (!/^\d{6}$/.test(pinCode)) {
+            alert("Please enter a 6-digit code.");
+            return;
+        }
+
+        const email = localStorage.getItem("emailToVerify");
+        if (!email) {
+            alert("Session expired, please try again.");
+            window.location.href = "forgot-password.html";
+            return;
+        }
+
+        console.log("Sending to server:", { email, pinCode }); // Debug log
+
+        button.disabled = true;
+        button.textContent = "Verifying...";
+
+        fetch("https://jobizaa.com/api/admin/password/verify-pin", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, pinCode }) // Changed from 'pin' to 'pinCode'
+        })
+        .then(async res => {
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Failed to verify code.");
+            return data;
+        })
+        .then(() => {
+            localStorage.setItem("resetVerified", "true");
+            window.location.href = "newpass.html";
+        })
+        .catch(err => {
+            console.error("Verification error:", err);
+            alert(err.message || "Invalid or expired code.");
+        })
+        .finally(() => {
+            button.disabled = false;
+            button.textContent = "Verify";
+        });
+    });
+});
+</script>
+<script src="js/login.js"></script>
+<script>
+         protectPage(['super-admin','admin']);
+    </script>
+<script src="js/auth.js"></script>
+</body>
+
+</html>

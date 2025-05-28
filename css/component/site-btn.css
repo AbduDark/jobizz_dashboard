@@ -1,0 +1,40 @@
+.site-btn {
+    border: none;
+    font-size: 14px;
+    background-color: #000;
+    font-family: var(--font-family-400);
+    cursor: pointer;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 15px;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    transition: all 0.5s ease;
+    overflow: hidden;
+
+}
+
+.site-btn:hover {
+    border-radius: 20px;
+    color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.site-btn::after {
+    width: 0%;
+    height: 2px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    content: "";
+    opacity: 0;
+    transition: 0.5s all ease;
+}
+
+.site-btn:hover::after {
+    width: 100%;
+    opacity: 1;
+}

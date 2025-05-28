@@ -1,0 +1,49 @@
+@media (min-width: 320px) {
+    .icon-section .user-profile span {
+        display: none;
+    }
+
+}
+
+
+/* Small devices (576px and up) */
+@media (min-width: 576px) {
+
+ 
+}
+
+/* Medium devices (768px and up) */
+@media (min-width: 768px) {
+    .icon-section i {
+        display: inline;
+    }
+
+ 
+
+
+}
+
+
+@media (min-width: 830px) {
+   
+
+    .icon-section .user-profile span {
+        display: inline;
+    }
+
+
+}
+
+/* Large devices (992px and up) */
+@media (min-width: 992px) {}
+
+/* Extra large devices (1200px and up) */
+@media (min-width: 1200px) {}
+
+
+
+
+
+
+
+

@@ -1,0 +1,347 @@
+/* start main panel */
+
+.main-panel {
+    position: relative;
+    width: calc(100% - 60px);
+    top: 80px;
+    left: 60px;
+    transition: all 0.5s;
+}
+
+.main-panel .dashboard {
+    font-weight: 600;
+    color: #2a2f5b;
+    padding-top: 20px;
+}
+
+.main-panel.open {
+    width: calc(100% - 250px);
+    left: 250px;
+}
+
+/* start cards */
+.main-panel .cards {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.main-panel .cards .card-item {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.cards .card-item .card-body {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.cards .card-item .card-body .card-icon {
+    width: 65px;
+    height: 65px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.cards .card-item .card-body .card-icon .icon {
+    font-size: 26px;
+}
+
+.cards .card-item .card-body .card-details .card-category {
+    font-size: 16px;
+    color: #8d9498;
+    margin: 0;
+}
+
+.cards .card-item .card-body .card-details .card-title {
+    margin: 0;
+    color: #2a2f5b;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+/* End cards */
+
+/* start  Charts*/
+.chartsBx {
+
+    padding-bottom: 20px;
+}
+
+.chartsBx .chart {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    border: 1px solid var(--blue);
+}
+
+canvas {
+    max-height: 250px;
+    max-width: 90%;
+}
+
+/* End  Charts*/
+
+
+/* Start table jobs */
+.orders-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* العنوان العلوي */
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.orders-header h2 {
+    color: var(--primary-color);
+}
+
+.filter-options {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+
+}
+
+.filter-options select,
+.filter-options .view-all {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+.filter-options .view-all {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Table container for horizontal scrolling */
+.table-container {
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    width: 100%;
+    /* Ensure it takes full width */
+}
+
+/* Table styles */
+.orders-table {
+    width: 100%;
+    /* Ensure the table takes full width */
+    border-collapse: collapse;
+    /* Remove spacing between cells */
+    min-width: 600px;
+    /* Set a minimum width to ensure scrolling */
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    /* Add a border to separate rows */
+}
+
+.orders-table th {
+    font-weight: bold;
+}
+
+.status-pending {
+    background: #ffeb99;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.status-shipped {
+    background: #b2f2bb;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.status-processing {
+    background: #a0c4ff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+
+/* End table jobs */
+
+
+
+
+/* Start  Users Geolocation */
+
+.card-head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header {
+    background-color: var(--white);
+}
+
+.card-header .card-title {
+    color: var(--primary-color);
+    padding: 10px 0;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+
+.card-header .card-category {
+    font-size: 12px;
+    padding-top: 10px;
+}
+
+.card-header .card-tools .btn {
+    font-size: 12px;
+    padding: 4px;
+    color: var(--primary-color);
+}
+
+.card-header .card-tools .btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+
+.mapcontainer {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+}
+
+.flag img {
+    width: auto;
+}
+
+
+/* End  Users Geolocation */
+
+
+
+/* Small devices (landscape phones, 480px and up) */
+@media (min-width: 480px) {
+    .card-header .card-title {
+
+        font-size: 24px;
+    }
+
+
+    .card-header .card-category {
+        font-size: 18px;
+    }
+
+
+    .card-header .card-tools .btn {
+        font-size: 24px;
+        padding: 10px;
+    }
+
+
+}
+
+
+/* Small devices (576px and up) */
+@media (min-width: 576px) {
+    .filter-options {
+        flex-direction: row;
+    }
+}
+
+/* Medium devices (768px and up) */
+@media (min-width: 768px) {}
+
+/* Large devices (992px and up) */
+@media (min-width: 992px) {}
+
+/* Extra large devices (1200px and up) */
+@media (min-width: 1200px) {}
+.notification-container {
+    position: relative;
+    display: inline-block;
+}
+
+.fa-bell {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4757;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.7rem;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 250px; /* تصغير عرض البوكس */
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 0.5rem; /* تصغير الحشوة الداخلية */
+    font-size: 0.7rem; /* تصغير حجم الخط */
+}
+
+.notification-item {
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.unread {
+    background: #f8f9fa;
+    position: relative;
+}
+
+.unread::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #2d98da;
+    border-radius: 50%;
+    position: absolute;
+    left: -10px;
+}
+
+.view-all {
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+    color: #2d98da;
+    text-decoration: none;
+    font-size: 0.7rem; /* تصغير الخط */
+}

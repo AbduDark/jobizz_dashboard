@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Title Of The Page -->
+    <title>Signup || Metrix</title>
+
+    <!-- Meta Information -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Metrix is a sleek and modern app landing page template built with HTML, CSS, and JavaScript. It's designed to showcase your app's features and attract potential users.">
+    <meta name="keywords" content="Metrix - App Landing Page Template, application landing page, application website landing page, responsive website, application responsive website, mobile app landing website, latest bootstrap mobile application website design, product lounch website, app product lounch website, bootstrap template, creative mobile website, multi pages template, landing page website, minimal portfolio, mobile app intro website">
+    <meta name="author" content="white orange software">
+    <!-- meta og property tags start -->
+    <meta property="og:title" content="404 || Metrix" />
+    <meta property="og:description" content="Metrix is a sleek and modern app landing page template built with HTML, CSS, and JavaScript. It's designed to showcase your app's features and attract potential users." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./assets/images/banner/etfit-index-one-hero-04.png" />
+    <meta property="og:URL" content="https://staging.whiteorangesoftware.com/metrix" />
+    <!-- meta og property tags end * -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex">
+
+
+    <!-- Favicons -->
+    
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="images/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="images/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
+  
+    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab.svg" color="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- All Css -->
+    <link type="text/css" rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
+    
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+ <!-- Spinner Loader Start -->
+<div class="loader" id="spinner" style="display: none;">
+    <div id="loading-bar-spinner" class="spinner">
+        <div class="spinner-icon"></div>
+    </div>
+</div>
+
+<!-- Activity Page Section Starts Here-->
+<section class="activity-bg bg-norepeat-cover">
+    <div class="container d-flex">
+        <div class="activity-card">
+            <div class="activity-logo-wrap">
+                <a href="home.html" class="logo-img pb-0">
+                    <img src="assets/images/logo/logo.svg" alt="logo-images" />
+                </a>
+            </div>
+            <div class="activity-card-heading">
+                <h1 class="activity-card-header">Signup</h1>
+                <label class="activity-card-subtitle">Join us today and unlock a world of possibilities – your journey starts here!.</label>
+            </div>
+
+            <div class="activity-actions">
+                <form class="d-flex flex-column gap-4" onsubmit="registerRedirect(event)">
+
+                    <div class="form-group">
+                        <label for="setName"><i class="fas fa-user"></i></label>
+                        <input type="text" id="setName" class="input-one" placeholder="User Name">
+                        <div class="error" id="setNameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="setMail"><i class="fas fa-envelope"></i></label>
+                        <input type="email" id="setMail" class="input-one" placeholder="Email">
+                        <div class="error" id="setMailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="setPhone"><i class="fas fa-phone"></i></label>
+                        <input type="tel" id="setPhone" class="input-one" placeholder="Phone Number">
+                        <div class="error" id="setPhoneError"></div>
+                    </div>
+
+                  <div class="form-group">
+    <label for="setPassword"><i class="fas fa-lock"></i></label>
+    <input type="password" id="setPassword" class="input-one" placeholder="Password">
+    <span class="password-toggle" onclick="togglePassword('setPassword', this)">
+        <i class="fas fa-eye"></i>
+    </span>
+    <div class="error" id="setPasswordError"></div>
+</div>
+
+
+                 <div class="form-group">
+    <label for="setConfirmPassword"><i class="fas fa-lock"></i></label>
+    <input type="password" id="setConfirmPassword" class="input-one" placeholder="Confirm Password">
+    <span class="password-toggle" onclick="togglePassword('setConfirmPassword', this)">
+        <i class="fas fa-eye"></i>
+    </span>
+    <div class="error" id="setConfirmPasswordError"></div>
+</div>
+
+                 
+                    <button type="submit" id="btnActivitySignup" class="btn-common btn-activity-confirm">Signup</button>
+                    <div id="registerMessage" class="form-message" style="text-align: center; margin-top: 10px;"></div>
+
+                </form>
+            </div>
+
+            <div class="activity-switch">
+                <label class="activity-switch-title">Already have an account?</label>
+                <a href="login.html" class="activity-go-link">Signin</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Jquery Javascript File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+         protectPage(['super-admin','admin']);
+    </script>
+    <!-- Bootstrap Bundle Javascript File -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Owl Carousel Javascript File -->
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <!-- Smooth Scroll Javascript File -->
+    <script src="assets/js/smoothscroll.min.js"></script>
+    <!-- Default Javascript File -->
+    <!-- Customized Javascript File -->
+    <script src="assets/js/svg.js"></script>
+    <script src="assets/js/custom.js"></script>
+  
+    
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const registrationForm = document.querySelector('.activity-actions form');
+        const submitButton = document.getElementById('btnActivitySignup');
+        const messageElement = document.getElementById('registerMessage');
+
+        registrationForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Reset messages
+            messageElement.textContent = '';
+            messageElement.className = 'form-message';
+            ['setNameError', 'setMailError', 'setPhoneError', 'setPasswordError', 'setConfirmPasswordError'].forEach(id => {
+                document.getElementById(id).textContent = '';
+            });
+
+            // Get form values
+            const fullName = document.getElementById('setName').value.trim();
+            const email = document.getElementById('setMail').value.trim();
+            const phone = document.getElementById('setPhone').value.trim();
+            const password = document.getElementById('setPassword').value;
+            const passwordConfirmation = document.getElementById('setConfirmPassword').value;
+
+            // Basic validation
+            if (password !== passwordConfirmation) {
+                document.getElementById('setConfirmPasswordError').textContent = 'Passwords do not match';
+                return;
+            }
+
+            const spinner = document.getElementById('spinner');
+            spinner.style.display = 'block';
+            submitButton.disabled = true;
+            submitButton.textContent = 'Registering...';
+
+            // Prepare form data
+            const formData = new FormData();
+            formData.append("fullName", fullName);
+            formData.append("email", email);
+            formData.append("phone", phone);
+            formData.append("password", password);
+            formData.append("password_confirmation", passwordConfirmation);
+
+            fetch("https://jobizaa.com/api/admin/register", {
+                method: "POST",
+                body: formData
+            })
+            .then(async response => {
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    // Handle validation errors
+                    if (data.errors) {
+                        for (const [field, errors] of Object.entries(data.errors)) {
+                            const errorElement = document.getElementById(`${field}Error`);
+                            if (errorElement) {
+                                errorElement.textContent = errors[0];
+                            }
+                        }
+                    }
+                    throw new Error(data.message || 'Registration failed');
+                }
+                
+                return data;
+            })
+            .then(data => {
+                // Show success message
+                messageElement.textContent = 'Registration successful! Verification code sent to your email.';
+                messageElement.classList.add('success-message');
+                
+                // Store email for verification
+                localStorage.setItem('emailToVerify', email);
+                localStorage.setItem('registeredPassword', password);
+                
+                // Redirect to verification page after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'verify code.html';
+                }, 2000);
+            })
+            .catch(error => {
+                console.error('Registration error:', error);
+                messageElement.textContent = error.message;
+                messageElement.classList.add('error-message');
+            })
+            .finally(() => {
+                spinner.style.display = 'none';
+                submitButton.disabled = false;
+                submitButton.textContent = 'Signup';
+            });
+        });
+    });
+    </script>
+    <script>
+    function togglePassword(inputId, iconElement) {
+        const input = document.getElementById(inputId);
+        const icon = iconElement.querySelector('i');
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = "password";
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+</script>
+
+      
+    
+</body>
+
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <!-- fontAwesome -->
+    <!-- <link rel="stylesheet" href="css/vendor/all.min.css">
+    <link rel="stylesheet" href="./css/pages/setting.css"> -->
+    <meta name="api-url" content="https://placeholder.mockapi.io/api/v1">
+    <meta name="api-url" content="https://your-real-api-url.com/api/v1">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <style>
+        .confirmation-dialog {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            width: 350px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .confirmation-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .confirmation-message {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .notification-container {
+            position: relative;
+        }
+
+        .notification-dropdown {
+            display: none; /* اجعلها تظهر عند الحاجة */
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 300px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px; /* إضافة حدود دائرية */
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee; /* إضافة حد بين الإشعارات */
+        }
+
+        .notification-item:last-child {
+            border-bottom: none; /* إزالة الحد الأخير */
+        }
+
+        .notification-icon {
+            width: 30px; /* حجم أصغر */
+            height: 30px; /* حجم أصغر */
+            border-radius: 50%; /* لجعلها دائرية */
+            margin-right: 10px;
+        }
+
+        .notification-content {
+            flex-grow: 1;
+        }
+
+        .view-all {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10%; /* لجعل الزر دائري */
+            margin: 10px auto; /* توسيط الزر */
+            width: 90px; /* عرض الزر */
+            height: 50px; /* ارتفاع الزر */
+            line-height: 30px; /* توسيط النص داخل الزر */
+        }
+
+        .view-all:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Added styles for form validation */
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        input.invalid {
+            border: 1px solid #dc3545;
+        }
+        
+        .admin-list-container {
+            margin-top: 20px;
+        }
+        
+        #superAdminNames {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .admin-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+        <!-- ✅ Navbar -->
+        <nav class="top-bar">
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-input">
+                <button class="search-button">
+                    <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <div class="icon-section">
+                <i class="fas fa-envelope"></i>
+            <!-- أيقونة الإشعارات مع البادج -->
+<div class="notification-container">
+    <i class="fas fa-bell" id="notificationBell"><span class="notification-badge">4</span></i>
+    
+    <!-- Dropdown الإشعارات -->
+    <div class="notification-dropdown" id="notificationDropdown">
+        <div class="dropdown-header">
+            <h3>Notifications</h3>
+            <a href="#" class="mark-read">Mark all as read</a>
+        </div>
+        
+        <div class="notification-list">
+            <!-- الإشعارات الجديدة -->
+            <div class="notification-section">
+                <h4>NEW</h4>
+                <div class="notification-item unread">
+                    <img src="./images/menna.jpeg" alt="Notification Icon" class="notification-icon">
+                    <div class="notification-content">
+                        Emma Watson replied to your comment: "Hello world 😊"
+                        <span class="notification-time">Just now</span>
+                    </div>
+                </div>
+                <div class="notification-item unread">
+                    <img src="./images/menna.jpeg" alt="Notification Icon" class="notification-icon">
+                    <div class="notification-content">
+                        Emma Watson replied to your comment: "Hello world 😊"
+                        <span class="notification-time">Just now</span>
+                    </div>
+                </div>
+              
+                <!-- باقي الإشعارات هنا -->
+            </div>
+            
+            <!-- الإشعارات القديمة -->
+            <div class="notification-section">
+                <h4>EARLIER</h4>
+                <div class="notification-item">
+                    <img src="./images/istockphoto-1185418020-170667a.jpg" alt="Notification Icon" class="notification-icon">
+                    <div class="notification-content">
+                        The forecast today shows a low of 20°C in California.
+                        <span class="notification-time">8h ago</span>
+                    </div>
+                </div>
+                <!-- باقي الإشعارات هنا -->
+            </div>
+        </div>
+        
+        <a href="./nofigation.html" class="view-all">View all</a>
+    </div>
+</div>
+
+                <i class="fas fa-layer-group"></i>
+                <div class="user-profile" onclick="toggleDropdown()">
+                    <img src="assets/images/avata.jpeg" alt="image profile">
+                    <span>Hi, Hizrian</span>
+
+                    <div class="dropdown-box">
+                        <div class="user-info">
+                            <h3>Kevin Anderson</h3>
+                            <p>مصمم مواقع</p>
+                        </div>
+                        <ul>
+                <li><a href="profile.html" class="fas fa-user"> Profile</a></li>
+                <li><a href="setting.html" class="fas fa-cog"> Setting</a></li>
+                <li><a href="app/chat.html" class="fas fa-question-circle"> Support</a></li>
+                <li><a href="#" class="fas fa-sign-out-alt" onclick="logout()">LogOut</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+
+
+    </div>
+
+
+
+
+  <!-- =============== sidebar ================ -->
+
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <img src="assets/images/logo.png" alt="logo" />
+        <div class="toggle-btn">☰</div>
+      </div>
+
+      <ul>
+  <!-- يظهر للجميع -->
+  <li data-id="dashboard" class="admin-only">
+    <a href="index.html">
+      <span class="icon"><i class="fa-sharp fa-solid fa-house"></i></span>
+      <span class="text">Dashboard</span>
+    </a>
+  </li>
+
+  <li data-id="users" class="admin-only">
+    <a href="user.html">
+      <span class="icon"><i class="fa-solid fa-users"></i></span>
+      <span class="text">Users</span>
+    </a>
+  </li>
+
+  <li data-id="jobs" class="user-only">
+    <a href="job.html">
+      <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
+      <span class="text">Jobs</span>
+    </a>
+  </li>
+
+  <li data-id="view" class="user-only">
+    <a href="view.html">
+      <span class="icon"><i class="fa-sharp fa-solid fa-eye"></i></span>
+      <span class="text">View jobs</span>
+    </a>
+  </li>
+
+  <li data-id="companies" class="admin-only">
+    <a href="company.html">
+      <span class="icon"><i class="fa-solid fa-buildings"></i></span>
+      <span class="text">Companies</span>
+    </a>
+  </li>
+
+  <li class="user-only">
+    <a href="./app/chat.html">
+      <span class="icon"><i class="fas fa-comments"></i></span>
+      <span class="text">Chat</span>
+    </a>
+  </li>
+
+  <li data-id="profile" class="user-only">
+    <a href="profile.html">
+      <span class="icon"><i class="fa-solid fa-user"></i></span>
+      <span class="text">Profile</span>
+    </a>
+  </li>
+
+  <li data-id="register" class="admin-only">
+    <a href="./signup.html">
+      <span class="icon"><i class="fa-solid fa-user-plus"></i></span>
+      <span class="text">Register</span>
+    </a>
+  </li>
+
+  <li data-id="setting" class="admin-only">
+    <a href="setting.html">
+      <span class="icon"><i class="fa-solid fa-gear"></i></span>
+      <span class="text">Settings</span>
+    </a>
+  </li>
+
+  <li data-id="logout">
+    <a href="#" onclick="logout()">
+      <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+      <span class="text">Logout</span>
+    </a>
+  </li>
+</ul>
+    </div>
+
+
+
+    <section class="main-panel">
+
+        <div class="container-fluid">
+
+
+
+            <h1 class="my-5">Settings</h1>
+
+            <!-- Navigation Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('general')">General</button>
+                <button class="tab btn-center" onclick="showTab('security')">Security</button>
+                <button class="tab" onclick="showTab('admin')">Admin Management</button>
+            </div>
+
+            <!-- General Settings -->
+            <div class="tab-content" id="general">
+                <h2>General Settings</h2>
+                <label>Application Name:</label>
+                <input type="text" placeholder="Enter application name" class="my-2">
+
+
+                <label for="logo">Logo:</label>
+                <div class="file-upload">
+                    <label for="logo" class="custom-file-upload">Choose the file</label>
+                    <span id="file-name">No file selected</span>
+                    <input type="file" id="logo" name="logo" accept="image/*" class="my-2">
+                </div>
+
+            </div>
+
+            <!-- Security Settings -->
+            <div class="tab-content hidden" id="security">
+                <h2>Security Settings</h2>
+                <label>Admin Permissions:</label>
+                <select>
+                    <option value="full">Full Access</option>
+                    <option value="limited">Limited Access</option>
+                </select>
+            </div>
+
+            <!-- Admin Management -->
+            <div class="tab-content hidden" id="admin">
+                <h2>Add Super Admin</h2>
+                <form id="superAdminForm">
+                    <div class="form-group">
+                        <label for="adminName">Full Name:</label>
+                        <input type="text" id="adminName" class="my-2" placeholder="Full Name" required>
+                        <span class="error-message" id="nameError">Please enter a valid name</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminEmail">Email:</label>
+                        <input type="email" id="adminEmail" class="my-2" placeholder="example@email.com" required>
+                        <span class="error-message" id="emailError">Please enter a valid email</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPhone">Phone Number:</label>
+                        <input type="text" id="adminPhone" class="my-2" placeholder="Phone Number" required>
+                        <span class="error-message" id="phoneError">Please enter a valid phone number</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPassword">Password:</label>
+                        <input type="password" id="adminPassword" class="my-2" placeholder="Password" required>
+                        <span class="error-message" id="passwordError">Password must be at least 6 characters</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPasswordConfirm">Confirm Password:</label>
+                        <input type="password" id="adminPasswordConfirm" class="my-2" placeholder="Confirm Password" required>
+                        <span class="error-message" id="confirmError">Passwords do not match</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Super Admin</button>
+                </form>
+
+                <hr>
+                <div class="admin-list-container">
+                    <h3>Added Supervisors:</h3>
+                    <select id="superAdminNames" style="margin-bottom: 10px;">
+                        <option disabled selected>Choose admin</option>
+                    </select>
+                    <div class="admin-actions">
+                        <button id="deleteSelectedAdminBtn" style="background-color: #f0ad4e; color: white; padding: 8px 15px; border: none; border-radius: 5px; margin-right: 10px;">❌ Delete Selected</button>
+                        <button id="clearAdminsBtn" style="background-color: #dc3545; color: white; padding: 8px 15px; border: none; border-radius: 5px;">🗑️ Delete All Moderators</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/main.js"></script>
+    <script src="./js/setting.js"></script>
+
+    <script>
+         protectPage(['super-admin','admin']);
+    </script>
+    <script src="./js/admin-settings.js"></script>
+
+</body>
+
+</html>

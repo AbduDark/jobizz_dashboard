@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعادة تعيين كلمة المرور || Metrix</title>
+
+    <!-- Meta Information -->
+    <meta name="description" content="Metrix - صفحة إعادة تعيين كلمة المرور لتطبيق حديث">
+    <meta name="author" content="white orange software">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="images/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="images/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab.svg" color="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         .message-box {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 5px;
+            display: none;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .message-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            left: 19px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+        }
+
+        .password-toggle:hover {
+            color: #555;
+        }
+        
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .strength-meter {
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            background: #ddd;
+        }
+        
+        .strength-meter.weak {
+            background: #ff4d4d;
+            width: 30%;
+        }
+        
+        .strength-meter.medium {
+            background: #ffa64d;
+            width: 65%;
+        }
+        
+        .strength-meter.strong {
+            background: #2ecc71;
+            width: 100%;
+        }
+   
+    </style>
+    
+</head>
+
+<body>
+    <!-- Spinner Loader Start -->
+    <div class="loader">
+        <div id="loading-bar-spinner" class="spinner">
+            <div class="spinner-icon"></div>
+        </div>
+    </div>
+
+    <!-- صفحة إعادة تعيين كلمة المرور -->
+    <section class="activity-bg forget bg-norepeat-cover">
+        <div class="container d-flex">
+            <div class="activity-card">
+                <div class="activity-logo-wrap">
+                    <a href="home.html" class="logo-img pb-0">
+                        <img src="assets/images/logo/logo.svg" alt="شعار">
+                    </a>
+                </div>
+                <div class="activity-card-heading">
+                    <h1 class="activity-card-header">Reset password</h1>
+                    <label class="activity-card-subtitle">Enter your email and new password.</label>
+                </div>
+                <div class="activity-actions activity-actions-forget">
+                    <form id="resetPasswordForm" class="d-flex flex-column gap-4">
+                       <div class="form-group">
+    <label for="email"><i class="fas fa-envelope"></i></label>
+    <input type="email" id="email" class="input-one" placeholder="e-mail" required>
+</div>
+
+<div class="form-group">
+    <label for="verificationCode"><i class="fas fa-key"></i></label>
+    <input type="text" id="verificationCode" class="input-one" placeholder="Email verification code" required>
+</div>
+
+<div class="form-group">
+    <label for="newPassword"><i class="fas fa-lock"></i></label>
+    <input type="password" id="newPassword" class="input-one" placeholder="New Password" required>
+    <span class="password-toggle" id="toggleNewPassword">
+        <i class="fas fa-eye"></i>
+    </span>
+
+</div>
+
+<div class="form-group">
+    <label for="confirmPassword"><i class="fas fa-lock"></i></label>
+    <input type="password" id="confirmPassword" class="input-one" placeholder="Confirm password" required>
+    <span class="password-toggle" id="toggleConfirmPassword">
+        <i class="fas fa-eye"></i>
+    </span>
+</div>
+                        <button type="submit" id="resetButton" class="btn-common btn-activity-confirm">تأكيد</button>
+                        <div id="message-box" class="message-box"></div>
+                    </form>
+                </div>
+                <div class="activity-switch">
+                    <label class="activity-switch-title">تذكرت كلمة المرور؟</label>
+                    <a href="login.html" class="activity-go-link">تسجيل الدخول</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jquery Javascript File -->
+    <script src="assets/js/jquery.min.js"></script>
+    <!-- Bootstrap Bundle Javascript File -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Default Javascript File -->
+    <script src="assets/js/custom.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/login.js"></script>
+  <script src="./js/newpass.js"></script>
+
+</body>
+
+</html>

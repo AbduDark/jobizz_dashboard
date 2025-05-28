@@ -1,0 +1,360 @@
+/* 🌟 إعدادات أساسية */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow-x: hidden;
+}
+
+
+
+
+
+/* ✅ تحسين العناوين */
+h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+h2 {
+  font-size: 20px;
+  color: #356899;
+}
+
+/* ✅ تحسين مربع البحث */
+#searchInput {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* ✅ تحسين الجدول وجعله متجاوب */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  min-width: 600px;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 14px;
+}
+
+/* ✅ تحسين رأس الجدول */
+th {
+  background-color: #356899;
+  color: white;
+}
+
+/* ✅ تحسين تأثيرات الجدول عند التمرير */
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* ✅ تحسين الأزرار */
+button {
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+
+  transition: 0.3s;
+  display: inline-block;
+  margin: 3px;
+}
+
+button.edit {
+  background-color: #0e723e;
+  color: white;
+}
+
+button.delete {
+  /* background-color: rgb(226, 14, 14); */
+  background-color: red;
+  color: white;
+  
+}
+
+button.add {
+  background-color: #356899;
+  color: white;
+}
+
+/* ✅ تحسين الـ Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .sidebar.open {
+    width: 140px;
+  }
+
+  .container {
+    
+  }
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* ✅ تحسين الـ Responsive عند 768px */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .sidebar.open {
+    width: 140px;
+  }
+
+  .container {
+    margin-left: 70px;
+    width: calc(100% - 80px);
+    padding: 15px;
+  }
+
+  .sidebar.open~.container {
+    margin-left: 150px;
+    width: calc(100% - 160px);
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+/* ✅ تحسين الـ Responsive عند 480px */
+@media (max-width: 480px) {
+  .sidebar {
+    width: 50px;
+  }
+
+  .sidebar.open {
+    width: 120px;
+  }
+
+  .sidebar ul li {
+    padding: 15px 5px;
+  }
+
+  .container {
+    margin-left: 60px;
+    width: calc(100% - 70px);
+    padding: 10px;
+  }
+
+  .sidebar.open~.container {
+    margin-left: 130px;
+    width: calc(100% - 140px);
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  #searchInput {
+    font-size: 14px;
+  }
+
+  table {
+    font-size: 11px;
+  }
+
+  button {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
+
+/* ✅ تحسين الـ Loader عند تحميل البيانات */
+.loader {
+  display: none;
+  margin: 10px auto;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*  */
+
+/* ✅ إخفاء الجدول في الشاشات الصغيرة وإظهار الكروت */
+@media (max-width: 768px) {
+  .table-container {
+    display: none !important;
+  }
+
+  .name {
+    display: none;
+  }
+
+  .profile-img {
+    margin-right: 38px;
+  }
+
+  .cards-container {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 10px;
+  }
+}
+
+/* ✅ إخفاء الكروت في الشاشات الكبيرة */
+@media (min-width: 769px) {
+  .cards-container {
+    display: none !important;
+  }
+}
+
+/* ✅ تصميم الكروت */
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+ 
+  text-align: left;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.card p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.card-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.card-buttons button {
+  flex: 1;
+}
+
+div:where(.swal2-container).swal2-center>.swal2-popup {
+  place-self: self-start center !important;
+}
+.notification-container {
+  position: relative;
+  display: inline-block;
+}
+
+.fa-bell {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 0.7rem;
+}
+
+.notification-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  width: 250px; /* تصغير عرض البوكس */
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 0.5rem; /* تصغير الحشوة الداخلية */
+  font-size: 0.7rem; /* تصغير حجم الخط */
+}
+
+.notification-item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+.unread {
+  background: #f8f9fa;
+  position: relative;
+}
+
+.unread::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #2d98da;
+  border-radius: 50%;
+  position: absolute;
+  left: -10px;
+}
+
+.view-all {
+  display: block;
+  text-align: center;
+  padding: 0.5rem;
+  color: #2d98da;
+  text-decoration: none;
+  font-size: 0.7rem; /* تصغير الخط */
+}

@@ -34,19 +34,42 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Function to add a super admin via API
-    function addSuperAdmin(admin) {
-        return new Promise((resolve, reject) => {
-            // In real implementation, this would be a fetch call to your API
-            // For now, just save to localStorage
-            try {
-                // Add an ID to the admin
-                admin.id = Date.now().toString();
-                saveSuperAdmin(admin);
-                resolve(admin);
-            } catch (error) {
-                reject(error);
+    async function addSuperAdmin(admin) {
+        try {
+            const response = await fetch('https://jobizaa.com/api/admin/AddSuperAdmin/6516561', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    email: admin.email,
+                    password: admin.password,
+                    fullName: admin.name,
+                    role: 'super-admin'
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to add super admin');
             }
-        });
+
+            const result = await response.json();
+            
+            // Save to localStorage for local UI updates
+            saveSuperAdmin({
+                id: result.id || Date.now().toString(),
+                email: admin.email,
+                name: admin.name,
+                role: 'super-admin'
+            });
+
+            return result;
+        } catch (error) {
+            console.error('Error adding super admin:', error);
+            throw error;
+        }
     }
     
     // Load existing super admins from API or localStorage

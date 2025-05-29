@@ -228,6 +228,27 @@
         });
     });
     </script>
+     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          const now = Date.now() / 1000; // الوقت الحالي بالثواني
+          if (payload.exp && payload.exp > now) {
+            alert("You are already logged in, please log out and try again.");
+
+            // استبدال محتوى الصفحة برسالة تنبيه
+            document.body.innerHTML = "<h2 style='text-align:center; margin-top:50px;'>You are already logged in, please log out and try again..</h2>";
+
+            return; // إيقاف باقي السكريبتات أو عرض الصفحة
+          }
+        } catch (e) {
+          // التوكن غير صالح، نسمح بالوصول للصفحة
+        }
+      }
+    });
+      </script>
     <script>
     function togglePassword(inputId, iconElement) {
         const input = document.getElementById(inputId);

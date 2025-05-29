@@ -10,7 +10,7 @@ body {
 }
 
 :root {
-    --primary-color: #356899;
+    --primary-color: rgb(26, 60, 102);
     --white: #fff;
     --gray: #f5f5f5;
     --black1: #222;
@@ -33,7 +33,7 @@ button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #356899;
+    background-color: rgb(26, 60, 102);
     color: white;
     padding: 12px 20px;
     border: none;
@@ -59,7 +59,7 @@ button {
 
 .add-btn {
     background-color: #EDF3FC;
-    color: #5386E4;
+    color: rgb(26, 60, 102);
 }
 
 /* .add-btn:hover {
@@ -124,7 +124,7 @@ td {
 }
 
 th {
-    background: #356899;
+    background: rgb(26, 60, 102);
     color: white;
 }
 
@@ -135,7 +135,7 @@ th {
 
 .pagination button {
     margin: 5px;
-    background-color: #356899;
+    background-color: rgb(26, 60, 102);
     color: white;
 }
 

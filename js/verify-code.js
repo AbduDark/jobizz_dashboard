@@ -17,7 +17,7 @@ document.getElementById("verifyForm").addEventListener("submit", async e => {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
 
-    showMessage("Verified! Redirecting...", true);
+    showMessage("Verified! Redirecting...✅", true);
     setTimeout(() => window.location.href = "newpass.html", 1500);
   } catch (err) {
     showMessage(err.message, false);

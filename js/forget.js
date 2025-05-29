@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const email = emailInput.value.trim();
 
         if (!email || !email.includes("@")) {
-            alert("يرجى إدخال بريد إلكتروني صالح");
+            alert("Please enter a vaild email.❗️");
             return;
         }
 
@@ -26,17 +26,17 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(async res => {
             const data = await res.json();
-            if (!res.ok) throw new Error(data.message || "فشل في إرسال الرمز");
+            if (!res.ok) throw new Error(data.message || "Failed to send code❗️");
             return data;
         })
        .then(() => {
     localStorage.setItem("emailToVerify", email);
-    alert("تم إرسال الكود إلى بريدك الإلكتروني.");
+    alert("The code has been sent to your email.✅");
     window.location.href = "newpass.html"; // ← تم التوجيه إلى الصفحة المطلوبة
 })
 
         .catch(error => {
-            alert(error.message || "حدث خطأ غير متوقع");
+            alert(error.message || "An unexpected error occurred!");
         })
         .finally(() => {
             submitBtn.disabled = false;
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const email = emailInput.value.trim();
 
         if (!email || !email.includes("@")) {
-            alert("يرجى إدخال بريد إلكتروني صالح.");
+            alert("Please enter a vaild email.❗️");
             return;
         }
 
@@ -73,16 +73,16 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(async res => {
             const data = await res.json();
-            if (!res.ok) throw new Error(data.message || "فشل في إرسال الكود.");
+            if (!res.ok) throw new Error(data.message || "Failed to send code❗️");
             return data;
         })
         .then(() => {
             localStorage.setItem("emailToVerify", email);
-            alert("تم إرسال الكود إلى بريدك الإلكتروني.");
+            alert("The code has been sent to your email.✅");
             window.location.href = "verify-code.html"; // ← غيري اسم الصفحة حسب صفحتك التالية
         })
         .catch(err => {
-            alert(err.message || "حدث خطأ، يرجى المحاولة لاحقًا.");
+            alert(err.message || "Error occurred, Please Try Again.");
         })
         .finally(() => {
             submitBtn.disabled = false;

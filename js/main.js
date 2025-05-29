@@ -183,12 +183,12 @@ document.addEventListener("DOMContentLoaded", function () {
 const super_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2pvYml6YWEuY29tL2FwaS9hZG1pbi9sb2dpbiIsImlhdCI6MTc0ODQwMDcwMSwibmJmIjoxNzQ4NDAwNzAxLCJqdGkiOiJxN0VhVk5JZkt0eVZma0YwIiwic3ViIjoiMSIsInBydiI6ImRmODgzZGI5N2JkMDVlZjhmZjg1MDgyZDY4NmM0NWU4MzJlNTkzYTkiLCJyb2xlcyI6WyJzdXBlci1hZG1pbiJdLCJwZXJtaXNzaW9ucyI6WyJtYW5hZ2UtYWxsLWNvbXBhbmllcyIsIm1hbmFnZS1hbGwtam9icyIsIm1hbmFnZS1yb2xlcyIsIm1hbmFnZS1jb21wYW55LWFkbWlucyIsIm1hbmFnZS1hcHBsaWNhdGlvbnMiLCJ2aWV3LWFwcGxpY2FudC1wcm9maWxlcyIsInNlbmQtbWVzc2FnZXMiXSwiY29tcGFueV9pZCI6bnVsbH0.19hp0h9-pLLwiqQKycD2KFcR3C3g9v0z8F6xDzT93iw"
 document.addEventListener("DOMContentLoaded", async () => {
   const token = sessionStorage.getItem("token");
-  const Id = sessionStorage.getItem("id");
+  const company_id = sessionStorage.getItem("company_id");
 
-  if (!token || !Id) return;
+  if (!token || !company_id) return;
 
   try {
-    const response = await fetch(`https://jobizaa.com/api/admin/companies/${Id}`, {
+    const response = await fetch(`https://jobizaa.com/api/admin/companies/${company_id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -210,3 +210,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
   
+
+  const bell = document.getElementById('notificationBell');
+  const dropdown = document.getElementById('notificationDropdown');
+
+  bell.addEventListener('click', () => {
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // إغلاق القائمة عند النقر خارجها
+  window.addEventListener('click', (e) => {
+    if (!bell.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });

@@ -69,17 +69,17 @@
 
 .sidebar ul li:hover {
     background: var(--white);
-    color: #356899;
+    color: rgb(26, 60, 102);
 }
 
 .sidebar ul li.active-link {
     background: var(--white);
-    color: #356899;
+    color: rgb(26, 60, 102);
 
 }
 
 .sidebar.open ul li:hover .text {
-    color: #356899;
+    color: rgb(26, 60, 102);
 }
 
 .sidebar ul li i {

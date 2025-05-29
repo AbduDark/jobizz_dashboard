@@ -1244,10 +1244,10 @@ select{
   border-color: rgb(93 135 255 / 0.1) !important;
 }
 .border-primary\/30{
-  border-color: rgb(93 135 255 / 0.3) !important;
+  border-color: rgb(26, 60, 102 / 0.3) !important;
 }
 .border-primary\/40{
-  border-color: rgb(93 135 255 / 0.4) !important;
+  border-color: rgb(26, 60, 102 / 0.4) !important;
 }
 .border-red-50{
   --tw-border-opacity: 1 !important;

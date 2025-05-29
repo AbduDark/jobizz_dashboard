@@ -52,7 +52,7 @@
 }
 
 .search-button:hover {
-  background-color: #418cd3;
+  background-color: rgb(26, 60, 102);
 }
 
 .search-button i {
@@ -120,7 +120,7 @@
   text-align: center;
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  background-color: #356899;
+  background-color: rgb(26, 60, 102);
   color: white;
 }
 
@@ -208,7 +208,7 @@
 }
 
 .search-button:hover {
-  background-color: #418cd3;
+  background-color: rgb(26, 60, 102);
 }
 
 .search-button i {
@@ -279,7 +279,7 @@
   text-align: center;
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  background-color: #356899;
+  background-color: rgb(26, 60, 102);
   color: white;
 }
 
@@ -320,7 +320,7 @@
   left: 0;
   width: 60px;
   height: 100vh;
-  background-color: #356899; /* الأزرق الغامق */
+  background-color: rgb(26, 60, 102); /* الأزرق الغامق */
   color: white;
   transition: all 0.5s;
   overflow: hidden;
@@ -462,7 +462,7 @@
   content: "";
   width: 6px;
   height: 6px;
-  background: #2d98da;
+  background: rgb(26, 60, 102);
   border-radius: 50%;
   position: absolute;
   left: -10px;
@@ -472,7 +472,7 @@
   display: block;
   text-align: center;
   padding: 0.5rem;
-  color: #2d98da;
+  color: rgb(26, 60, 102);
   text-decoration: none;
   font-size: 0.7rem; /* تصغير الخط */
 }
@@ -480,7 +480,7 @@
 .icon-section i {
   display: inline-block; /* بدلًا من none */
   font-size: 18px;
-  color: #666;
+  color: rgb(26, 60, 102);
   cursor: pointer;
   transition: all 0.3s;
 }

@@ -25,13 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const password = passwordInput.value;
 
     if (!email || !password) {
-      showError("يرجى إدخال البريد الإلكتروني وكلمة المرور.");
+      showError("Please enter your email and password.");
       return;
     }
 
     // زر التحميل
     loginButton.disabled = true;
-    loginButton.innerHTML = '<span class="spinner"></span> جاري تسجيل الدخول...';
+    loginButton.innerHTML = '<span class="spinner"></span> Logging in...';
     loginButton.classList.add("btn-loading");
     hideError();
 
@@ -44,10 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const payload = await res.json();
 
-      if (!res.ok) throw new Error(payload.message || "فشل تسجيل الدخول");
+      if (!res.ok) throw new Error(payload.message || "login failed");
 
       const token = payload.data?.token;
-      if (!token) throw new Error("لم يتم استلام التوكن من الخادم");
+      if (!token) throw new Error("Token not received from server");
 
       // حفظ التوكن
       sessionStorage.setItem("token", token);
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // استخراج الدور من التوكن
       const role = parseRole(token);
 
-      showSuccess("تم تسجيل الدخول بنجاح! سيتم التحويل...");
+      showSuccess("Login Successfully! You will be redirected...✅");
 
       setTimeout(() => {
         if (role === "super-admin") {
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     } catch (err) {
       console.error("Login error:", err);
-      showError(err.message || "حدث خطأ غير متوقع أثناء تسجيل الدخول.");
+      showError(err.message || "An unexpected error occurred while logging in.❗️");
     } finally {
       resetButton();
     }

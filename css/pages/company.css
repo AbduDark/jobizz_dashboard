@@ -60,7 +60,7 @@ h2 {
 
 .filter-section button {
     padding: 10px 15px;
-    background: #356899;
+    background: rgb(26, 60, 102);
     color: white;
     border: none;
     border-radius: 6px;
@@ -89,7 +89,7 @@ td {
 }
 
 th {
-    background: #356899;
+    background: rgb(26, 60, 102);
     color: white;
     font-weight: bold;
 }

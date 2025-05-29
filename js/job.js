@@ -44,7 +44,7 @@ async function fetchJobs() {
       {
         method: "GET",
         headers: {
-          Authorization: ACTIVE_TOKEN,
+          Authorization: TOKEN,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -92,7 +92,7 @@ function viewJob(jobId) {
   fetch(`${API_URL}/${jobId}`, {
     method: "GET",
     headers: {
-      Authorization: ACTIVE_TOKEN,
+      Authorization: TOKEN,
       Accept: "application/json",
       "Content-Type": "application/json",
     },
@@ -214,7 +214,7 @@ async function deleteJob(id) {
         method: "DELETE",
         headers: {
           // token of creator
-          Authorization: CREATOR_TOKEN,
+          Authorization: TOKEN,
         },
       });
 
@@ -271,7 +271,7 @@ async function openEditJobModal(id) {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
       headers: {
-        Authorization: ACTIVE_TOKEN,
+        Authorization: TOKEN,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
@@ -360,7 +360,7 @@ async function saveChanges() {
   const options = {
     method: "POST",
     headers: {
-      Authorization: CREATOR_TOKEN,
+      Authorization: TOKEN,
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -427,7 +427,7 @@ async function saveJob() {
   const options = {
     method: "POST",
     headers: {
-      Authorization: CREATOR_TOKEN,
+      Authorization: TOKEN,
       Accept: "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
     },

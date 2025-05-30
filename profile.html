@@ -154,7 +154,7 @@
           <i class="fas fa-layer-group"></i>
           <div class="user-profile" onclick="toggleDropdown()">
             <img src="assets/images/avata.jpeg" alt="image profile" />
-            <span name="name"> S </span>
+            <span name="name">  </span>
 
             <div class="dropdown-box">
               <div class="user-info">
@@ -164,7 +164,7 @@
                     <ul>
                 <li><a href="profile.html" class="fas fa-user"> Profile</a></li>
                 <li><a href="setting.html" class="fas fa-cog"> Setting</a></li>
-                <li><a href="chat.html" class="fas fa-question-circle"> Support</a></li>
+                <li><a href="app/chat.html" class="fas fa-question-circle"> Support</a></li>
                 <li><a href="#" class="fas fa-sign-out-alt" onclick="logout()">LogOut</a></li>
                     </ul>
                 </div>
@@ -174,7 +174,7 @@
     </nav>
 
 
-
+</div>
 
 
 
@@ -225,7 +225,7 @@
   </li>
 
   <li class="user-only">
-    <a href="chatbot.html">
+    <a href="./app/chat.html">
       <span class="icon"><i class="fas fa-comments"></i></span>
       <span class="text">Chat</span>
     </a>
@@ -288,13 +288,7 @@
                                 <h4 class="page-title">Profile 2</h4>
                             </div>
                         </div>
-                        
                     </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-
                     <!-- end page title -->
 
                     <div class="row">
@@ -364,7 +358,7 @@ function switchToSettingsTab() {
                                         <div class="dropdown">
                                          
                                               
-                                       
+                                            </a>
                                           
                                         </div>
                                     </div>
@@ -374,7 +368,6 @@ function switchToSettingsTab() {
                                 <!-- end card-body-->
                             </div>
                             <!-- end card-->
-                                    </div>
 
                         </div>
                         <!-- end col-->
@@ -395,9 +388,6 @@ function switchToSettingsTab() {
                                             </a>
                                         </li>
                                     </ul>
-                                    </div>
-                                    </div>
-
                                     <div class="tab-content">
                                         <div class="tab-pane" id="about">
 
@@ -444,6 +434,8 @@ function switchToSettingsTab() {
                                             <div class="table-responsive">
                                                 <table class="table table-borderless table-nowrap mb-0">
                                                   
+
+                                                    </tbody>
                                                 </table>
                                             </div>
 
@@ -539,9 +531,8 @@ function switchToSettingsTab() {
     <!-- App js -->
 
     <script src="assets/js/app.min.js"></script>
-    <script src="js/auth.js"></script>  
+    <script src="js/auth.js"></script>
     <script src="js/login.js"></script>
-    <script src="js/protect.js"></script>
     <script>
          protectPage(['super-admin','admin']);
     </script>

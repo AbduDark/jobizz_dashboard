@@ -2,8 +2,6 @@
 const API_URL = "https://jobizaa.com/api/admin/jobs";
 
 const TOKEN = "Bearer " + sessionStorage.getItem('token');
-const CREATOR_TOKEN =
-  "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2pvYml6YWEuY29tL2FwaS9hZG1pbi9sb2dpbiIsImlhdCI6MTc0Njk5NTMwNiwibmJmIjoxNzQ2OTk1MzA2LCJqdGkiOiJmR0pFa2FWMHpBTTFmU0kwIiwic3ViIjoiMyIsInBydiI6ImRmODgzZGI5N2JkMDVlZjhmZjg1MDgyZDY4NmM0NWU4MzJlNTkzYTkiLCJyb2xlcyI6WyJhZG1pbiJdLCJwZXJtaXNzaW9ucyI6WyJtYW5hZ2Utb3duLWNvbXBhbnkiLCJtYW5hZ2UtY29tcGFueS1qb2JzIiwibWFuYWdlLWNvbXBhbnktYWRtaW5zIiwibWFuYWdlLWFwcGxpY2F0aW9ucyIsInZpZXctYXBwbGljYW50LXByb2ZpbGVzIiwic2VuZC1tZXNzYWdlcyJdLCJjb21wYW55X2lkIjozfQ.X3uQzsixFHZizAf9v8Y_ESNnQ-sIMNQFOWoGHYKpOsM";
 
 let jobs = [];
 let currentPage = 1;

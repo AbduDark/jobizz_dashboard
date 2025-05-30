@@ -142,13 +142,15 @@ img {
     height: auto;
 
 }
-.logo-image{
-    margin: 0 auto;
- width: 100px;
+.logo-image {
+  margin-left: 250px;
+
+    width: 90px;
     height: auto;
     border-radius: 25px;
     background-color: #0f69d7;
 }
+
 label em {
     color: var(--red);
     display: inline-block;
@@ -837,7 +839,9 @@ html.show-menu body {
     font-size: var(--h4-size);
     font-weight: 800;
     margin: 1rem 0 1.2rem;
+    transform: translateY(-65px); /* يحرك النص للأعلى 5 بيكسل */
 }
+
 
 .activity-card-subtitle {
     font-weight: 600;
@@ -852,11 +856,22 @@ html.show-menu body {
     position: relative;
     display: flex;
     align-items: center;
+   
 }
+.form-group label i {
+  position: absolute;
+  top: 50%;
+  left: 30px; /* أو right: 10px; حسب الاتجاه المطلوب */
+  transform: translateY(-50%);
+ 
+}
+
 
 .form-group i {
     position: absolute;
     left: 23px;
+   
+     
 
     font-size: var(--h6-small-size);
     color: var(--button-blue);

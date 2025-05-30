@@ -1,3 +1,4 @@
+
 // /js/auth.js
 (function(window) {
   function getToken() {

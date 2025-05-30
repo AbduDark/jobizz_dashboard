@@ -108,20 +108,22 @@
       .form-group {
         position: relative;
         margin-bottom: 20px;
+       
       }
 
       .password-toggle {
         position: absolute;
         right: 10px;
-        top: 50%;
+        top: 40%;
         transform: translateY(-50%);
         cursor: pointer;
-        color: #999;
+      
       }
 
       .password-toggle:hover {
         color: #555;
       }
+     
     </style>
   
 
@@ -147,7 +149,8 @@
         <div class="activity-card">
           <div class="activity-logo-wrap">
             <a href="home.html" class="logo-img pb-0">
-              <img src="assets/images/logo/logo.svg" alt="logo-images" />
+              <img src="./imag/logo.png" alt="logo-images" class="logo-image" />
+
             </a>
           </div>
           <div class="activity-card-heading">
@@ -331,11 +334,284 @@
     <script src="assets/js/custom.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/login.js"></script>
-    
+   
  
 
 
+<script>
+  // Enhanced login.js to support both API and locally created admins
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('userEmail');
+    const passwordInput = document.getElementById('userPassword');
+    const loginButton = document.getElementById('loginButton');
+    const errorBox = document.getElementById('error-message-box');
+    const togglePassword = document.getElementById('togglePassword');
 
+    // API endpoints
+    const LOGIN_API_URL = 'https://jobizaa.com/api/auth/login';
+    const USER_PROFILE_URL = 'https://jobizaa.com/api/user/profile';
+
+    // Password toggle functionality
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            const icon = togglePassword.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    }
+
+    // Function to show error message
+    function showError(message) {
+        if (errorBox) {
+            errorBox.textContent = message;
+            errorBox.classList.add('show');
+            setTimeout(() => {
+                errorBox.classList.remove('show');
+            }, 5000);
+        }
+    }
+
+    // Function to show success message
+    function showSuccess(message) {
+        if (errorBox) {
+            errorBox.textContent = message;
+            errorBox.classList.add('show', 'success-box');
+            setTimeout(() => {
+                errorBox.classList.remove('show', 'success-box');
+            }, 3000);
+        }
+    }
+
+    // Function to set loading state
+    function setLoadingState(isLoading) {
+        if (loginButton) {
+            if (isLoading) {
+                loginButton.innerHTML = '<span class="spinner"></span>Logging in...';
+                loginButton.disabled = true;
+                loginButton.classList.add('btn-loading');
+            } else {
+                loginButton.innerHTML = 'Login';
+                loginButton.disabled = false;
+                loginButton.classList.remove('btn-loading');
+            }
+        }
+    }
+
+    // Function to check locally created admins
+    function checkLocalAdmin(email, password) {
+        const localAdmins = JSON.parse(localStorage.getItem('superAdmins') || '[]');
+        
+        const admin = localAdmins.find(admin => 
+            admin.email.toLowerCase() === email.toLowerCase()
+        );
+
+        if (admin) {
+            // For locally created admins, we stored the plain password
+            // In production, you should hash passwords!
+            if (admin.password === password) {
+                return {
+                    success: true,
+                    user: {
+                        id: admin.id,
+                        email: admin.email,
+                        name: admin.name || admin.fullName,
+                        phone: admin.phone,
+                        role: admin.role || 'super-admin'
+                    },
+                    token: 'local_admin_' + admin.id // Generate a local token
+                };
+            } else {
+                return {
+                    success: false,
+                    message: 'Invalid password'
+                };
+            }
+        }
+
+        return null; // Admin not found locally
+    }
+
+    // Function to login via API
+    async function loginViaAPI(email, password) {
+        try {
+            const response = await fetch(LOGIN_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                return {
+                    success: true,
+                    user: data.user || data.data?.user,
+                    token: data.token || data.access_token || data.data?.token
+                };
+            } else {
+                return {
+                    success: false,
+                    message: data.message || 'Login failed'
+                };
+            }
+        } catch (error) {
+            console.error('API Login Error:', error);
+            return {
+                success: false,
+                message: 'Network error. Please check your connection.'
+            };
+        }
+    }
+
+    // Function to handle successful login
+    function handleSuccessfulLogin(loginResult) {
+        // Store authentication data
+        localStorage.setItem('access_token', loginResult.token);
+        localStorage.setItem('token', loginResult.token);
+        sessionStorage.setItem('token', loginResult.token);
+        
+        // Store user data
+        localStorage.setItem('userData', JSON.stringify(loginResult.user));
+        localStorage.setItem('userRole', loginResult.user.role || 'user');
+        
+        showSuccess('Login successful! Redirecting...');
+        
+        // Redirect based on user role
+        setTimeout(() => {
+            const userRole = loginResult.user.role || 'user';
+            
+            switch(userRole) {
+                case 'super-admin':
+                case 'admin':
+                    window.location.href = 'index.html'; // Admin dashboard
+                    break;
+                case 'company':
+                    window.location.href = 'company-dashboard.html'; // Company dashboard
+                    break;
+                default:
+                    window.location.href = 'user-dashboard.html'; // User dashboard
+            }
+        }, 1500);
+    }
+
+    // Main login function
+    async function handleLogin(email, password) {
+        setLoadingState(true);
+
+        try {
+            // First, check for locally created admins
+            const localLoginResult = checkLocalAdmin(email, password);
+            
+            if (localLoginResult) {
+                if (localLoginResult.success) {
+                    handleSuccessfulLogin(localLoginResult);
+                    return;
+                } else {
+                    showError(localLoginResult.message);
+                    return;
+                }
+            }
+
+            // If not found locally, try API login
+            const apiLoginResult = await loginViaAPI(email, password);
+            
+            if (apiLoginResult.success) {
+                handleSuccessfulLogin(apiLoginResult);
+            } else {
+                showError(apiLoginResult.message);
+            }
+
+        } catch (error) {
+            console.error('Login Error:', error);
+            showError('An unexpected error occurred. Please try again.');
+        } finally {
+            setLoadingState(false);
+        }
+    }
+
+    // Form submission handler
+    if (loginForm) {
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            // Basic validation
+            if (!email || !password) {
+                showError('Please enter both email and password');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+
+            await handleLogin(email, password);
+        });
+    }
+
+    // Email validation helper
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    // Check if user is already logged in
+    function checkExistingLogin() {
+        const token = localStorage.getItem('access_token') || sessionStorage.getItem('token');
+        const userData = localStorage.getItem('userData');
+        
+        if (token && userData) {
+            try {
+                const user = JSON.parse(userData);
+                console.log('User already logged in:', user);
+                
+                // You can uncomment the next line if you want to auto-redirect logged-in users
+                // window.location.href = user.role === 'admin' || user.role === 'super-admin' ? 'index.html' : 'profile.html';
+            } catch (error) {
+                console.error('Error parsing stored user data:', error);
+                // Clear corrupted data
+                localStorage.removeItem('userData');
+                localStorage.removeItem('access_token');
+                sessionStorage.removeItem('token');
+            }
+        }
+    }
+
+    // Initialize
+    checkExistingLogin();
+});
+
+// Global logout function (can be called from anywhere)
+function logout() {
+    // Clear all stored authentication data
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('userRole');
+    sessionStorage.removeItem('token');
+    
+    // Redirect to login page
+    window.location.href = 'login.html';
+}
+
+// Export for use in other scripts
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { logout };
+}
+</script>
 
 
   

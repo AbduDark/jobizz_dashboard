@@ -158,7 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(() => {
             localStorage.setItem("resetVerified", "true");
-            window.location.href = "newpass.html";
+           alert("تمت العملية بنجاح!"); // عرض رسالة النجاح
+window.location.href = "setting.html"; // العودة لصفحة الإعدادات أو أي صفحة تختارها
+
         })
         .catch(err => {
             console.error("Verification error:", err);

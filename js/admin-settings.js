@@ -251,11 +251,10 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             
             try {
-                await addSuperAdmin(admin);
-                superAdminForm.reset();
-                showSuccessMessage('Super admin added successfully! They can now login with their credentials.');
-                await fetchSuperAdmins();
-                
+              await addSuperAdmin(admin);
+localStorage.setItem("emailToVerify", admin.email); // حفظ البريد للتحقق
+window.location.href = "cod.html"; // الانتقال إلى صفحة التحقق
+
             } catch (error) {
                 // Even if API fails, the admin was saved locally
                 showSuccessMessage('Admin added locally and can login. API sync may have failed: ' + error.message);

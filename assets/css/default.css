@@ -143,9 +143,9 @@ img {
 
 }
 .logo-image {
-  margin-left: 250px;
+  margin-left: 120px;
 
-    width: 90px;
+    width: 80px;
     height: auto;
     border-radius: 25px;
     background-color: #0f69d7;
@@ -850,6 +850,8 @@ html.show-menu body {
     line-height: 1.5;
     font-size: var(--p-xs-size);
     visibility: hidden;
+    padding-bottom: 0px;
+    margin-bottom: 0%;
 }
 
 .form-group {

@@ -1,8 +1,8 @@
-// Wait for DOM content to be fully loaded
+// Updated admin-settings.js with login capability
 document.addEventListener('DOMContentLoaded', function() {
     // API URLs
     const ADD_SUPER_ADMIN_URL = 'https://jobizaa.com/api/admin/AddSuperAdmin/6516561';
-    const GET_SUPER_ADMINS_URL = 'https://jobizaa.com/api/admin/sub-admin'; // Adjust if needed
+    const GET_SUPER_ADMINS_URL = 'https://jobizaa.com/api/admin/sub-admin';
     
     // Get DOM elements
     const superAdminForm = document.getElementById('superAdminForm');
@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             const response = await fetch(url, requestOptions);
             
-            // Check if the response is OK
             if (!response.ok) {
                 let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
                 
@@ -67,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(errorMessage);
             }
             
-            // Try to parse JSON response
             const contentType = response.headers.get('content-type');
             if (contentType && contentType.includes('application/json')) {
                 return await response.json();
@@ -88,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'GET'
             });
             
-            // Handle the response data
             let admins = [];
             if (response && Array.isArray(response.data)) {
                 admins = response.data;
@@ -96,15 +93,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 admins = response;
             }
             
-            // Save to localStorage for offline access
-            localStorage.setItem('superAdmins', JSON.stringify(admins));
+            // Merge with local admins
+            const localAdmins = JSON.parse(localStorage.getItem('superAdmins') || '[]');
+            const mergedAdmins = [...localAdmins];
             
-            // Load into dropdown
-            loadSuperAdminsToDropdown(admins);
+            // Add API admins that don't exist locally
+            admins.forEach(apiAdmin => {
+                if (!mergedAdmins.find(localAdmin => localAdmin.email === apiAdmin.email)) {
+                    mergedAdmins.push({
+                        id: apiAdmin.id,
+                        email: apiAdmin.email,
+                        name: apiAdmin.name || apiAdmin.fullName,
+                        phone: apiAdmin.phone,
+                        role: apiAdmin.role || 'super-admin',
+                        source: 'api'
+                    });
+                }
+            });
+            
+            localStorage.setItem('superAdmins', JSON.stringify(mergedAdmins));
+            loadSuperAdminsToDropdown(mergedAdmins);
             
         } catch (error) {
             console.error('Error fetching super admins:', error);
-            // Fallback to localStorage if API fails
             loadSuperAdmins();
             showErrorMessage('Unable to fetch latest data from server. Showing cached data.');
         }
@@ -121,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
             role: 'super-admin'
         };
         
-        console.log('Sending payload:', payload); // For debugging
+        console.log('Sending payload:', payload);
         
         try {
             const response = await makeAuthenticatedRequest(ADD_SUPER_ADMIN_URL, {
@@ -129,15 +140,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(payload)
             });
             
-            console.log('API Response:', response); // For debugging
+            console.log('API Response:', response);
             
-            // Save to localStorage for local UI updates
+            // Create admin object for local storage with password for login
             const newAdmin = {
                 id: response.id || response.data?.id || Date.now().toString(),
                 email: admin.email,
                 name: admin.name,
                 phone: admin.phone,
+                password: admin.password, // Store password for login capability
                 role: 'super-admin',
+                source: 'local',
                 created_at: new Date().toISOString()
             };
             
@@ -146,7 +159,21 @@ document.addEventListener('DOMContentLoaded', function() {
             return response;
             
         } catch (error) {
-            console.error('Error adding super admin:', error);
+            console.error('Error adding super admin via API:', error);
+            
+            // If API fails, still save locally for login capability
+            const newAdmin = {
+                id: Date.now().toString(),
+                email: admin.email,
+                name: admin.name,
+                phone: admin.phone,
+                password: admin.password,
+                role: 'super-admin',
+                source: 'local',
+                created_at: new Date().toISOString()
+            };
+            
+            saveSuperAdminLocally(newAdmin);
             throw error;
         }
     }
@@ -159,17 +186,14 @@ document.addEventListener('DOMContentLoaded', function() {
         superAdminForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Reset all error states
             resetErrors();
             
-            // Get form values
             const name = nameInput.value.trim();
             const email = emailInput.value.trim();
             const phone = phoneInput.value.trim();
             const password = passwordInput.value;
             const passwordConfirm = passwordConfirmInput.value;
             
-            // Validate form
             let isValid = true;
             
             // Validate name
@@ -186,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Check if email already exists
             const existingAdmins = JSON.parse(localStorage.getItem('superAdmins') || '[]');
-            if (existingAdmins.some(admin => admin.email === email)) {
+            if (existingAdmins.some(admin => admin.email.toLowerCase() === email.toLowerCase())) {
                 showError(emailInput, emailError, 'This email is already registered');
                 isValid = false;
             }
@@ -209,12 +233,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
             
-            // If validation failed, stop here
             if (!isValid) {
                 return;
             }
             
-            // Create admin object
             const admin = {
                 name: name,
                 email: email,
@@ -223,29 +245,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 password_confirmation: passwordConfirm
             };
             
-            // Show loading indicator
             const submitBtn = superAdminForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.textContent;
             submitBtn.textContent = 'Adding...';
             submitBtn.disabled = true;
             
             try {
-                // Add admin via API
-                const response = await addSuperAdmin(admin);
-                
-                // Clear form
+                await addSuperAdmin(admin);
                 superAdminForm.reset();
-                
-                // Show success message
-                showSuccessMessage('Super admin added successfully!');
-                
-                // Refresh the list of admins
+                showSuccessMessage('Super admin added successfully! They can now login with their credentials.');
                 await fetchSuperAdmins();
                 
             } catch (error) {
-                showErrorMessage('Error adding admin: ' + error.message);
+                // Even if API fails, the admin was saved locally
+                showSuccessMessage('Admin added locally and can login. API sync may have failed: ' + error.message);
+                await fetchSuperAdmins();
             } finally {
-                // Reset button state
                 submitBtn.textContent = originalBtnText;
                 submitBtn.disabled = false;
             }
@@ -255,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear all admins button event listener
     if (clearAdminsBtn) {
         clearAdminsBtn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to delete all moderators?')) {
+            if (confirm('Are you sure you want to delete all moderators? This will prevent them from logging in.')) {
                 clearAllSuperAdmins();
                 showSuccessMessage('All moderators have been deleted');
             }
@@ -267,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteSelectedAdminBtn.addEventListener('click', function() {
             const selectedAdminId = superAdminNamesDropdown.value;
             if (selectedAdminId && selectedAdminId !== '') {
-                if (confirm('Are you sure you want to delete this moderator?')) {
+                if (confirm('Are you sure you want to delete this moderator? They will no longer be able to login.')) {
                     deleteAdmin(selectedAdminId);
                     showSuccessMessage('Moderator deleted successfully');
                 }
@@ -277,19 +292,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Function to validate email
+    // Validation functions
     function validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
     
-    // Function to validate phone number
     function validatePhone(phone) {
         const re = /^\+?[\d\s\-\(\)]{10,15}$/;
         return re.test(phone);
     }
     
-    // Function to show error message
     function showError(inputElement, errorElement, message) {
         if (inputElement && errorElement) {
             inputElement.classList.add('invalid');
@@ -298,7 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Function to reset all error states
     function resetErrors() {
         const inputs = [nameInput, emailInput, phoneInput, passwordInput, passwordConfirmInput];
         const errors = [nameError, emailError, phoneError, passwordError, confirmError];
@@ -312,11 +324,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Function to show success message
     function showSuccessMessage(message) {
         if (!superAdminForm) return;
         
-        // Remove any existing messages
         const existingMessages = document.querySelectorAll('.success-message, .error-message');
         existingMessages.forEach(msg => msg.remove());
         
@@ -340,11 +350,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
-    // Function to show error message
     function showErrorMessage(message) {
         if (!superAdminForm) return;
         
-        // Remove any existing messages
         const existingMessages = document.querySelectorAll('.success-message, .error-message');
         existingMessages.forEach(msg => msg.remove());
         
@@ -368,15 +376,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
-    // Function to save super admin locally
     function saveSuperAdminLocally(admin) {
         let admins = JSON.parse(localStorage.getItem('superAdmins') || '[]');
-        admins.push(admin);
+        
+        // Check if admin already exists (by email)
+        const existingIndex = admins.findIndex(existingAdmin => 
+            existingAdmin.email.toLowerCase() === admin.email.toLowerCase()
+        );
+        
+        if (existingIndex !== -1) {
+            // Update existing admin
+            admins[existingIndex] = { ...admins[existingIndex], ...admin };
+        } else {
+            // Add new admin
+            admins.push(admin);
+        }
+        
         localStorage.setItem('superAdmins', JSON.stringify(admins));
         loadSuperAdminsToDropdown(admins);
     }
     
-    // Function to delete an admin
     function deleteAdmin(adminId) {
         let admins = JSON.parse(localStorage.getItem('superAdmins') || '[]');
         admins = admins.filter(admin => admin.id !== adminId);
@@ -384,33 +403,29 @@ document.addEventListener('DOMContentLoaded', function() {
         loadSuperAdminsToDropdown(admins);
     }
     
-    // Function to load super admins into dropdown
     function loadSuperAdminsToDropdown(admins) {
         if (!superAdminNamesDropdown) return;
         
-        // Clear dropdown except the first option
         while (superAdminNamesDropdown.options.length > 1) {
             superAdminNamesDropdown.remove(1);
         }
         
-        // Add admins to dropdown
         admins.forEach(admin => {
             const option = document.createElement('option');
             option.value = admin.id;
-            option.textContent = `${admin.name || admin.fullName} (${admin.email})`;
+            const source = admin.source === 'api' ? ' (API)' : ' (Local)';
+            option.textContent = `${admin.name || admin.fullName} (${admin.email})${source}`;
             superAdminNamesDropdown.appendChild(option);
         });
         
         updateAdminCount(admins.length);
     }
     
-    // Function to load super admins from localStorage (fallback)
     function loadSuperAdmins() {
         const admins = JSON.parse(localStorage.getItem('superAdmins') || '[]');
         loadSuperAdminsToDropdown(admins);
     }
     
-    // Function to update admin count display
     function updateAdminCount(count) {
         if (!superAdminNamesDropdown) return;
         
@@ -430,7 +445,6 @@ document.addEventListener('DOMContentLoaded', function() {
         adminCountElement.textContent = `Total moderators: ${count}`;
     }
     
-    // Function to clear all super admins
     function clearAllSuperAdmins() {
         localStorage.removeItem('superAdmins');
         loadSuperAdmins();
@@ -493,7 +507,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Debug function to check authentication
     function checkAuth() {
         const token = getAuthToken();
         if (!token) {

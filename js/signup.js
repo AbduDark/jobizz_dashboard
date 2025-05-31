@@ -10,7 +10,9 @@ document.querySelector("form").addEventListener("submit", async e => {
     return document.getElementById("setConfirmPasswordError")
       .textContent = "Passwords do not match";
   }
-
+document.getElementById('setphone').addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);
+});
   const formData = new FormData();
   formData.append("fullName", fullName);
   formData.append("email", email);

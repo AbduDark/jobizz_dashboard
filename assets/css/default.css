@@ -111,6 +111,22 @@ a {
 a:hover {
     color: var(--Black);
 }
+    #password-checks {
+        margin-top: 10px;
+    }
+    #password-checks ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    #password-checks li {
+        font-size: 19px;
+        margin: 5px 0;
+        color: red;
+    }
+    #password-checks li.valid {
+        color: green;
+        text-decoration: line-through;
+    }
 
 a,
 div a:hover,

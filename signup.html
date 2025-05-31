@@ -101,7 +101,15 @@
     </span>
     <div class="error" id="setConfirmPasswordError"></div>
 </div>
-
+<div id="password-checks">
+    <ul>
+        <li id="lowercase" class="invalid">At least 1 lowercase letter</li>
+        <li id="uppercase" class="invalid">At least 1 uppercase letter</li>
+        <li id="number" class="invalid">At least 1 number</li>
+        <li id="special" class="invalid">At least 1 special character</li>
+        <li id="length" class="invalid">At least 8 characters</li>
+    </ul>
+</div>
                  
                     <button type="submit" id="btnActivitySignup" class="btn-common btn-activity-confirm">Signup</button>
                     <div id="registerMessage" class="form-message" style="text-align: center; margin-top: 10px;"></div>
@@ -136,7 +144,64 @@
     <script src="assets/js/custom.js"></script>
   
     
-    
+    <script>
+    const passwordInput = document.getElementById('setPassword'); // او id الباسورد اللي عندك
+    const lowerCase = document.getElementById('lowercase');
+    const upperCase = document.getElementById('uppercase');
+    const number = document.getElementById('number');
+    const special = document.getElementById('special');
+    const length = document.getElementById('length');
+
+    passwordInput.addEventListener('input', function() {
+        const value = passwordInput.value;
+
+        // Lowercase
+        if (/[a-z]/.test(value)) {
+            lowerCase.classList.add('valid');
+            lowerCase.classList.remove('invalid');
+        } else {
+            lowerCase.classList.remove('valid');
+            lowerCase.classList.add('invalid');
+        }
+
+        // Uppercase
+        if (/[A-Z]/.test(value)) {
+            upperCase.classList.add('valid');
+            upperCase.classList.remove('invalid');
+        } else {
+            upperCase.classList.remove('valid');
+            upperCase.classList.add('invalid');
+        }
+
+        // Number
+        if (/\d/.test(value)) {
+            number.classList.add('valid');
+            number.classList.remove('invalid');
+        } else {
+            number.classList.remove('valid');
+            number.classList.add('invalid');
+        }
+
+        // Special character
+        if (/[\W_]/.test(value)) {
+            special.classList.add('valid');
+            special.classList.remove('invalid');
+        } else {
+            special.classList.remove('valid');
+            special.classList.add('invalid');
+        }
+
+        // Length
+        if (value.length >= 8) {
+            length.classList.add('valid');
+            length.classList.remove('invalid');
+        } else {
+            length.classList.remove('valid');
+            length.classList.add('invalid');
+        }
+    });
+</script>
+
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const registrationForm = document.querySelector('.activity-actions form');

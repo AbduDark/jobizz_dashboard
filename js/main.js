@@ -1,11 +1,8 @@
 
-
+console.log("company_id in sessionStorage:", sessionStorage.getItem("company_id"));
   // حماية الصفحة للـ super-admin و admin
   
   // ربط زرّ الخروج
-  document.querySelectorAll("[onclick='logout()']").forEach(btn => {
-    btn.addEventListener("click", auth.logout);
-  });
 
 
   
@@ -49,37 +46,6 @@ toggle.addEventListener("click", function () {
 
 });
 
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const listItems = document.querySelectorAll(".sidebar li");
-
-//     // If there is no element saved in localStorage, index.html is automatically activated.
-
-//     // 'dashboard' is the data-id of the index.html page.
-
-//     const activeItemId = localStorage.getItem('activeSidebarItem') || 'dashboard';
-
-//     // Activate the appropriate element
-//     listItems.forEach(item => {
-//         item.classList.remove('active-link');
-//         if (item.getAttribute('data-id') === activeItemId) {
-//             item.classList.add('active-link');
-//         }
-//     });
-
-//     listItems.forEach(item => {
-//         item.addEventListener('click', function () {
-//             listItems.forEach(li => li.classList.remove('active-link'));
-//             this.classList.add('active-link');
-
-//             // Save the active item to localStorage
-
-//             const itemId = this.getAttribute('data-id');
-//             localStorage.setItem('activeSidebarItem', itemId);
-//         });
-//     });
-// });
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -179,37 +145,6 @@ document.addEventListener("DOMContentLoaded", function () {
         markers.forEach(marker => map.removeLayer(marker));
         markers = [];
     }
-
-const super_token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2pvYml6YWEuY29tL2FwaS9hZG1pbi9sb2dpbiIsImlhdCI6MTc0ODQwMDcwMSwibmJmIjoxNzQ4NDAwNzAxLCJqdGkiOiJxN0VhVk5JZkt0eVZma0YwIiwic3ViIjoiMSIsInBydiI6ImRmODgzZGI5N2JkMDVlZjhmZjg1MDgyZDY4NmM0NWU4MzJlNTkzYTkiLCJyb2xlcyI6WyJzdXBlci1hZG1pbiJdLCJwZXJtaXNzaW9ucyI6WyJtYW5hZ2UtYWxsLWNvbXBhbmllcyIsIm1hbmFnZS1hbGwtam9icyIsIm1hbmFnZS1yb2xlcyIsIm1hbmFnZS1jb21wYW55LWFkbWlucyIsIm1hbmFnZS1hcHBsaWNhdGlvbnMiLCJ2aWV3LWFwcGxpY2FudC1wcm9maWxlcyIsInNlbmQtbWVzc2FnZXMiXSwiY29tcGFueV9pZCI6bnVsbH0.19hp0h9-pLLwiqQKycD2KFcR3C3g9v0z8F6xDzT93iw"
-document.addEventListener("DOMContentLoaded", async () => {
-  const token = sessionStorage.getItem("token");
-  const company_id = sessionStorage.getItem("company_id");
-
-  if (!token || !company_id) return;
-
-  try {
-    const response = await fetch(`https://jobizaa.com/api/admin/companies/${company_id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json"
-      }
-    });
-
-    const data = await response.json();
-    const company = data.data;
-
-    // ضيف البيانات في العناصر
-    document.querySelectorAll('[name="name"]').forEach(el => el.textContent = company.name);
-    document.querySelectorAll('[name="websitee"]').forEach(el => el.textContent = company.website);
-    const profileImage = document.querySelector(".user-profile img");
-    if (profileImage) profileImage.src = company.logo;
-
-  } catch (error) {
-    console.error("Failed to fetch company info:", error);
-  }
-});
-  
 
   const bell = document.getElementById('notificationBell');
   const dropdown = document.getElementById('notificationDropdown');

@@ -29,6 +29,7 @@
     // حذف التوكن و البريد من sessionStorage
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("email");
+    localStorage.removeItem("email")
     sessionStorage.removeItem("company_id");
 
     // إعادة توجيه لصفحة تسجيل الدخول

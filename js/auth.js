@@ -1,10 +1,10 @@
-
-// /js/auth.js
 (function(window) {
   function getToken() {
     return sessionStorage.getItem("token");
   }
-
+  function getEmail(){
+    return sessionStorage.getItem("email");
+  }
   function saveToken(token) {
     sessionStorage.setItem("token", token);
   }
@@ -19,11 +19,21 @@
   }
 
   function logout() {
+    // حذف بيانات الشركة المخزنة localStorage المرتبطة بأي companyData_*
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith("companyData_")) {
+        localStorage.removeItem(key);
+      }
+    });
+
+    // حذف التوكن و البريد من sessionStorage
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("company_id");
+
+    // إعادة توجيه لصفحة تسجيل الدخول
     window.location.href = "login.html";
   }
-
-
 
   // expose both under auth.* and globally
   window.auth = { getToken, saveToken, parseRole, logout };
@@ -33,16 +43,3 @@
   window.logout       = logout;
 
 })(window);
-function parseRole(token) {
-  if (!token) return null;
-  try {
-    const base64Payload = token.split('.')[1];
-    const decodedPayload = atob(base64Payload);
-    const payloadObj = JSON.parse(decodedPayload);
-    const roles = payloadObj.roles;
-    return Array.isArray(roles) ? roles[0] : null;
-  } catch (error) {
-    console.error("Error parsing token:", error);
-    return null;
-  }
-}

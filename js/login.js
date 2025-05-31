@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!form) return;
 
-  // عرض/إخفاء كلمة المرور
+  // إظهار/إخفاء كلمة المرور
   if (togglePassword) {
     togglePassword.addEventListener("click", function () {
       const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // زر التحميل
     loginButton.disabled = true;
     loginButton.innerHTML = '<span class="spinner"></span> Logging in...';
     loginButton.classList.add("btn-loading");
@@ -43,28 +42,31 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       const payload = await res.json();
-
       if (!res.ok) throw new Error(payload.message || "login failed");
 
       const token = payload.data?.token;
       if (!token) throw new Error("Token not received from server");
 
-      // حفظ التوكن
+      // ✅ حفظ التوكن والبريد الإلكتروني في sessionStorage
       sessionStorage.setItem("token", token);
+      sessionStorage.setItem("userEmail", email);
+        const decoded = parseJwt(token);
+      const companyId = decoded?.company_id;
+      const roles = decoded?.roles || [];
+      if (companyId) {
+        sessionStorage.setItem("company_id", companyId);
+      }
 
-      // استخراج الدور من التوكن
+      showSuccess("Login Successful. Redirecting...");
+
+
       const role = parseRole(token);
-
       showSuccess("Login Successfully! You will be redirected...✅");
 
       setTimeout(() => {
-        if (role === "super-admin") {
-          window.location.href = "index.html";
-        } else {
-          window.location.href = "profile.html";
-        }
+        window.location.href = (role === "super-admin") ? "index.html" : "profile.html";
       }, 1500);
-
+      
     } catch (err) {
       console.error("Login error:", err);
       showError(err.message || "An unexpected error occurred while logging in.❗️");
@@ -72,6 +74,14 @@ document.addEventListener("DOMContentLoaded", function () {
       resetButton();
     }
   });
+   function parseJwt(token) {
+    try {
+      const payload = token.split(".")[1];
+      return JSON.parse(atob(payload));
+    } catch (err) {
+      return null;
+    }
+  }
 
   function showError(message) {
     errorBox.textContent = message;
@@ -94,7 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
     loginButton.classList.remove("btn-loading");
   }
 
-  // دالة استخراج الدور من التوكن (JWT)
   function parseRole(token) {
     try {
       const base64Payload = token.split(".")[1];

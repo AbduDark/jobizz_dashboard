@@ -460,7 +460,7 @@
                             <p><strong>Size:</strong> ${company.size || 'N/A'}</p>
                             <p><strong>Hired People:</strong> ${company.hired_people || 'N/A'}</p>
                             <p><strong>Created At:</strong> ${company.created_at || 'N/A'}</p>
-                            <img src="${company.logo || 'assets/images/avata.jpeg'}" alt="Company Logo" style="max-width: 150px; margin-top: 10px;">
+                            <img src="${company.logo}" alt="Company Logo" style="max-width: 150px; margin-top: 10px;">
                         </div>
                     `;
 
@@ -476,7 +476,7 @@
                         companyWebsiteEl.textContent = company.website || 'N/A';
                         companyWebsiteEl.href = company.website || '#';
                     }
-                    if (companyLogoEl) companyLogoEl.src = company.logo || 'assets/images/avata.jpeg';
+                    if (companyLogoEl) companyLogoEl.src = company.logo;
                 } catch (error) {
                     console.error('About tab update error:', error);
                     const companyInfoDiv = document.getElementById('companyInfo');

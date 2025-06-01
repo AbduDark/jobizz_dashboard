@@ -2,535 +2,229 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إعادة تعيين كلمة المرور || Metrix</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التحقق من البريد الإلكتروني || Metrix</title>
 
-    <!-- Meta Information -->
-    <meta name="description" content="Metrix - صفحة إعادة تعيين كلمة المرور لتطبيق حديث">
-    <meta name="author" content="white orange software">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="noindex">
+  <meta name="description" content="Metrix - التحقق من البريد الإلكتروني">
+  <meta name="author" content="white orange software">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="noindex">
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicons/apple-touch-icon.png">
-    <link rel="icon" type="images/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="images/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png">
-    <link rel="mask-icon" href="/assets/images/favicons/safari-pinned-tab.svg" color="#ffffff">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS -->
-    <link type="text/css" rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-         .message-box {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 5px;
-            display: none;
-            font-size: 14px;
-            text-align: center;
-        }
+  <style>
+    .message-box {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 5px;
+      display: none;
+      font-size: 14px;
+      text-align: center;
+    }
 
-        .message-box.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
+    .message-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
 
-        .message-box.error {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
+    .message-box.error {
+      background-color: #f8d7da;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
 
-        .message-box.success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+    .message-box.success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
 
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, .3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
 
-        .btn-loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .form-group {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        
-        .password-toggle {
-            position: absolute;
-            left: 30px;
-            top: 38%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #999;
-        }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-        .password-toggle:hover {
-            color: #555;
-        }
-        
-        .password-requirements {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-            text-align: right;
-        }
-        
-        .strength-meter {
-            height: 5px;
-            margin-top: 5px;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-            background: #ddd;
-        }
-        
-        .strength-meter.weak {
-            background: #ff4d4d;
-            width: 30%;
-        }
-        
-        .strength-meter.medium {
-            background: #ffa64d;
-            width: 65%;
-        }
-        
-        .strength-meter.strong {
-            background: #2ecc71;
-            width: 100%;
-        }
-   
-    </style>
-    
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Spinner Loader Start -->
-    <div class="loader">
-        <div id="loading-bar-spinner" class="spinner">
-            <div class="spinner-icon"></div>
+  <section class="activity-bg forget bg-norepeat-cover">
+    <div class="container d-flex">
+      <div class="activity-card">
+        <div class="activity-logo-wrap">
+          <a href="home.html" class="logo-img pb-0">
+            <img src="./imag/logo.png" alt="شعار Metrix" class="logo-image" />
+          </a>
         </div>
+        <div class="activity-card-heading">
+          <h1 class="activity-card-header">التحقق من البريد الإلكتروني</h1>
+          <label class="activity-card-subtitle">أدخل بريدك الإلكتروني ورمز التفعيل (PIN)</label>
+        </div>
+        <div class="activity-actions activity-actions-forget">
+          <form id="resetPasswordForm" class="d-flex flex-column gap-4">
+            <div class="form-group">
+              <label for="email"><i class="fas fa-envelope"></i></label>
+              <input type="email" id="email" class="input-one" placeholder="البريد الإلكتروني" required>
+            </div>
+
+            <div class="form-group">
+              <label for="verificationCode"><i class="fas fa-key"></i></label>
+              <input type="text" id="verificationCode" class="input-one" placeholder="رمز التفعيل" required>
+            </div>
+
+            <button type="button" class="btn btn-primary w-100" id="verifyBtn">
+              <i class="fas fa-check-circle"></i> تحقق الآن
+            </button>
+            
+          </form>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- صفحة إعادة تعيين كلمة المرور -->
-    <section class="activity-bg forget bg-norepeat-cover">
-        <div class="container d-flex">
-            <div class="activity-card">
-                <div class="activity-logo-wrap">
-                    <a href="home.html" class="logo-img pb-0">                        
-                      <img src="./imag/logo.png" alt="logo-images" class="logo-image" />
-
-                    </a>
-                </div>
-                <div class="activity-card-heading">
-                    <h1 class="activity-card-header"></h1>
-                    <label class="activity-card-subtitle">Enter your email and new password.</label>
-                </div>
-                <div class="activity-actions activity-actions-forget">
-                    <form id="resetPasswordForm" class="d-flex flex-column gap-4">
-                       <div class="form-group">
-    <label for="email"><i class="fas fa-envelope"></i></label>
-    <input type="email" id="email" class="input-one" placeholder="e-mail" required>
-</div>
-
-<div class="form-group">
-    <label for="verificationCode"><i class="fas fa-key"></i></label>
-   <input type="text" id="verificationCode" class="input-one" placeholder="PIN Code" required>
-</div>
-
-
-
-    </section>
-
-    <!-- Jquery Javascript File -->
-    <script src="assets/js/jquery.min.js"></script>
-    <!-- Bootstrap Bundle Javascript File -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <!-- Default Javascript File -->
-       <script>    document.addEventListener("DOMContentLoaded", () => {
-      const token = sessionStorage.getItem("token");
-      if (token) {
-        const overlay = document.createElement("div");
-    overlay.style.cssText = `
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background:  url('images/shinobu-kocho-5120x2880-19754.jpg') no-repeat center/cover;
-      color: #00ffcc;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      z-index: 99999;
-      animation: pulse 2s infinite ease-in-out;
-      border: 5px solid #ff3366;
-      box-sizing: border-box;
-      animation: glow 1.2s infinite alternate;
-    `;
-
-    // Add CSS animations for pulse, glow, and text effects
-    const style = document.createElement("style");
-    style.textContent = `
-      @keyframes pulse {
-        0% { background-color: rgba(0, 0, 0, 0.7); }
-        50% { background-color: rgba(0, 0, 0, 0.85); }
-        100% { background-color: rgba(0, 0, 0, 0.7); }
-      }
-      @keyframes glow {
-        0% { border-color: #ff3366; box-shadow: 0 0 8px #ff3366; }
-        100% { border-color: #00ffcc; box-shadow: 0 0 20px #00ffcc; }
-      }
-      @keyframes textPulse {
-        0% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.1); opacity: 0.9; }
-        100% { transform: scale(1); opacity: 1; }
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Countdown starts at 5
-    let countdown = 5;
-
-    overlay.innerHTML = `
-      <h1 style="font-size: 32px; margin-bottom: 20px; animation: textPulse 1s infinite;">
-        🔒 You're already <span style="color: #ff3366;">Logged in</span>
-      </h1>
-      <p style="font-size: 20px; margin-bottom: 10px; animation: textPulse 1.2s infinite;">
-        Please log out and try again
-      </p>
-      <p style="font-size: 18px;">
-        Redirecting in: <span id="countdown" style="color: #ffcc00;">${countdown}</span>...
-      </p>
-      <p id="audioError" style="font-size: 16px; color: #ff3366; display: none;">
-        Failed to play sound. Check your device or browser audio settings.
-      </p>
-    `;
-
-    document.body.appendChild(overlay);
-
-    // Initialize Web Audio API
-    // let audioCtx;
-    // try {
-    //   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    //   // Attempt to resume AudioContext automatically
-    //   if (audioCtx.state === 'suspended') {
-    //     audioCtx.resume().catch((e) => {
-    //       console.error('Auto-resume failed:', e);
-    //       document.getElementById('audioError').style.display = 'block';
-    //     });
-    //   }
-
-    //   // Function to play short alert sound
-    //   function playAlertSound(freq) {
-    //     const oscillator = audioCtx.createOscillator();
-    //     const gainNode = audioCtx.createGain();
-    //     oscillator.type = 'triangle'; // Triangle wave for clear alert sound
-    //     oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    //     gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime); // Moderate volume
-    //     oscillator.connect(gainNode);
-    //     gainNode.connect(audioCtx.destination);
-    //     oscillator.start();
-    //     oscillator.stop(audioCtx.currentTime + 0.3); // Short 0.3s sound
-    //   }
-
-    //   // Countdown and redirect
-    //   const frequencies = [440, 523.25, 659.25, 784, 880]; // A4, C5, E5, G5, A5
-      const interval = setInterval(() => {
-        countdown--;
-        document.getElementById("countdown").textContent = countdown;
-
-        // Play alert sound for each countdown number
-        if (countdown > 0) {
-          setTimeout(() => {
-            // playAlertSound(frequencies[countdown - 1] || 440); // Use different frequency for each number
-          }, 50); // Slight delay to ensure audio context is ready
-        }
-
-        if (countdown <= 0) {
-          clearInterval(interval);
-          window.location.href = "profile.html"; // Immediate redirect
-        }
-      }, 1000);
-    // } catch (e) {
-      // Show error message if audio fails
-    //   document.getElementById('audioError').style.display = 'block';
-    //   console.error('AudioContext initialization failed:', e);
-    }
-  }
-
-      
-    );</script>
-    <script src="assets/js/custom.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/login.js"></script>
   <script>
-   // Fixed email verification handler for cod.html
-document.addEventListener('DOMContentLoaded', function() {
-    const VERIFY_EMAIL_URL = 'https://jobizaa.com/api/admin/verify-email';
-    
-    // Get form elements
-    const resetPasswordForm = document.getElementById('resetPasswordForm');
-    const emailInput = document.getElementById('email');
-    const verificationCodeInput = document.getElementById('verificationCode');
-    
-    // Get auth token from localStorage
-    function getAuthToken() {
-        return localStorage.getItem('access_token') || localStorage.getItem('token');
-    }
-    
-    // Auto-fill email if coming from registration
-    function autoFillEmail() {
-        const emailToVerify = localStorage.getItem('emailToVerify');
-        if (emailToVerify && emailInput) {
-            emailInput.value = emailToVerify;
-            emailInput.readOnly = true;
-            emailInput.style.backgroundColor = '#f8f9fa';
-        }
-    }
-    
-    autoFillEmail();
-    
-    // Function to make authenticated API requests
-    async function makeAuthenticatedRequest(url, options = {}) {
-        const token = getAuthToken();
-        
-        const defaultHeaders = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        };
-        
-        if (token) {
-            defaultHeaders['Authorization'] = `Bearer ${token}`;
-        }
-        
-        const requestOptions = {
-            ...options,
-            headers: {
-                ...defaultHeaders,
-                ...options.headers
-            }
-        };
-        
-        try {
-            const response = await fetch(url, requestOptions);
-            
-            if (!response.ok) {
-                let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-                
-                try {
-                    const errorData = await response.json();
-                    errorMessage = errorData.message || errorData.error || errorMessage;
-                } catch (e) {
-                    // If response is not JSON, use status text
-                }
-                
-                throw new Error(errorMessage);
-            }
-            
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-                return await response.json();
-            }
-            
-            return { success: true, message: 'Operation completed successfully' };
-            
-        } catch (error) {
-            console.error('API Request Error:', error);
-            throw error;
-        }
-    }
-    
-    // ✅ FIXED: Function to verify email and PIN code
-    async function verifyEmailAndCode(email, verificationCode) {
-        const payload = {
-            email: email,
-            pin_code: verificationCode  // ✅ Changed from 'verification_code' to 'pin_code'
-        };
-        
-        console.log('Sending verification payload:', payload);
-        
-        try {
-            const response = await makeAuthenticatedRequest(VERIFY_EMAIL_URL, {
-                method: 'POST',
-                body: JSON.stringify(payload)
-            });
-            
-            console.log('Verification Response:', response);
-            return response;
-            
-        } catch (error) {
-            console.error('Error verifying email:', error);
-            throw error;
-        }
-    }
-    
-    // Function to show message
-    function showMessage(message, type = 'error') {
-        const existingMessages = document.querySelectorAll('.message-box');
-        existingMessages.forEach(msg => msg.remove());
-        
-        const messageBox = document.createElement('div');
-        messageBox.className = `message-box ${type} show`;
-        messageBox.textContent = message;
-        
-        resetPasswordForm.parentNode.insertBefore(messageBox, resetPasswordForm.nextSibling);
-        
-        setTimeout(() => {
-            messageBox.classList.remove('show');
-            setTimeout(() => messageBox.remove(), 300);
-        }, 5000);
-    }
-    
-    // Function to update admin verification status locally
-    function updateAdminVerificationStatus(email, isVerified = true) {
-        const admins = JSON.parse(localStorage.getItem('superAdmins') || '[]');
-        const adminIndex = admins.findIndex(admin => 
-            admin.email.toLowerCase() === email.toLowerCase()
-        );
-        
-        if (adminIndex !== -1) {
-            admins[adminIndex].email_verified = isVerified;
-            admins[adminIndex].email_verified_at = isVerified ? new Date().toISOString() : null;
-            localStorage.setItem('superAdmins', JSON.stringify(admins));
-            console.log('Admin verification status updated locally');
-        }
-    }
-    
-    // Handle form submission
-    if (resetPasswordForm) {
-        const verifyButton = document.createElement('button');
-        verifyButton.type = 'button';
-        verifyButton.className = 'btn btn-primary w-100';
-        verifyButton.innerHTML = '<i class="fas fa-check-circle"></i> Verify Email';
-        
-        resetPasswordForm.appendChild(verifyButton);
-        
-        verifyButton.addEventListener('click', async function(e) {
-            e.preventDefault();
-            
-            const email = emailInput.value.trim();
-            const verificationCode = verificationCodeInput.value.trim();
-            
-            // Validation
-            if (!email) {
-                showMessage('Please enter your email address', 'error');
-                emailInput.focus();
-                return;
-            }
-            
-            if (!verificationCode) {
-                showMessage('Please enter the PIN code', 'error');  // ✅ Updated message
-                verificationCodeInput.focus();
-                return;
-            }
-            
-            if (verificationCode.length < 4) {
-                showMessage('PIN code must be at least 4 characters', 'error');  // ✅ Updated message
-                verificationCodeInput.focus();
-                return;
-            }
-            
-            // Show loading state
-            const originalText = verifyButton.innerHTML;
-            verifyButton.innerHTML = '<div class="spinner"></div> Verifying...';
-            verifyButton.disabled = true;
-            
-            try {
-                const response = await verifyEmailAndCode(email, verificationCode);
-                
-                updateAdminVerificationStatus(email, true);
-                localStorage.removeItem('emailToVerify');
-                
-                showMessage('Email verified successfully! You can now login.', 'success');
-                
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 2000);
-                
-            } catch (error) {
-                let errorMessage = 'Verification failed. ';
-                
-                if (error.message.includes('invalid') || error.message.includes('code') || error.message.includes('pin')) {
-                    errorMessage += 'Please check your PIN code and try again.';  // ✅ Updated message
-                } else if (error.message.includes('expired')) {
-                    errorMessage += 'PIN code has expired. Please request a new one.';  // ✅ Updated message
-                } else if (error.message.includes('email')) {
-                    errorMessage += 'Email not found or already verified.';
-                } else {
-                    errorMessage += error.message;
-                }
-                
-                showMessage(errorMessage, 'error');
-                updateAdminVerificationStatus(email, false);
-                
-            } finally {
-                verifyButton.innerHTML = originalText;
-                verifyButton.disabled = false;
-            }
-        });
-    }
-    
-    // ✅ Updated placeholder text in HTML
-    if (verificationCodeInput) {
-        verificationCodeInput.placeholder = 'PIN Code';  // Update placeholder
-        
-        // Format PIN code input (numbers only)
-        verificationCodeInput.addEventListener('input', function(e) {
-            // Keep only numbers
-            e.target.value = e.target.value.replace(/\D/g, '');
-            
-            // Limit to 6 digits
-            if (e.target.value.length > 6) {
-                e.target.value = e.target.value.slice(0, 6);
-            }
-        });
-        
-        // Auto-submit when PIN is complete (6 digits)
-        verificationCodeInput.addEventListener('input', function(e) {
-            if (e.target.value.length === 6) {
-                const verifyButton = document.querySelector('.btn-primary');
-                if (verifyButton && !verifyButton.disabled) {
-                    setTimeout(() => verifyButton.click(), 500);
-                }
-            }
-        });
-    }
-    
-    // Auto-focus on PIN code if email is pre-filled
-    if (emailInput && emailInput.value && verificationCodeInput) {
-        verificationCodeInput.focus();
-    }
-});
-  </script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const VERIFY_EMAIL_URL = 'https://jobizaa.com/api/admin/verify-email';
 
+      const form = document.getElementById('resetPasswordForm');
+      const emailInput = document.getElementById('email');
+      const verificationCodeInput = document.getElementById('verificationCode');
+      const verifyBtn = document.getElementById('verifyBtn');
+
+      function getAuthToken() {
+        return localStorage.getItem('access_token') || localStorage.getItem('token');
+      }
+
+      function showMessage(message, type = 'error') {
+        const existing = document.querySelectorAll('.message-box');
+        existing.forEach(el => el.remove());
+
+        const box = document.createElement('div');
+        box.className = `message-box ${type} show`;
+        box.textContent = message;
+        form.parentNode.insertBefore(box, form.nextSibling);
+
+        setTimeout(() => {
+          box.classList.remove('show');
+          setTimeout(() => box.remove(), 300);
+        }, 5000);
+      }
+
+      async function makeAuthenticatedRequest(url, options = {}) {
+        const token = getAuthToken();
+        const headers = {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const requestOptions = {
+          ...options,
+          headers: {
+            ...headers,
+            ...options.headers,
+          }
+        };
+
+        const response = await fetch(url, requestOptions);
+        if (!response.ok) {
+          let errorText = `HTTP ${response.status}: ${response.statusText}`;
+          try {
+            const data = await response.json();
+            errorText = data.message || data.error || errorText;
+          } catch { }
+          throw new Error(errorText);
+        }
+        return response.json();
+      }
+
+      async function verifyEmailAndCode(email, code) {
+        const payload = {
+          email: email,
+          pin_code: code
+        };
+
+        return await makeAuthenticatedRequest(VERIFY_EMAIL_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+      }
+
+      verifyBtn.addEventListener('click', async function () {
+        const email = emailInput.value.trim();
+        const code = verificationCodeInput.value.trim();
+
+        if (!email) {
+          showMessage('يرجى إدخال البريد الإلكتروني');
+          return;
+        }
+        if (!code) {
+          showMessage('يرجى إدخال رمز التفعيل');
+          return;
+        }
+
+        if (code.length < 4) {
+          showMessage('رمز التفعيل يجب أن يكون 4 أرقام أو أكثر');
+          return;
+        }
+
+        verifyBtn.innerHTML = '<div class="spinner"></div> جاري التحقق...';
+        verifyBtn.disabled = true;
+
+        try {
+          await verifyEmailAndCode(email, code);
+          showMessage('تم التحقق بنجاح! سيتم توجيهك الآن.', 'success');
+          localStorage.removeItem('emailToVerify');
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 2000);
+        } catch (error) {
+          showMessage(`فشل التحقق: ${error.message}`, 'error');
+        } finally {
+          verifyBtn.innerHTML = '<i class="fas fa-check-circle"></i> تحقق الآن';
+          verifyBtn.disabled = false;
+        }
+      });
+
+      verificationCodeInput.addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/\D/g, '');
+        if (e.target.value.length > 6) {
+          e.target.value = e.target.value.slice(0, 6);
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

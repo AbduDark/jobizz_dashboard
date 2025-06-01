@@ -249,20 +249,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const originalBtnText = submitBtn.textContent;
             submitBtn.textContent = 'Adding...';
             submitBtn.disabled = true;
-            
-            try {
-              await addSuperAdmin(admin);
-localStorage.setItem("emailToVerify", admin.email); // حفظ البريد للتحقق
-window.location.href = "cod.html"; // الانتقال إلى صفحة التحقق
+          try {
+    await addSuperAdmin(admin);
+    localStorage.setItem("emailToVerify", admin.email); // حفظ البريد للتحقق
 
-            } catch (error) {
-                // Even if API fails, the admin was saved locally
-                showSuccessMessage('Admin added locally and can login. API sync may have failed: ' + error.message);
-                await fetchSuperAdmins();
-            } finally {
-                submitBtn.textContent = originalBtnText;
-                submitBtn.disabled = false;
-            }
+    console.log("تم الحفظ، سيتم الانتقال إلى صفحة الكود...");
+    window.location.href = "cod.html"; // ✔️ الانتقال هنا يتم مباشرة
+
+} catch (error) {
+    showSuccessMessage('تمت إضافة المشرف محليًا، لكن فشل المزامنة مع السيرفر: ' + error.message);
+    await fetchSuperAdmins();
+
+} finally {
+    submitBtn.textContent = originalBtnText;
+    submitBtn.disabled = false;
+}
+
         });
     }
     

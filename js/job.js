@@ -67,7 +67,9 @@ async function fetchJobs() {
         id: job.id,
         title: job.title,
         company: job.company?.name || "No company",
-        applicants: Math.floor(Math.random() * 50),
+        salary: job.salary || 0 ,
+        position: job.position || "No position",
+        created_at: job.created_at || "No date",
         status: job.job_status || "Pending",
       }));
     } else {
@@ -104,6 +106,8 @@ function viewJob(jobId) {
           <p><strong>Location:</strong> ${job.location}</p>
           <p><strong>Salary:</strong> ${job.salary}</p>
           <p><strong>Status:</strong> ${job.job_status}</p>
+          <p><strong>position At:</strong> ${job.position}</p>
+          <p><strong>Created At:</strong> ${job.created_at}</p>
         `,
         icon: "info",
       });
@@ -130,8 +134,10 @@ function displayJobs(jobsArray) {
       <td>${job.id}</td>
       <td>${job.title}</td>
       <td>${job.company}</td>
-      <td>${job.applicants}</td>
+      <td>${job.salary}</td>
       <td>${job.status}</td>
+       <td>${job.position}</td>
+       <td>${job.created_at}</td>
       <td>
         <button class="view-btn btn btn-primary" onclick="viewJob(${job.id})">
           <i class="fa-solid fa-eye"></i> View

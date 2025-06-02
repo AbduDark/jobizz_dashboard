@@ -158,12 +158,32 @@ img {
     height: auto;
 
 }
-.logo-image {
-  margin-left: 120px;
+.logo-imagess{
+     margin-left: 60px;
+  margin-bottom: -10px;
 
-    width: 80px;
+    width: 60px;
     height: auto;
-    border-radius: 25px;
+    border-radius: 20px;
+    background-color: #0f69d7;
+}
+.logo-images{
+     margin-left: 120px;
+  margin-bottom: -44px;
+
+    width: 60px;
+    height: auto;
+    border-radius: 20px;
+    background-color: #0f69d7;
+
+}
+.logo-image {
+  margin-left: 90px;
+  margin-bottom: -44px;
+
+    width: 60px;
+    height: auto;
+    border-radius: 20px;
     background-color: #0f69d7;
 }
 
@@ -855,7 +875,7 @@ html.show-menu body {
     font-size: var(--h4-size);
     font-weight: 800;
     margin: 1rem 0 1.2rem;
-    transform: translateY(-65px); /* يحرك النص للأعلى 5 بيكسل */
+    transform: translateY(-10px); /* يحرك النص للأعلى 5 بيكسل */
 }
 
 

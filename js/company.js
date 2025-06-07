@@ -49,6 +49,7 @@ async function fetchCompanies() {
     const companies = items.map((company) => ({
       id: company.id ?? 0,
       name: company.name ?? "N/A",
+     hired_people: company.hired_people ?? 0,
       logo: company.logo ?? "",
       email: company.email ?? "N/A", // لو فيه email
       jobs: company.jobs_count ?? 0, // لو فيه jobs_count
@@ -181,7 +182,7 @@ companiesList.forEach((company) => {
 row.innerHTML = `
   <td><img src="${company.logo}" alt="Logo" style="width:50px;height:auto;"></td>
   <td>${company.name || "N/A"}</td>
-  <td>${company.description || "N/A"}</td>
+  <td>${company.hired_people || "N/A"}</td>
   <td><a href="${company.website}" target="_blank">Visit</a></td>
   <td>${company.status || "N/A"}</td>
          <button class="delete-btn" onclick="deleteCompany(${company.id})">Delete</button>

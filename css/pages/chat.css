@@ -104,15 +104,21 @@
     background: #f9f9f9;
     border-radius: 0 0 15px 15px;
 }
-
+.send-btn{
+    display: flex;
+    justify-content: end;
+}
 .chat-input input {
+    display: flex;
+    justify-self: start;
     flex: 1;
-    padding: 12px 18px;
+    padding: 12px 40px;
     border: 1px solid #ddd;
     border-radius: 25px;
     font-size: 16px;
     outline: none;
     margin-right: 10px;
+    width: 100%;
 }
 
 .send-btn {

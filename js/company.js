@@ -19,53 +19,90 @@ document.addEventListener("DOMContentLoaded", fetchCompanies);
 let companies = [];
 async function fetchCompanies() {
   try {
-    const response = await fetch(API_BASE, {
+    const token = sessionStorage.getItem("token");
+    const companyId = sessionStorage.getItem("company_id");
+
+    if (!token) {
+      Swal.fire("Unauthorized", "Please log in", "error");
+      return;
+    }
+
+    // استخراج الدور من التوكن
+    const role = parseRole(token);
+
+    let url = "";
+    if (role === "admin") {
+      if (!companyId) {
+        Swal.fire("Error", "No company ID found for admin", "error");
+        return;
+      }
+      url = `https://jobizaa.com/api/admin/companies/${companyId}`;
+    } else if (role === "super-admin") {
+      url = `https://jobizaa.com/api/admin/companies`;
+    } else {
+      Swal.fire("Unauthorized", "You are not allowed to view this data", "error");
+      return;
+    }
+
+    const response = await fetch(url, {
       headers: {
-        Authorization: TOKEN,
+        Authorization: `Bearer ${token}`,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
     });
 
+    const result = await response.json();
+
     if (!response.ok) {
-      Swal.fire("Error", "Failed to fetch companies", "error");
+      Swal.fire("Error", result.message || "Failed to fetch companies", "error");
       return;
     }
 
-    const apiResult = await response.json();
-    console.log(apiResult.data);
+    let companies = [];
 
-    // console.log("companies:", Object.values(apiResult)[2]["items"]);
+    if (role === "super-admin" && Array.isArray(result.data)) {
+      companies = result.data.map((company) => ({
+        id: company.id ?? 0,
+        name: company.name ?? "N/A",
+        hired_people: company.hired_people ?? 0,
+        logo: company.logo ?? "",
+        email: company.email ?? "N/A",
+        jobs: company.jobs_count ?? 0,
+        status: Math.random() > 0.5 ? "Active" : "Inactive",
+      }));
+    } else if (role === "admin") {
+     const company = result.data.company;
 
-    if (!apiResult || !Array.isArray(apiResult.data)) {
-      console.error("Unexpected structure:", apiResult.data);
-      Swal.fire("Error", "Invalid data format received from API", "error");
-      return;
+       console.log("بيانات الشركة (admin):", company); // ✅ هنا
+      companies = [{
+        id: company.id ?? 0,
+        name: company.name ?? "N/A",
+        hired_people: company.hired_people ?? 0,
+        logo: company.logo ?? "",
+        email: company.email ?? "N/A",
+        jobs: company.jobs_count ?? 0,
+        status: Math.random() > 0.5 ? "Active" : "Inactive",
+      }];
     }
-
-    // console.log("Full API Response:", apiResult);
-    const items = apiResult.data;
-
-    const companies = items.map((company) => ({
-      id: company.id ?? 0,
-      name: company.name ?? "N/A",
-     hired_people: company.hired_people ?? 0,
-      logo: company.logo ?? "",
-      email: company.email ?? "N/A", // لو فيه email
-      jobs: company.jobs_count ?? 0, // لو فيه jobs_count
-      status: Math.random() > 0.5 ? "Active" : "Inactive",
-    }));
 
     displayCompanies(companies);
+
   } catch (error) {
     console.error("Error fetching companies:", error);
-    Swal.fire(
-      "Error",
-      "Something went wrong while fetching companies",
-      "error"
-    );
+    Swal.fire("Error", "Something went wrong while fetching companies", "error");
+  }
+  
+}
+function parseRole(token) {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.roles ? payload.roles[0] : null;
+  } catch {
+    return null;
   }
 }
+
 
 // Add a company
 async function addCompany(formData) {
@@ -372,3 +409,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Update navigation elements
     updateNavigation();
 });
+
+
+

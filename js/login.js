@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+    
 
     const email = emailInput.value.trim();
     const password = passwordInput.value;
@@ -46,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const token = payload.data?.token;
       if (!token) throw new Error("Token not received from server");
+      
 
       // ✅ حفظ التوكن والبريد الإلكتروني في sessionStorage
       sessionStorage.setItem("token", token);
@@ -114,4 +116,11 @@ document.addEventListener("DOMContentLoaded", function () {
       return null;
     }
   }
+
+  
 });
+
+
+
+
+

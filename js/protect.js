@@ -27,19 +27,32 @@ function protectPage(allowedRoles = []) {
   }
 }
 
+
+
+
 // Control visibility of elements based on role
 function toggleVisibilityByRole(role) {
+  // العناصر العامة اللي تظهر لـ super-admin بس
   document.querySelectorAll(".admin-only").forEach(el => {
-    el.style.display = role === "super-admin" ? "block" : "none";
+    // لو العنصر هو قائمة الشركات نخليه يظهر للـ admin كمان
+    if (el.dataset.id === "companies") {
+      el.style.display = ["admin", "super-admin"].includes(role) ? "block" : "none";
+    } else {
+      // الباقي يفضل خاص بـ super-admin
+      el.style.display = role === "super-admin" ? "block" : "none";
+    }
   });
 
+  // العناصر الخاصة بالمستخدم العادي أو المدير
   document.querySelectorAll(".user-only").forEach(el => {
     el.style.display = ["admin", "super-admin"].includes(role) ? "block" : "none";
   });
 }
 
+
 function restrictAdminPages(role) {
-  const allowedPagesForAdmin = ["job.html", "view.html", "profile.html", "chat.html"];
+ const allowedPagesForAdmin = ["job.html", "view.html", "profile.html", "chat.html", "company.html"];
+
   const currentPage = window.location.pathname.split("/").pop().toLowerCase();
 
   if (role === "admin" && !allowedPagesForAdmin.includes(currentPage)) {

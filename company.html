@@ -195,6 +195,44 @@
         <div id="companyList" class="company-list"></div>
       </div>
    </section>
+  <div id="updateBox" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:500px; max-height:90vh; overflow-y:auto; background:#fff; padding:20px; box-shadow:0 2px 15px rgba(0,0,0,0.3); z-index:9999; border-radius:8px;"
+">
+  <h3 style="margin-top: 0;">تعديل بيانات الشركة</h3>
+  <form id="updateCompanyForm" enctype="multipart/form-data">
+    <input type="hidden" id="updateCompanyId">
+
+    <label>اسم الشركة:</label>
+    <input type="text" id="companyName" required>
+
+    <label>البريد الإلكتروني:</label>
+    <input type="email" id="companyEmail" required>
+
+    <label>الموقع:</label>
+    <input type="text" id="companyLocation">
+
+    <label>الوصف:</label>
+    <textarea id="companyDescription" rows="3"></textarea>
+
+    <label>الموقع الإلكتروني:</label>
+    <input type="url" id="companyWebsite">
+
+    <label>حجم الشركة:</label>
+    <input type="text" id="companySize">
+
+    <label>عدد الموظفين:</label>
+    <input type="number" id="companyHiredPeople">
+
+    <label>شعار الشركة (Logo):</label>
+    <input type="file" id="companyLogo">
+
+    <div style="text-align: right;">
+      <button type="submit">حفظ التعديلات</button>
+      <button type="button" onclick="document.getElementById('updateBox').style.display='none'">إغلاق</button>
+    </div>
+  </form>
+</div>
+
+
     <!-- js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/company.js"></script>

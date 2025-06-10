@@ -223,6 +223,12 @@ row.innerHTML = `
   <td><a href="${company.website}" target="_blank">Visit</a></td>
   <td>${company.status || "N/A"}</td>
          <button class="delete-btn" onclick="deleteCompany(${company.id})">Delete</button>
+     ${parseRole(sessionStorage.getItem("token")) === "admin" ? `
+  <button class="update-btn" onclick="openUpdateForm(${company.id}, '${company.name}', '${company.email}', '${company.location ?? ""}', '${company.description ?? ""}', '${company.website ?? ""}', '${company.size ?? ""}', ${company.hired_people ?? 0})">Update</button>
+` : ""}
+
+
+       
 
 `;
 
@@ -238,6 +244,7 @@ row.innerHTML = `
       <label>Status:</label><p>${company.status}</p>
       <div class="actions">
         <button class="delete-btn" onclick="deleteCompany(${company.id})">Delete</button>
+        
       </div>
     `;
     companyListContainer.appendChild(item);
@@ -410,5 +417,64 @@ document.addEventListener("DOMContentLoaded", function() {
     updateNavigation();
 });
 
+
+function openUpdateForm(id, name, email, location = "", description = "", website = "", size = "", hired_people = 0) {
+  document.getElementById("updateBox").style.display = "block";
+  document.getElementById("updateCompanyId").value = id;
+  document.getElementById("companyName").value = name;
+  document.getElementById("companyEmail").value = email;
+  document.getElementById("companyLocation").value = location;
+  document.getElementById("companyDescription").value = description;
+  document.getElementById("companyWebsite").value = website;
+  document.getElementById("companySize").value = size;
+  document.getElementById("companyHiredPeople").value = hired_people;
+}
+
+document.getElementById("updateCompanyForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData();
+
+  formData.append("name", document.getElementById("companyName").value);
+  formData.append("email", document.getElementById("companyEmail").value);
+  formData.append("location", document.getElementById("companyLocation").value);
+  formData.append("description", document.getElementById("companyDescription").value);
+  formData.append("website", document.getElementById("companyWebsite").value);
+  formData.append("size", document.getElementById("companySize").value);
+  formData.append("hired_people", document.getElementById("companyHiredPeople").value);
+  formData.append("_method", "PUT");
+
+  const logoInput = document.getElementById("companyLogo");
+  if (logoInput.files.length > 0) {
+    formData.append("logo", logoInput.files[0]);
+  }
+
+  try {
+    const token = sessionStorage.getItem("token");
+
+    const response = await fetch(`https://jobizaa.com/api/admin/companies/1`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      Swal.fire("خطأ", result.message || "فشل في التحديث", "error");
+      return;
+    }
+
+    Swal.fire("تم", "تم تحديث بيانات الشركة بنجاح ✅", "success");
+    document.getElementById("updateBox").style.display = "none";
+    fetchCompanies();
+
+  } catch (err) {
+    console.error("Update error:", err);
+    Swal.fire("خطأ", "حدث خطأ أثناء التحديث", "error");
+  }
+});
 
 

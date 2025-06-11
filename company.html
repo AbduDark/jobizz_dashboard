@@ -197,36 +197,36 @@
    </section>
   <div id="updateBox" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:500px; max-height:90vh; overflow-y:auto; background:#fff; padding:20px; box-shadow:0 2px 15px rgba(0,0,0,0.3); z-index:9999; border-radius:8px;"
 ">
-  <h3 style="margin-top: 0;">تعديل بيانات الشركة</h3>
+  <h3 style="margin-top: 0;">Edit company data</h3>
   <form id="updateCompanyForm" enctype="multipart/form-data">
     <input type="hidden" id="updateCompanyId">
 
-    <label>اسم الشركة:</label>
+    <label>Company Name:</label>
     <input type="text" id="companyName" required>
 
-    <label>البريد الإلكتروني:</label>
+    <label>e-mail:</label>
     <input type="email" id="companyEmail" required>
 
-    <label>الموقع:</label>
+    <label>site</label>
     <input type="text" id="companyLocation">
 
-    <label>الوصف:</label>
+    <label>Description:</label>
     <textarea id="companyDescription" rows="3"></textarea>
 
    <input type="url" id="companyWebsiteInput" placeholder="https://example.com" required>
 
 
 
-    <label>حجم الشركة:</label>
+    <label>Company size:</label>
     <input type="text" id="companySize">
 
-    <label>عدد الموظفين:</label>
+    <label>Number of employees:</label>
     <input type="number" id="companyHiredPeople">
 
     
     <div style="text-align: right;">
-      <button type="submit">حفظ التعديلات</button>
-      <button type="button" onclick="document.getElementById('updateBox').style.display='none'">إغلاق</button>
+      <button type="submit">Save modifications</button>
+      <button type="button" onclick="document.getElementById('updateBox').style.display='none'">closing</button>
     </div>
   </form>
 </div>

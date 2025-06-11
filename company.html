@@ -213,8 +213,9 @@
     <label>الوصف:</label>
     <textarea id="companyDescription" rows="3"></textarea>
 
-    <label>الموقع الإلكتروني:</label>
-    <input type="url" id="companyWebsite">
+   <input type="url" id="companyWebsiteInput" placeholder="https://example.com" required>
+
+
 
     <label>حجم الشركة:</label>
     <input type="text" id="companySize">
@@ -222,9 +223,7 @@
     <label>عدد الموظفين:</label>
     <input type="number" id="companyHiredPeople">
 
-    <label>شعار الشركة (Logo):</label>
-    <input type="file" id="companyLogo">
-
+    
     <div style="text-align: right;">
       <button type="submit">حفظ التعديلات</button>
       <button type="button" onclick="document.getElementById('updateBox').style.display='none'">إغلاق</button>

@@ -32,7 +32,25 @@
 <!-- مكتبة الأيقونات والـ Swiper -->
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<style>
+    /* تأكد أن كل كارت داخل السلايدر له نفس الحجم */
+.swiper-slide {
+  flex-shrink: 0;
+  width: 100% !important;
+  max-width: 300px; /* يمكنك تعديل العرض حسب تصميمك */
+  display: flex;
+}
 
+.swiper-slide > div {
+  height: 100%;
+  min-height: 300px; /* توحيد الطول */
+  max-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+</style>
 
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <!-- JS -->
@@ -811,18 +829,18 @@
                             </div>
                         </div>
 
-                        <!-- كارد 2 -->
+                        <!-- كارد 1 -->
                         <div class="swiper-slide w-full max-w-sm">
                             <div class="p-6 rounded-xl border-2 border-default-200 h-full flex flex-col justify-between min-h-[420px]">
-                                <h3 class="text-lg font-semibold text-default-950">It's just incredible!</h3>
+                                <h3 class="text-lg font-semibold text-default-950">No doubt, spend. in is the best!</h3>
                                 <p class="text-sm font-normal mt-4 mb-4 text-muted">
-                                     Without a doubt, Spend in stands out as the absolute best. Their exceptional quality, reliability, and customer service are unmatched...
+                                    Without a doubt, Spend in stands out as the absolute best. Their exceptional quality, reliability, and customer service are unmatched...
                                 </p>
                                 <div class="flex items-center gap-4 mt-auto">
-                                    <img src="assets/images/user/client-05.jpg" class="h-10 rounded-full" alt="">
+                                    <img src="assets/images/user/client-04.jpg" class="h-10 rounded-full" alt="">
                                     <div>
-                                        <h3 class="text-base font-semibold text-primary">Jimmy Bartney</h3>
-                                        <p class="text-xs font-medium mt-1">Product Manager At Picko Lab</p>
+                                        <h3 class="text-base font-semibold text-primary">Moritika Kazuki</h3>
+                                        <p class="text-xs font-medium mt-1">Finance Manager at Mangan</p>
                                     </div>
                                 </div>
                             </div>

@@ -321,7 +321,10 @@ embed,
 object {
   display: block; /* 1 */
   vertical-align: middle; /* 2 */
+ 
+
 }
+
 /*
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
 */
@@ -604,6 +607,7 @@ select{
 }
 .container{
   width: 100%;
+ 
   margin-right: auto;
   margin-left: auto;
   padding-right: 1rem;
@@ -2170,7 +2174,7 @@ p{
 
 /* أضف هذا في ملف style.css */
 .nav-link {
-  font-size: 1.1rem !important; /* زيادة حجم الخط */
+  font-size: 2.3rem !important; /* زيادة حجم الخط */
   margin: 0 1rem !important; /* زيادة المسافة بين العناصر */
 }
 

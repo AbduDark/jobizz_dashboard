@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Company Management</title>
-    <!-- fontAwesome -->
-    <link rel="stylesheet" href="css/vendor/all.min.css" />
-    <link rel="stylesheet" href="./css/pages/company.css" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Blacklisted Admins</title>
+  <link rel="stylesheet" href="./css/pages/bloke.css" />
+      <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
 
-    <link rel="stylesheet" href="css/style.css" />
-   
-  </head>
 
-  <body>
-    <div class="header">
-      <!-- ✅ Navbar -->
-      <nav class="top-bar">
-        <div class="search-container">
-          <input type="text" placeholder="Search..." class="search-input" />
-          <button class="search-button">
-            <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
-        <div class="icon-section">
-          <i class="fas fa-envelope"></i>
-            <!-- أيقونة الإشعارات مع البادج -->
+   <div class="header">
+        <!-- ✅ Navbar -->
+        <nav class="top-bar">
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-input">
+                <button class="search-button">
+                    <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <div class="icon-section">
+                <i class="fas fa-envelope"></i>
+               <!-- أيقونة الإشعارات مع البادج -->
 <div class="notification-container">
     <i class="fas fa-bell" id="notificationBell"><span class="notification-badge">4</span></i>
     
@@ -40,14 +36,14 @@
             <div class="notification-section">
                 <h4>NEW</h4>
                 <div class="notification-item unread">
-                    <img src="#" alt="Notification Icon" class="notification-icon">
+                    <img src="./images/menna.jpeg" alt="Notification Icon" class="notification-icon">
                     <div class="notification-content">
                         Emma Watson replied to your comment: "Hello world 😊"
                         <span class="notification-time">Just now</span>
                     </div>
                 </div>
                 <div class="notification-item unread">
-                    <img src="#" alt="Notification Icon" class="notification-icon">
+                    <img src="./images/menna.jpeg" alt="Notification Icon" class="notification-icon">
                     <div class="notification-content">
                         Emma Watson replied to your comment: "Hello world 😊"
                         <span class="notification-time">Just now</span>
@@ -61,7 +57,7 @@
             <div class="notification-section">
                 <h4>EARLIER</h4>
                 <div class="notification-item">
-                    <img src="#" alt="Notification Icon" class="notification-icon">
+                    <img src="./images/istockphoto-1185418020-170667a.jpg" alt="Notification Icon" class="notification-icon">
                     <div class="notification-content">
                         The forecast today shows a low of 20°C in California.
                         <span class="notification-time">8h ago</span>
@@ -75,7 +71,6 @@
     </div>
 </div>
 
-          <i class="fas fa-layer-group"></i>
 <div class="user-profile" onclick="toggleDropdown()">
   <img id="companyLogo" src="assets/images/avata.jpeg" alt="Company Logo" />
   <span id="companyName">Company Name</span>
@@ -106,7 +101,8 @@
     <div class="sidebar">
       <div class="sidebar-header">
         <img src="assets/images/logo.png" alt="logo" />
-        <div class="toggle-btn">☰</div>
+       <div class="toggle-btn" id="sidebarToggle">☰</div>
+
       </div>
 
      <ul>
@@ -140,12 +136,13 @@
                     <span class="text">Companies</span>
                 </a>
             </li>
-             <li data-id="blacklist" class="admin-only">
+            <li data-id="blacklist" class="admin-only">
   <a href="bloke.html">
     <span class="icon"><i class="fa-solid fa-user-slash"></i></span>
     <span class="text">Blacklisted</span>
   </a>
 </li>
+
             <li class="user-only">
                 <a href="chat.html">
                     <span class="icon"><i class="fas fa-comments"></i></span>
@@ -170,88 +167,45 @@
                     <span class="text">Logout</span>
                 </a>
             </li>
-        </ul> 
+        </ul>
     </div>
 
-    <!-- ✅ Main Container -->
-    <section class="main-panel">
-      <div class="container-fluid">
-        <h2 class="my-5">Company List</h2>
-      
-        <!-- ✅ إضافة جدول الشركات -->
-        <div class="table-container my-5">
-          <table>
-           <thead>
-  <tr>
-    <th>Logo</th>
-    <th>Company Name</th>
-    <th>people</th>
-    <th>Website</th>   
-    <th>Status</th>
-    <th>Delete</th>
-  </tr>
-</thead>
-            <tbody id="companyTableBody">
-              <!-- سيتم ملء البيانات ديناميكيًا -->
-            </tbody>
-          </table>
-        </div>
-
-        <!-- ✅ قائمة الشركات في الموبايل -->
-        <div id="companyList" class="company-list"></div>
-      </div>
-   </section>
-  <div id="updateBox" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:90%; max-width:500px; max-height:90vh; overflow-y:auto; background:#fff; padding:20px; box-shadow:0 2px 15px rgba(0,0,0,0.3); z-index:9999; border-radius:8px;"
-">
-  <h3 style="margin-top: 0;">Edit company data</h3>
-  <form id="updateCompanyForm" enctype="multipart/form-data">
-    <input type="hidden" id="updateCompanyId">
-
-    <label>Company Name:</label>
-    <input type="text" id="companyName" required>
-
-    <label>e-mail:</label>
-    <input type="email" id="companyEmail" required>
-
-    <label>site</label>
-    <input type="text" id="companyLocation">
-
-    <label>Description:</label>
-    <textarea id="companyDescription" rows="3"></textarea>
-
-   <input type="url" id="companyWebsiteInput" placeholder="https://example.com" required>
 
 
 
-    <label>Company size:</label>
-    <input type="text" id="companySize">
+  <h2>Blacklisted Admins</h2>
 
-    <label>Number of employees:</label>
-    <input type="number" id="companyHiredPeople">
+  <table id="blacklistTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Admins will be loaded here dynamically -->
+    </tbody>
+  </table>
 
-    
-    <div style="text-align: right;">
-      <button type="submit">Save modifications</button>
-      <button type="button" onclick="document.getElementById('updateBox').style.display='none'">closing</button>
-    </div>
-  </form>
-</div>
+  <script src="./js/bloke.js"></script>
+<script>
+  const toggleBtn = document.getElementById("sidebarToggle");
+  const sidebar = document.querySelector(".sidebar");
+  const table = document.getElementById("blacklistTable");
+  const header = document.querySelector("h2");
+  const navbar = document.querySelector(".top-bar");
+
+  toggleBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("open");
+    table.classList.toggle("table-shifted");
+    header.classList.toggle("table-shifted");
+    navbar.classList.toggle("navbar-shifted"); // ✅ كلاس جديد للناف بار
+  });
+</script>
 
 
-    <!-- js -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/company.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/protect.js"></script>
-    <script>
-         protectPage(['super-admin','admin']);
-    </script>
-    <script src="js/login.js"></script>
-        <script src="js/navbar.js"></script>
-      
- <script>
-    
- </script>
 </body>
 </html>

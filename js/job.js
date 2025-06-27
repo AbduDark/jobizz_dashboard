@@ -1,7 +1,7 @@
 // General Settings
 const API_URL = "https://jobizaa.com/api/admin/jobs";
 
-const TOKEN = "Bearer " + sessionStorage.getItem('token');
+const TOKEN = "Bearer " + sessionStorage.getItem("token");
 
 let jobs = [];
 let currentPage = 1;
@@ -30,7 +30,12 @@ document.querySelector(".mark-read").addEventListener("click", function () {
   });
   document.querySelector(".notification-badge").textContent = "0";
 });
-
+document.addEventListener("DOMContentLoaded", function () {
+  // If you need categories to be loaded immediately
+  populateCategoryDropdown().catch((error) => {
+    console.error("Initial category load failed:", error);
+  });
+});
 // @author  A.A
 // @desc    Fetch jobs from API
 // @route   GET /api/admin/jobs
@@ -67,7 +72,7 @@ async function fetchJobs() {
         id: job.id,
         title: job.title,
         company: job.company?.name || "No company",
-        salary: job.salary || 0 ,
+        salary: job.salary || 0,
         position: job.position || "No position",
         created_at: job.created_at || "No date",
         status: job.job_status || "Pending",
@@ -157,7 +162,7 @@ function displayJobs(jobsArray) {
   document.querySelectorAll(".delete-button").forEach((button) => {
     button.addEventListener("click", function () {
       const jobId = parseInt(this.getAttribute("data-id"));
-      deleteJob(jobId); 
+      deleteJob(jobId);
     });
   });
 }
@@ -246,9 +251,9 @@ async function deleteJob(id) {
 
 // @author  A.A
 // @desc    Open add job modal
-function openAddJobModal() {
+async function openAddJobModal() {
   document.getElementById("modalJobId").value = "";
-  document.getElementById("modalCategory").value = "";
+  // document.getElementById("modalCategory").value = "";
   document.getElementById("modalTitle").value = "";
   document.getElementById("modalSalary").value = "";
   document.getElementById("modalLocation").value = "";
@@ -261,6 +266,8 @@ function openAddJobModal() {
   document.getElementById("modalStatus").value = "Pending"; // default value
   document.getElementById("modalTitleText").innerText = "Add Job";
   document.getElementById("jobModal").style.display = "flex";
+  // Populate categories
+  await populateCategoryDropdown();
 
   document.getElementById("updateButton").style.display = "none";
   document.getElementById("saveButton").style.display = "block";
@@ -295,8 +302,12 @@ async function openEditJobModal(id) {
       return;
     }
 
+    // Populate categories first
+    await populateCategoryDropdown();
+
     document.getElementById("modalJobId").value = job.id || "";
-    document.getElementById("modalCategory").value = job.category_name;
+    document.getElementById("modalCategory").value =
+      job.category_id || job.category_name;
     document.getElementById("modalTitle").value = job.title || "";
     document.getElementById("modalSalary").value = job.salary || "";
     document.getElementById("modalLocation").value = job.location || "";
@@ -492,4 +503,67 @@ async function saveJob() {
 // Close the modal
 function closeModal() {
   document.getElementById("jobModal").style.display = "none";
+}
+
+// @desc    Fetch categories
+// @route   GET /api/admin/categories
+// @author  A.A
+async function fetchCategories() {
+  try {
+    const response = await fetch("https://jobizaa.com/api/admin/categories", {
+      method: "GET",
+      headers: {
+        Authorization: TOKEN,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    const result = await response.json();
+    console.log("API Responseeeeeeeeeeeeeee:", result);
+
+    if (result.status === "200") {
+      return result.data;
+    }
+  } catch (error) {
+    console.error("Network error fetching categories:", error);
+    return [];
+  }
+}
+
+// @desc    Populate category dropdown
+// @route   GET /api/admin/categories
+// @author  A.A
+async function populateCategoryDropdown() {
+  const selectElement = document.getElementById("modalCategory");
+
+  // Show loading state
+  selectElement.innerHTML = '<option value="">Loading categories...</option>';
+
+  try {
+    const categories = await fetchCategories();
+    console.log("Received categories:", categories);
+
+    // Clear and rebuild options
+    selectElement.innerHTML = '<option value="">Select category</option>';
+
+    if (!categories || categories.length === 0) {
+      selectElement.innerHTML = `
+        <option value="">No categories found</option>
+        <option value="general">General</option>
+      `;
+      return;
+    }
+
+    categories.forEach((category) => {
+      const option = new Option(category.name, category.id || category.name);
+      selectElement.add(option);
+    });
+  } catch (error) {
+    console.error("Category load failed:", error);
+    selectElement.innerHTML = `
+      <option value="">Error loading categories</option>
+      <option value="general">General</option>
+    `;
+  }
 }

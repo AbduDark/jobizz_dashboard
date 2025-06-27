@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <title>Job Listings Dashboard</title>
 
     <!-- fontAwesome -->
@@ -11,55 +11,55 @@
     <link rel="stylesheet" href="./css/style.css" />
     <style>
       .notification-dropdown {
-    display: none; /* اجعلها تظهر عند الحاجة */
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    width: 300px;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px; /* إضافة حدود دائرية */
-}
+        display: none; /* اجعلها تظهر عند الحاجة */
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        width: 300px;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px; /* إضافة حدود دائرية */
+      }
 
-.notification-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #eee; /* إضافة حد بين الإشعارات */
-}
+      .notification-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #eee; /* إضافة حد بين الإشعارات */
+      }
 
-.notification-item:last-child {
-    border-bottom: none; /* إزالة الحد الأخير */
-}
+      .notification-item:last-child {
+        border-bottom: none; /* إزالة الحد الأخير */
+      }
 
-.notification-icon {
-    width: 30px; /* حجم أصغر */
-    height: 30px; /* حجم أصغر */
-    border-radius: 50%; /* لجعلها دائرية */
-    margin-right: 10px;
-}
+      .notification-icon {
+        width: 30px; /* حجم أصغر */
+        height: 30px; /* حجم أصغر */
+        border-radius: 50%; /* لجعلها دائرية */
+        margin-right: 10px;
+      }
 
-.notification-content {
-    flex-grow: 1;
-}
+      .notification-content {
+        flex-grow: 1;
+      }
 
-.view-all {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 10%; /* لجعل الزر دائري */
-    margin: 10px auto; /* توسيط الزر */
-    width: 90px; /* عرض الزر */
-    height: 50px; /* ارتفاع الزر */
-    line-height: 30px; /* توسيط النص داخل الزر */
-}
+      .view-all {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 10%; /* لجعل الزر دائري */
+        margin: 10px auto; /* توسيط الزر */
+        width: 90px; /* عرض الزر */
+        height: 50px; /* ارتفاع الزر */
+        line-height: 30px; /* توسيط النص داخل الزر */
+      }
 
-.view-all:hover {
-    background-color: #0056b3;
-}
+      .view-all:hover {
+        background-color: #0056b3;
+      }
     </style>
   </head>
 
@@ -75,83 +75,101 @@
         </div>
         <div class="icon-section">
           <i class="fas fa-envelope"></i>
-           <!-- أيقونة الإشعارات مع البادج -->
-<div class="notification-container">
-    <i class="fas fa-bell" id="notificationBell"><span class="notification-badge">4</span></i>
-    
-    <!-- Dropdown الإشعارات -->
-    <div class="notification-dropdown" id="notificationDropdown">
-        <div class="dropdown-header">
-            <h3>Notifications</h3>
-            <a href="#" class="mark-read">Mark all as read</a>
-        </div>
-        
-        <div class="notification-list">
-            <!-- الإشعارات الجديدة -->
-            <div class="notification-section">
-                <h4>NEW</h4>
-                <div class="notification-item unread">
-                    <img src="./images/menna.jpeg" alt="Notification Icon" class="notification-icon">
-                    <div class="notification-content">
-                        Emma Watson replied to your comment: "Hello world 😊"
-                        <span class="notification-time">Just now</span>
-                    </div>
-                </div>
-                <div class="notification-item unread">
-                    <img src="./images/menna.jpeg" alt="Notification Icon" class="notification-icon">
-                    <div class="notification-content">
-                        Emma Watson replied to your comment: "Hello world 😊"
-                        <span class="notification-time">Just now</span>
-                    </div>
-                </div>
-              
-                <!-- باقي الإشعارات هنا -->
-            </div>
-            
-            <!-- الإشعارات القديمة -->
-            <div class="notification-section">
-                <h4>EARLIER</h4>
-                <div class="notification-item">
-                    <img src="./images/istockphoto-1185418020-170667a.jpg" alt="Notification Icon" class="notification-icon">
-                    <div class="notification-content">
-                        The forecast today shows a low of 20°C in California.
-                        <span class="notification-time">8h ago</span>
-                    </div>
-                </div>
-                <!-- باقي الإشعارات هنا -->
-            </div>
-        </div>
-        
-        <a href="./nofigation.html" class="view-all">View all</a>
-    </div>
-</div>
-          <i class="fas fa-layer-group"></i>
-<div class="user-profile" onclick="toggleDropdown()">
-  <img id="companyLogo" src="assets/images/avata.jpeg" alt="Company Logo" />
-  <span id="companyName">Company Name</span>
+          <!-- أيقونة الإشعارات مع البادج -->
+          <div class="notification-container">
+            <i class="fas fa-bell" id="notificationBell"
+              ><span class="notification-badge">4</span></i
+            >
 
-  <div class="dropdown-box">
-    <div class="user-info">
-      <h3 id="companyFullName">Company Name</h3>
-      <a href="website"  id="companyWebsite">website.com</a>
-                        </div>
-                        <ul>
+            <!-- Dropdown الإشعارات -->
+            <div class="notification-dropdown" id="notificationDropdown">
+              <div class="dropdown-header">
+                <h3>Notifications</h3>
+                <a href="#" class="mark-read">Mark all as read</a>
+              </div>
+
+              <div class="notification-list">
+                <!-- الإشعارات الجديدة -->
+                <div class="notification-section">
+                  <h4>NEW</h4>
+                  <div class="notification-item unread">
+                    <img
+                      src="./images/menna.jpeg"
+                      alt="Notification Icon"
+                      class="notification-icon" />
+                    <div class="notification-content">
+                      Emma Watson replied to your comment: "Hello world 😊"
+                      <span class="notification-time">Just now</span>
+                    </div>
+                  </div>
+                  <div class="notification-item unread">
+                    <img
+                      src="./images/menna.jpeg"
+                      alt="Notification Icon"
+                      class="notification-icon" />
+                    <div class="notification-content">
+                      Emma Watson replied to your comment: "Hello world 😊"
+                      <span class="notification-time">Just now</span>
+                    </div>
+                  </div>
+
+                  <!-- باقي الإشعارات هنا -->
+                </div>
+
+                <!-- الإشعارات القديمة -->
+                <div class="notification-section">
+                  <h4>EARLIER</h4>
+                  <div class="notification-item">
+                    <img
+                      src="./images/istockphoto-1185418020-170667a.jpg"
+                      alt="Notification Icon"
+                      class="notification-icon" />
+                    <div class="notification-content">
+                      The forecast today shows a low of 20°C in California.
+                      <span class="notification-time">8h ago</span>
+                    </div>
+                  </div>
+                  <!-- باقي الإشعارات هنا -->
+                </div>
+              </div>
+
+              <a href="./nofigation.html" class="view-all">View all</a>
+            </div>
+          </div>
+          <i class="fas fa-layer-group"></i>
+          <div class="user-profile" onclick="toggleDropdown()">
+            <img
+              id="companyLogo"
+              src="assets/images/avata.jpeg"
+              alt="Company Logo" />
+            <span id="companyName">Company Name</span>
+
+            <div class="dropdown-box">
+              <div class="user-info">
+                <h3 id="companyFullName">Company Name</h3>
+                <a href="website" id="companyWebsite">website.com</a>
+              </div>
+              <ul>
                 <li><a href="profile.html" class="fas fa-user"> Profile</a></li>
                 <li><a href="setting.html" class="fas fa-cog"> Setting</a></li>
-                <li><a href="chat.html" class="fas fa-question-circle"> Support</a></li>
-                <li><a href="#" class="fas fa-sign-out-alt" onclick="logout()">LogOut</a></li>
-                        </ul>
-                    </div>
-
-                </div>
+                <li>
+                  <a href="chat.html" class="fas fa-question-circle">
+                    Support</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="fas fa-sign-out-alt" onclick="logout()"
+                    >LogOut</a
+                  >
+                </li>
+              </ul>
             </div>
-        </nav>
-
-
+          </div>
+        </div>
+      </nav>
     </div>
 
-
-<!-- =============== sidebar ================ -->
+    <!-- =============== sidebar ================ -->
 
     <div class="sidebar">
       <div class="sidebar-header">
@@ -159,70 +177,72 @@
         <div class="toggle-btn">☰</div>
       </div>
 
-     <ul>
-            <li data-id="dashboard" class="admin-only">
-                <a href="index.html">
-                    <span class="icon"><i class="fa-sharp fa-solid fa-house"></i></span>
-                    <span class="text">Dashboard</span>
-                </a>
-            </li>
-            <li data-id="users" class="admin-only">
-                <a href="user.html">
-                    <span class="icon"><i class="fa-solid fa-users"></i></span>
-                    <span class="text">Users</span>
-                </a>
-            </li>
-            <li data-id="jobs" class="user-only">
-                <a href="job.html">
-                    <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
-                    <span class="text">Jobs</span>
-                </a>
-            </li>
-            <li data-id="view" class="user-only">
-                <a href="view.html">
-                    <span class="icon"><i class="fa-sharp fa-solid fa-eye"></i></span>
-                    <span class="text">View jobs</span>
-                </a>
-            </li>
-            <li data-id="companies" class="admin-only">
-                <a href="company.html">
-                    <span class="icon"><i class="fa-solid fa-buildings"></i></span>
-                    <span class="text">Companies</span>
-                </a>
-            </li>
-             <li data-id="blacklist" class="admin-only">
-  <a href="bloke.html">
-    <span class="icon"><i class="fa-solid fa-user-slash"></i></span>
-    <span class="text">Blacklisted</span>
-  </a>
-</li>
-            <li class="user-only">
-                <a href="chat.html">
-                    <span class="icon"><i class="fas fa-comments"></i></span>
-                    <span class="text">Chat</span>
-                </a>
-            </li>
-            <li data-id="profile" class="user-only">
-                <a href="profile.html">
-                    <span class="icon"><i class="fa-solid fa-user"></i></span>
-                    <span class="text">Profile</span>
-                </a>
-            </li>
-            <li data-id="setting" class="admin-only">
-                <a href="setting.html">
-                    <span class="icon"><i class="fa-solid fa-gear"></i></span>
-                    <span class="text">Settings</span>
-                </a>
-            </li>
-            <li data-id="logout">
-                <a href="#" onclick="auth.logout()">
-                    <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
-                    <span class="text">Logout</span>
-                </a>
-            </li>
-        </ul>
+      <ul>
+        <li data-id="dashboard" class="admin-only">
+          <a href="index.html">
+            <span class="icon"><i class="fa-sharp fa-solid fa-house"></i></span>
+            <span class="text">Dashboard</span>
+          </a>
+        </li>
+        <li data-id="users" class="admin-only">
+          <a href="user.html">
+            <span class="icon"><i class="fa-solid fa-users"></i></span>
+            <span class="text">Users</span>
+          </a>
+        </li>
+        <li data-id="jobs" class="user-only">
+          <a href="job.html">
+            <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
+            <span class="text">Jobs</span>
+          </a>
+        </li>
+        <li data-id="view" class="user-only">
+          <a href="view.html">
+            <span class="icon"><i class="fa-sharp fa-solid fa-eye"></i></span>
+            <span class="text">View jobs</span>
+          </a>
+        </li>
+        <li data-id="companies" class="admin-only">
+          <a href="company.html">
+            <span class="icon"><i class="fa-solid fa-buildings"></i></span>
+            <span class="text">Companies</span>
+          </a>
+        </li>
+        <li data-id="blacklist" class="admin-only">
+          <a href="bloke.html">
+            <span class="icon"><i class="fa-solid fa-user-slash"></i></span>
+            <span class="text">Blacklisted</span>
+          </a>
+        </li>
+        <li class="user-only">
+          <a href="chat.html">
+            <span class="icon"><i class="fas fa-comments"></i></span>
+            <span class="text">Chat</span>
+          </a>
+        </li>
+        <li data-id="profile" class="user-only">
+          <a href="profile.html">
+            <span class="icon"><i class="fa-solid fa-user"></i></span>
+            <span class="text">Profile</span>
+          </a>
+        </li>
+        <li data-id="setting" class="admin-only">
+          <a href="setting.html">
+            <span class="icon"><i class="fa-solid fa-gear"></i></span>
+            <span class="text">Settings</span>
+          </a>
+        </li>
+        <li data-id="logout">
+          <a href="#" onclick="auth.logout()">
+            <span class="icon"
+              ><i class="fa-solid fa-right-from-bracket"></i
+            ></span>
+            <span class="text">Logout</span>
+          </a>
+        </li>
+      </ul>
     </div>
-    
+
     <section class="main-panel">
       <div class="container-fluid text-center">
         <h2 class="mt-4">Job Listings Dashboard</h2>
@@ -257,16 +277,15 @@
                 <th>Company Name</th>
                 <th>Salary</th>
                 <th>Status</th>
-              <th>position</th>
-              <th>Created</th>
+                <th>position</th>
+                <th>Created</th>
                 <th>Actions</th>
-
               </tr>
             </thead>
             <tbody id="jobTable"></tbody>
           </table>
         </div>
- <div id="jobDetailsContainer"></div>
+        <div id="jobDetailsContainer"></div>
         <div class="card-container"></div>
 
         <div
@@ -283,11 +302,15 @@
             <h3 id="modalTitleText">Add Job</h3>
             <!-- <div class="inp"> -->
             <input type="hidden" id="modalJobId" />
-            <input
+            <!-- <input
               type="text"
               id="modalCategory"
               placeholder="Category Name"
-              class="inp" />
+              class="inp" /> -->
+            <select name="category" id="modalCategory" class="inp">
+              <option value="">Select a category</option>
+              <!-- Categories will be populated here dynamically -->
+            </select>
             <input
               type="text"
               id="modalTitle"
@@ -393,7 +416,7 @@
     <script src="js/navbar.js"></script>
 
     <script>
-         protectPage(['super-admin','admin']);
+      protectPage(["super-admin", "admin"]);
     </script>
     <script src="./js/job.js"></script>
   </body>

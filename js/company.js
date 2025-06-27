@@ -40,7 +40,11 @@ async function fetchCompanies() {
     } else if (role === "super-admin") {
       url = `https://jobizaa.com/api/admin/companies`;
     } else {
-      Swal.fire("Unauthorized", "You are not allowed to view this data", "error");
+      Swal.fire(
+        "Unauthorized",
+        "You are not allowed to view this data",
+        "error"
+      );
       return;
     }
 
@@ -55,7 +59,11 @@ async function fetchCompanies() {
     const result = await response.json();
 
     if (!response.ok) {
-      Swal.fire("Error", result.message || "Failed to fetch companies", "error");
+      Swal.fire(
+        "Error",
+        result.message || "Failed to fetch companies",
+        "error"
+      );
       return;
     }
 
@@ -72,27 +80,31 @@ async function fetchCompanies() {
         status: Math.random() > 0.5 ? "Active" : "Inactive",
       }));
     } else if (role === "admin") {
-     const company = result.data.company;
+      const company = result.data.company;
 
-       console.log("بيانات الشركة (admin):", company); // ✅ هنا
-      companies = [{
-        id: company.id ?? 0,
-        name: company.name ?? "N/A",
-        hired_people: company.hired_people ?? 0,
-        logo: company.logo ?? "",
-        email: company.email ?? "N/A",
-        jobs: company.jobs_count ?? 0,
-        status: Math.random() > 0.5 ? "Active" : "Inactive",
-      }];
+      console.log("بيانات الشركة (admin):", company); // ✅ هنا
+      companies = [
+        {
+          id: company.id ?? 0,
+          name: company.name ?? "N/A",
+          hired_people: company.hired_people ?? 0,
+          logo: company.logo ?? "",
+          email: company.email ?? "N/A",
+          jobs: company.jobs_count ?? 0,
+          status: Math.random() > 0.5 ? "Active" : "Inactive",
+        },
+      ];
     }
 
     displayCompanies(companies);
-
   } catch (error) {
     console.error("Error fetching companies:", error);
-    Swal.fire("Error", "Something went wrong while fetching companies", "error");
+    Swal.fire(
+      "Error",
+      "Something went wrong while fetching companies",
+      "error"
+    );
   }
-  
 }
 function parseRole(token) {
   try {
@@ -102,7 +114,6 @@ function parseRole(token) {
     return null;
   }
 }
-
 
 // Add a company
 async function addCompany(formData) {
@@ -214,18 +225,32 @@ function displayCompanies(companiesList = []) {
     return;
   }
 
-companiesList.forEach((company) => {
-  const row = document.createElement("tr");
-row.innerHTML = `
-  <td><img src="${company.logo}" alt="Logo" style="width:50px;height:auto;"></td>
+  companiesList.forEach((company) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+  <td><img src="${
+    company.logo
+  }" alt="Logo" style="width:50px;height:auto;"></td>
   <td>${company.name || "N/A"}</td>
   <td>${company.hired_people || "N/A"}</td>
   <td><a href="${company.website}" target="_blank">Visit</a></td>
-  <td>${company.status || "N/A"}</td>
-         <button class="delete-btn" onclick="deleteCompany(${company.id})">Delete</button>
-     ${parseRole(sessionStorage.getItem("token")) === "admin" ? `
-  <button class="update-btn" onclick="openUpdateForm(${company.id}, '${company.name}', '${company.email}', '${company.location ?? ""}', '${company.description ?? ""}', '${company.website ?? ""}', '${company.size ?? ""}', ${company.hired_people ?? 0})">Update</button>
-` : ""}
+  <td>${company.status || "N/A"}</td>
+         <button class="delete-btn" onclick="deleteCompany(${
+           company.id
+         })">Delete</button>
+     ${
+       parseRole(sessionStorage.getItem("token")) === "admin"
+         ? `
+  <button class="update-btn" onclick="openUpdateForm(${company.id}, '${
+             company.name
+           }', '${company.email}', '${company.location ?? ""}', '${
+             company.description ?? ""
+           }', '${company.website ?? ""}', '${company.size ?? ""}', ${
+             company.hired_people ?? 0
+           })">Update</button>
+`
+         : ""
+     }
 
 
        
@@ -286,139 +311,154 @@ function updateDisplayMode() {
 window.addEventListener("resize", updateDisplayMode);
 window.onload = () => fetchCompanies();
 
+document.addEventListener("DOMContentLoaded", function () {
+  const bellIcon = document.getElementById("notificationBell");
+  const dropdown = document.getElementById("notificationDropdown");
+  const viewAllLink = document.querySelector(".view-all");
 
-document.addEventListener('DOMContentLoaded', function () {
-    const bellIcon = document.getElementById('notificationBell');
-    const dropdown = document.getElementById('notificationDropdown');
-    const viewAllLink = document.querySelector('.view-all');
+  // إظهار / إخفاء قائمة الإشعارات عند الضغط على الجرس
+  bellIcon.addEventListener("click", function (e) {
+    e.stopPropagation();
+    dropdown.style.display =
+      dropdown.style.display === "block" ? "none" : "block";
+  });
 
-    // إظهار / إخفاء قائمة الإشعارات عند الضغط على الجرس
-    bellIcon.addEventListener('click', function (e) {
-        e.stopPropagation();
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    });
+  // إغلاق القائمة إذا تم النقر خارجها
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".notification-container")) {
+      dropdown.style.display = "none";
+    }
+  });
 
-    // إغلاق القائمة إذا تم النقر خارجها
-    document.addEventListener('click', function (e) {
-        if (!e.target.closest('.notification-container')) {
-            dropdown.style.display = 'none';
-        }
-    });
-
-    // عند الضغط على "View all" يتم التوجيه للصفحة
-    viewAllLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        window.location.href = this.getAttribute('href');
-    });
+  // عند الضغط على "View all" يتم التوجيه للصفحة
+  viewAllLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = this.getAttribute("href");
+  });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const bellIcon = document.getElementById("notificationBell");
+  const dropdown = document.getElementById("notificationDropdown");
+  const viewAllLink = document.querySelector(".view-all");
 
+  // إظهار / إخفاء قائمة الإشعارات عند الضغط على الجرس
+  bellIcon.addEventListener("click", function (e) {
+    e.stopPropagation();
+    dropdown.style.display =
+      dropdown.style.display === "block" ? "none" : "block";
+  });
 
-   
-      document.addEventListener("DOMContentLoaded", function () {
-        const bellIcon = document.getElementById("notificationBell");
-        const dropdown = document.getElementById("notificationDropdown");
-        const viewAllLink = document.querySelector(".view-all");
+  // إغلاق القائمة إذا تم النقر خارجها
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".notification-container")) {
+      dropdown.style.display = "none";
+    }
+  });
 
-        // إظهار / إخفاء قائمة الإشعارات عند الضغط على الجرس
-        bellIcon.addEventListener("click", function (e) {
-          e.stopPropagation();
-          dropdown.style.display =
-            dropdown.style.display === "block" ? "none" : "block";
-        });
+  // عند الضغط على "View all" يتم التوجيه للصفحة
+  viewAllLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.location.href = this.getAttribute("href");
+  });
+});
 
-        // إغلاق القائمة إذا تم النقر خارجها
-        document.addEventListener("click", function (e) {
-          if (!e.target.closest(".notification-container")) {
-            dropdown.style.display = "none";
-          }
-        });
-
-        // عند الضغط على "View all" يتم التوجيه للصفحة
-        viewAllLink.addEventListener("click", function (e) {
-          e.preventDefault();
-          window.location.href = this.getAttribute("href");
-        });
-      });
-   
-
-
-      // Add this script to your navigation pages (like job.html, about.html, etc.)
+// Add this script to your navigation pages (like job.html, about.html, etc.)
 // This should be included near the top of your JS scripts
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Check authentication and access control
-    function checkAccess() {
-        const authToken = localStorage.getItem("authToken");
-        const userRole = localStorage.getItem("userRole");
-        
-        // If not logged in at all, redirect to login
-        if (!authToken) {
-            window.location.href = "login.html";
-            return;
-        }
-        
-        // Get current page
-        const currentPage = window.location.pathname.split("/").pop();
-        
-        // List of pages accessible to regular users
-        const userAccessiblePages = [
-            "newpass.html", 
-            "signup.html", 
-            "job.html", 
-            "company.html", 
-            "profile.html"
-        ];
-        
-        // Check if regular user is trying to access restricted page
-        if (userRole === "user" && !isPageAccessible(currentPage, userAccessiblePages)) {
-            // Redirect to allowed page or show access denied
-            alert("Access denied. You don't have permission to view this page.");
-            window.location.href = "job.html"; // Redirect to an allowed page
-        }
+document.addEventListener("DOMContentLoaded", function () {
+  // Check authentication and access control
+  function checkAccess() {
+    const authToken = localStorage.getItem("authToken");
+    const userRole = localStorage.getItem("userRole");
+
+    // If not logged in at all, redirect to login
+    if (!authToken) {
+      window.location.href = "login.html";
+      return;
     }
-    
-    // Check if the current page is in the allowed list
-    function isPageAccessible(page, allowedPages) {
-        return allowedPages.some(allowedPage => 
-            page === allowedPage || page === "" && allowedPage === "job.html"
-        );
+
+    // Get current page
+    const currentPage = window.location.pathname.split("/").pop();
+
+    // List of pages accessible to regular users
+    const userAccessiblePages = [
+      "newpass.html",
+      "signup.html",
+      "job.html",
+      "company.html",
+      "profile.html",
+    ];
+
+    // Check if regular user is trying to access restricted page
+    if (
+      userRole === "user" &&
+      !isPageAccessible(currentPage, userAccessiblePages)
+    ) {
+      // Redirect to allowed page or show access denied
+      alert("Access denied. You don't have permission to view this page.");
+      window.location.href = "job.html"; // Redirect to an allowed page
     }
-    
-    // Run access check
-    checkAccess();
-    
-    // Modify navigation menu visibility based on role
-    function updateNavigation() {
-        const userRole = localStorage.getItem("userRole");
-        
-        // If we're on a page with sidebar navigation
-        const sidebar = document.querySelector(".sidebar");
-        if (sidebar) {
-            const menuItems = sidebar.querySelectorAll("li");
-            
-            if (userRole === "user") {
-                // Hide admin-only menu items from regular users
-                menuItems.forEach(item => {
-                    const linkText = item.querySelector(".text")?.textContent.trim().toLowerCase();
-                    
-                    // Define which menu items should be hidden from regular users
-                    const adminOnlyItems = ["dashboard", "users", "view jobs", "settings"];
-                    
-                    if (adminOnlyItems.includes(linkText)) {
-                        item.style.display = "none";
-                    }
-                });
-            }
-        }
+  }
+
+  // Check if the current page is in the allowed list
+  function isPageAccessible(page, allowedPages) {
+    return allowedPages.some(
+      (allowedPage) =>
+        page === allowedPage || (page === "" && allowedPage === "job.html")
+    );
+  }
+
+  // Run access check
+  checkAccess();
+
+  // Modify navigation menu visibility based on role
+  function updateNavigation() {
+    const userRole = localStorage.getItem("userRole");
+
+    // If we're on a page with sidebar navigation
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar) {
+      const menuItems = sidebar.querySelectorAll("li");
+
+      if (userRole === "user") {
+        // Hide admin-only menu items from regular users
+        menuItems.forEach((item) => {
+          const linkText = item
+            .querySelector(".text")
+            ?.textContent.trim()
+            .toLowerCase();
+
+          // Define which menu items should be hidden from regular users
+          const adminOnlyItems = [
+            "dashboard",
+            "users",
+            "view jobs",
+            "settings",
+          ];
+
+          if (adminOnlyItems.includes(linkText)) {
+            item.style.display = "none";
+          }
+        });
+      }
     }
-    
-    // Update navigation elements
-    updateNavigation();
+  }
+
+  // Update navigation elements
+  updateNavigation();
 });
 
-
-function openUpdateForm(id, name, email, location = "", description = "", website = "", size = "", hired_people = 0) {
+function openUpdateForm(
+  id,
+  name,
+  email,
+  location = "",
+  description = "",
+  website = "",
+  size = "",
+  hired_people = 0
+) {
   document.getElementById("updateBox").style.display = "block";
   document.getElementById("updateCompanyId").value = id;
   document.getElementById("companyName").value = name;
@@ -431,82 +471,96 @@ function openUpdateForm(id, name, email, location = "", description = "", websit
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("updateCompanyForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+  document
+    .getElementById("updateCompanyForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    const formData = new FormData();
+      const formData = new FormData();
 
-    formData.append("name", document.getElementById("companyName").value);
-    formData.append("email", document.getElementById("companyEmail").value);
-    formData.append("location", document.getElementById("companyLocation").value);
-    formData.append("description", document.getElementById("companyDescription").value);
-let websiteInput = document.getElementById("companyWebsiteInput");
-let websiteValue = websiteInput.value.replace(/\s+/g, '').trim();
+      formData.append("name", document.getElementById("companyName").value);
+      formData.append("email", document.getElementById("companyEmail").value);
+      formData.append(
+        "location",
+        document.getElementById("companyLocation").value
+      );
+      formData.append(
+        "description",
+        document.getElementById("companyDescription").value
+      );
+      let websiteInput = document.getElementById("companyWebsiteInput");
+      let websiteValue = websiteInput.value.replace(/\s+/g, "").trim();
 
-if (!websiteValue) {
-  Swal.fire("خطأ", "الرجاء إدخال رابط الموقع الإلكتروني", "error");
-  return;
-}
-
-if (!websiteValue.startsWith("http://") && !websiteValue.startsWith("https://")) {
-  websiteValue = "https://" + websiteValue;
-  websiteInput.value = websiteValue;
-}
-
-try {
-  new URL(websiteValue);
-  formData.append("website", websiteValue);
-} catch (err) {
-  Swal.fire("خطأ", "رابط الموقع الإلكتروني غير صحيح. مثال: https://example.com", "error");
-  return;
-}
-
-
-
-console.log("🚀 Website sent:", websiteValue);
-
-
-
-
-    formData.append("size", document.getElementById("companySize").value);
-    formData.append("hired_people", document.getElementById("companyHiredPeople").value);
-    formData.append("_method", "PUT");
-
-    const logoInput = document.getElementById("companyLogo");
-    if (logoInput && logoInput.files && logoInput.files.length > 0) {
-      formData.append("logo", logoInput.files[0]);
-    }
-
-    try {
-      const token = sessionStorage.getItem("token");
-      const id = document.getElementById("updateCompanyId").value;
-
-      const response = await fetch(`https://jobizaa.com/api/admin/companies/${id}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData
-      });
-
-      const result = await response.json();
-      console.log("🔴 تفاصيل الخطأ:", result);
-
-console.log(result); // ⬅️ هذا السطر لعرض الخطأ بالتفصيل في الـ Console
-
-
-      if (!response.ok) {
-        Swal.fire("خطأ", result.message || "فشل في التحديث", "error");
+      if (!websiteValue) {
+        Swal.fire("خطأ", "الرجاء إدخال رابط الموقع الإلكتروني", "error");
         return;
       }
 
-      Swal.fire("تم", "تم تحديث بيانات الشركة بنجاح ✅", "success");
-      document.getElementById("updateBox").style.display = "none";
-      fetchCompanies();
+      if (
+        !websiteValue.startsWith("http://") &&
+        !websiteValue.startsWith("https://")
+      ) {
+        websiteValue = "https://" + websiteValue;
+        websiteInput.value = websiteValue;
+      }
 
-    } catch (err) {
-      console.error("Update error:", err);
-      Swal.fire("خطأ", "حدث خطأ أثناء التحديث", "error");
-    }
-  });
+      try {
+        new URL(websiteValue);
+        formData.append("website", websiteValue);
+      } catch (err) {
+        Swal.fire(
+          "خطأ",
+          "رابط الموقع الإلكتروني غير صحيح. مثال: https://example.com",
+          "error"
+        );
+        return;
+      }
+
+      console.log("🚀 Website sent:", websiteValue);
+
+      formData.append("size", document.getElementById("companySize").value);
+      formData.append(
+        "hired_people",
+        document.getElementById("companyHiredPeople").value
+      );
+      formData.append("_method", "PUT");
+
+      const logoInput = document.getElementById("companyLogo");
+      if (logoInput && logoInput.files && logoInput.files.length > 0) {
+        formData.append("logo", logoInput.files[0]);
+      }
+
+      try {
+        const token = sessionStorage.getItem("token");
+        const id = document.getElementById("updateCompanyId").value;
+
+        const response = await fetch(
+          `https://jobizaa.com/api/admin/companies/${id}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+          }
+        );
+
+        const result = await response.json();
+        console.log("🔴 تفاصيل الخطأ:", result);
+
+        console.log(result); // ⬅️ هذا السطر لعرض الخطأ بالتفصيل في الـ Console
+
+        if (!response.ok) {
+          Swal.fire("خطأ", result.message || "فشل في التحديث", "error");
+          return;
+        }
+
+        Swal.fire("تم", "تم تحديث بيانات الشركة بنجاح ✅", "success");
+        document.getElementById("updateBox").style.display = "none";
+        fetchCompanies();
+      } catch (err) {
+        console.error("Update error:", err);
+        Swal.fire("خطأ", "حدث خطأ أثناء التحديث", "error");
+      }
+    });
 });

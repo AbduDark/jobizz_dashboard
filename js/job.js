@@ -556,7 +556,7 @@ async function populateCategoryDropdown() {
     }
 
     categories.forEach((category) => {
-      const option = new Option(category.name, category.id || category.name);
+      const option = new Option(category.name, category.name);
       selectElement.add(option);
     });
   } catch (error) {

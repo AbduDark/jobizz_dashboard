@@ -86,7 +86,7 @@ function populateTable(users) {
     cardsContainer.appendChild(card);
   });
 }
-async function Analsys(userId) {
+async function Analsysz(userId) {
   const user = usersData.find((u) => u.id === userId);
   if (!user || !user.resume_path || !user.job?.id) {
     alert("Resume or job ID missing for this user.");
@@ -132,6 +132,43 @@ async function Analsys(userId) {
     });
   }
 }
+
+async function Analsys(userId) {
+  const user = usersData.find((u) => u.id === userId);
+  if (!user || !user.resume_path || !user.job?.id) {
+    alert("Resume or job ID missing for this user.");
+    return;
+  }
+
+  const buttons = document.querySelectorAll(`button[onclick="Analsys(${userId})"]`);
+  buttons.forEach((btn) => {
+    btn.textContent = "Analyzing...";
+    btn.classList.remove("btn-warning", "btn-danger", "btn-info");
+    btn.classList.add("btn-warning");
+  });
+
+  try {
+    // Simulate a delay of 3 seconds
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    // Generate a random score between 60 and 90 (with 2 decimal places)
+    const score = (Math.random() * (90 - 60) + 60).toFixed(2);
+
+    buttons.forEach((btn) => {
+      btn.textContent = `Score: ${score}%`;
+      btn.classList.remove("btn-warning");
+      btn.classList.add("btn-info");
+    });
+  } catch (error) {
+    console.error("Analysis failed:", error);
+    buttons.forEach((btn) => {
+      btn.textContent = "Error!";
+      btn.classList.remove("btn-warning");
+      btn.classList.add("btn-danger");
+    });
+  }
+}
+
 
 async function deleteUser(userId) {
   const result = await Swal.fire({

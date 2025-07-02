@@ -185,6 +185,17 @@ img {
     border-radius: 20px;
     background-color: #0f69d7;
 }
+.logo-imag {
+  margin-left: 210px;
+  margin-bottom: -44px;
+
+    width: 60px;
+    height: auto;
+    border-radius: 20px;
+    background-color: #0f69d7;
+}
+
+
 
 label em {
     color: var(--red);

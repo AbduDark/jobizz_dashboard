@@ -1,6 +1,7 @@
 // General Settings
 const API_URL = "https://jobizaa.com/api/admin/jobs";
-
+const viewToken =
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2pvYml6YWEuY29tL2FwaS9hZG1pbi9sb2dpbiIsImlhdCI6MTc1MTEyMTg5MSwibmJmIjoxNzUxMTIxODkxLCJqdGkiOiIzME5DNFMzeEZIRW1NbUtWIiwic3ViIjoiMjEiLCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5Iiwicm9sZXMiOlsic3VwZXItYWRtaW4iXSwicGVybWlzc2lvbnMiOlsibWFuYWdlLWFsbC1jb21wYW5pZXMiLCJtYW5hZ2UtYWxsLWpvYnMiLCJtYW5hZ2Utcm9sZXMiLCJtYW5hZ2UtY29tcGFueS1hZG1pbnMiLCJtYW5hZ2UtYXBwbGljYXRpb25zIiwidmlldy1hcHBsaWNhbnQtcHJvZmlsZXMiLCJzZW5kLW1lc3NhZ2VzIl0sImNvbXBhbnlfaWQiOm51bGx9.6oBufPeFD_duvx6AYbuqqvvaeKLzQc6hriWxdQx9jcg";
 const TOKEN = "Bearer " + sessionStorage.getItem("token");
 
 let jobs = [];
@@ -253,7 +254,7 @@ async function deleteJob(id) {
 // @desc    Open add job modal
 async function openAddJobModal() {
   document.getElementById("modalJobId").value = "";
-  // document.getElementById("modalCategory").value = "";
+  document.getElementById("modalCategory").value = "";
   document.getElementById("modalTitle").value = "";
   document.getElementById("modalSalary").value = "";
   document.getElementById("modalLocation").value = "";
@@ -439,6 +440,9 @@ async function saveJob() {
   formData.append("position", position);
   formData.append("status", status);
 
+  const getGategory = await fetchCategory(category);
+  console.log("getGategory:", getGategory);
+
   const options = {
     method: "POST",
     headers: {
@@ -518,6 +522,34 @@ async function fetchCategories() {
         "Content-Type": "application/json",
       },
     });
+
+    const result = await response.json();
+    console.log("API Responseeeeeeeeeeeeeee:", result);
+
+    if (result.status === "200") {
+      return result.data;
+    }
+  } catch (error) {
+    console.error("Network error fetching categories:", error);
+    return [];
+  }
+}
+// @desc    Fetch category
+// @route   GET /api/admin/categories
+// @author  A.A
+async function fetchCategory(id) {
+  try {
+    const response = await fetch(
+      "https://jobizaa.com/api/admin/categories/" + id,
+      {
+        method: "GET",
+        headers: {
+          Authorization: TOKEN,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const result = await response.json();
     console.log("API Responseeeeeeeeeeeeeee:", result);

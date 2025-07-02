@@ -849,8 +849,9 @@ html.show-menu body {
     padding: 15px 0 15px 25px;
     border-radius: 15px;
     display: flex;
-    align-items: center;
+    align-items: center;    
     margin: 0 auto 2rem;
+    /* height: 100px; */
 }
 
 .activity-retreat-text {

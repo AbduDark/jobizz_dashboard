@@ -8,9 +8,7 @@ list.forEach((item) => item.addEventListener("mouseover", activeLink));
 
 // API Constants
 const API_BASE = "https://jobizaa.com/api/admin/companies";
-const TOKEN =
-  "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2pvYml6YWEuY29tL2FwaS9hZG1pbi9sb2dpbiIsImlhdCI6MTc0Njg4NDg4NSwibmJmIjoxNzQ2ODg0ODg1LCJqdGkiOiJKNFRQNDc0VDBYZmVkbHZSIiwic3ViIjoiMSIsInBydiI6ImRmODgzZGI5N2JkMDVlZjhmZjg1MDgyZDY4NmM0NWU4MzJlNTkzYTkiLCJyb2xlcyI6WyJzdXBlci1hZG1pbiJdLCJwZXJtaXNzaW9ucyI6WyJtYW5hZ2UtYWxsLWNvbXBhbmllcyIsIm1hbmFnZS1hbGwtam9icyIsIm1hbmFnZS1yb2xlcyIsIm1hbmFnZS1jb21wYW55LWFkbWlucyIsIm1hbmFnZS1hcHBsaWNhdGlvbnMiLCJ2aWV3LWFwcGxpY2FudC1wcm9maWxlcyIsInNlbmQtbWVzc2FnZXMiXSwiY29tcGFueV9pZCI6bnVsbH0.1okzsacodT2LkZoDo6e7N8nkNekwXxvFAuT1mjH0OE0";
-
+TOKEN = "Bearer " + sessionStorage.getItem("token");
 document.addEventListener("DOMContentLoaded", fetchCompanies);
 
 // @desc    Fetch companies
@@ -82,7 +80,7 @@ async function fetchCompanies() {
     } else if (role === "admin") {
       const company = result.data.company;
 
-      console.log("بيانات الشركة (admin):", company); // ✅ هنا
+      console.log("company data (admin):", company);
       companies = [
         {
           id: company.id ?? 0,

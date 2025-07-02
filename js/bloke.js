@@ -1,16 +1,17 @@
 // Set your authorization token here
-const token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2pvYml6YWEuY29tL2FwaS9hZG1pbi9sb2dpbiIsImlhdCI6MTc1MDUxNzg4MCwibmJmIjoxNzUwNTE3ODgwLCJqdGkiOiJWVWFDdkFvS0RmVkFIckpVIiwic3ViIjoiOTAiLCJwcnYiOiJkZjg4M2RiOTdiZDA1ZWY4ZmY4NTA4MmQ2ODZjNDVlODMyZTU5M2E5Iiwicm9sZXMiOlsic3VwZXItYWRtaW4iXSwicGVybWlzc2lvbnMiOlsibWFuYWdlLWFsbC1jb21wYW5pZXMiLCJtYW5hZ2UtYWxsLWpvYnMiLCJtYW5hZ2Utcm9sZXMiLCJtYW5hZ2UtY29tcGFueS1hZG1pbnMiLCJtYW5hZ2UtYXBwbGljYXRpb25zIiwidmlldy1hcHBsaWNhbnQtcHJvZmlsZXMiLCJzZW5kLW1lc3NhZ2VzIl0sImNvbXBhbnlfaWQiOm51bGx9.ltFRHWBuBJWSlSYM_iLFP3sXsrTr9anrbBf_NU8npVM'; // Replace this with your actual token
-
+const TOKEN = "Bearer " + sessionStorage.getItem("token");
 // Load and display all blacklisted admins
 async function loadBlacklist() {
   try {
     const response = await fetch('https://jobizaa.com/api/admin/black-list', {
       headers: {
-        'Authorization': token,
+        'Authorization': TOKEN,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     });
+  
+    
 
     const result = await response.json();
     console.log("API Response:", result);
